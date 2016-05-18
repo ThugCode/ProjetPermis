@@ -1,14 +1,15 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<html>
-<head>
-	<title>Home</title>
-</head>
-<body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
-</body>
-</html>
+<%@include file="/WEB-INF/bootstrap.jsp" %>
+<c:set var="_page_current" value="static_home" />
+<c:set var="_page_title" value="Accueil" />
+<c:set var="_page_stylesheets">
+	<!-- Stylesheets -->
+</c:set>
+<c:set var="_page_body">
+	<div class="jumbotron">
+        <h1>[Nom du site]</h1>
+    </div>
+</c:set>
+<c:set var="_page_scripts">
+	<!-- Scripts -->
+</c:set>
+<%@include file="/WEB-INF/views/layout.jsp" %>
