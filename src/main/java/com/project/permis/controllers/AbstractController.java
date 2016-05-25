@@ -91,7 +91,8 @@ public abstract class AbstractController
      * 
      * @return The flash list.
      */
-    protected List<Flash> getFlashList()
+    @SuppressWarnings("unchecked")
+	protected List<Flash> getFlashList()
     {
         // Initialize vars
         Object flashListObject = this.request.getSession().getAttribute("_flashes");
@@ -103,7 +104,7 @@ public abstract class AbstractController
         }
         else
         {
-            flashList = new ArrayList<>();
+            flashList = new ArrayList<Flash>();
         }
         
         return flashList;
@@ -120,7 +121,7 @@ public abstract class AbstractController
         // Initialize vars
         HttpSession session = this.request.getSession();
         List<Flash> currentFlashList = this.getFlashList();
-        List<Flash> flashList = new ArrayList<>(currentFlashList);
+        List<Flash> flashList = new ArrayList<Flash>(currentFlashList);
         
         // Erase the saved flash list
         currentFlashList.clear();
