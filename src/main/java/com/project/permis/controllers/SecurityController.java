@@ -21,26 +21,47 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
 @Controller
-public class HomeController extends AbstractController
+public class SecurityController extends AbstractController
 {
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(SecurityController.class);
 	
 	/**
-	 * Simply selects the home view to render by returning its name.
+	 * 
+	 * @return
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home(Locale locale)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login()
 	{
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		// Build model
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		String formattedDate = dateFormat.format(date);
-		
-		ModelMap model = new ModelMap();
-		model.addAttribute("serverTime", formattedDate);
-		
-		return this.render("static/home", model);
+		return this.render("security/login");
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ModelAndView doLogin()
+	{
+		return this.redirect("login");
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public ModelAndView register()
+	{
+		return this.render("security/register");
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ModelAndView doRegister()
+	{
+		return this.redirect("register");
 	}
 }
