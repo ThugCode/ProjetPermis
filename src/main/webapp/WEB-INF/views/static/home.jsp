@@ -11,8 +11,6 @@
         <!-- Scripts -->
     </jsp:attribute>
     <jsp:body>
-        <div class="jumbotron">
-	        <h1>[Nom du site]</h1>
-	    </div>        
+               
     </jsp:body>
 </t:layout>

@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>
-            [Nom du site]
+            AdN Formations -
             <jsp:invoke fragment="_page_title" />
         </title>
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" />
@@ -23,6 +23,7 @@
         <c:url value="/assets/css/skin-black.min.css" var="_url" />
         <link rel="stylesheet" type="text/css" href="${fn:escapeXml(_url)}" media="screen" />
         <jsp:invoke fragment="_page_stylesheets" />
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/assets/css/layout.css"/>
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -33,8 +34,8 @@
     		<header class="main-header">
     			<c:url value="/" var="_url" />
     			<a class="logo" href="${_url}">
-    				<span class="logo-mini"><b>A</b>B</span>
-    				<span class="logo-lg"><b>ABC</b>DEF</span>
+    				<span class="logo-mini"><b>A</b>d<b>N</b></span>
+    				<span class="logo-lg"><b>A</b>d<b>N</b> Formations</span>
     			</a>
     			<nav class="navbar navbar-static-top">
     				<a class="sidebar-toggle" data-toggle="offcanvas" role="button" href="#">
@@ -55,7 +56,7 @@
 					                  		<li><!-- start message -->
 					                    		<a href="#">
 					                      			<div class="pull-left">
-					                        			<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+					                        			<img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
 					                      			</div>
 					                      			<h4>
 					                        			Support Team
@@ -236,7 +237,7 @@
        						<!-- User Account: style can be found in dropdown.less -->
           					<li class="dropdown user user-menu">
 					            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					              	<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image" />
+					              	<img src="<%=request.getContextPath()%>/assets/img/user.png" class="user-image" alt="User Image" />
 					              	<span class="hidden-xs">Alexander Pierce</span>
 					            </a>
             					<ul class="dropdown-menu">
@@ -282,13 +283,9 @@
     			<section class="sidebar">
     				<div class="user-panel">
     					<div class="pull-left image">
-    						<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+    						<!-- <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" /> -->
     					</div>
     					<div class="pull-left info">
-				          	<p>Alexander Pierce</p>
-				          	<a href="#">
-				          		<i class="fa fa-circle text-success"></i> Online
-				          	</a>
 				        </div>
     				</div>
     				<form class="sidebar-form" method="get" action="#">
@@ -326,7 +323,7 @@
     			<div class="pull-right hidden-xs">
     				<b>Version</b> 1.0
     			</div>
-    			<strong>&copy; [Nom du site]</strong>, 2016
+    			<strong>&copy; Portail de formation, Aéroport de Nice</strong>, 2016
     		</footer>
     		<aside class="control-sidebar control-sidebar-dark">
     		</aside>
