@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+
+html {
+	
+	background-image 		: url(../img/backRegister.jpg);
+	background-size			: cover;
+	background-position		: center center;
+	background-repeat		: no-repeat;
+	background-attachment	: fixed;
+}
+
+.register-page {
+    background				: rgba(200, 200, 200, 0.5);
+    width					: 50%;
+    margin					: auto;
+}
+
+.register-box {
+    padding-bottom			: 40px;
+}
+
+#register-btn {
+	margin-top				: 10px;
+}
+
+.all-width {
+	margin-left 			: 1px;
+}
+
+.text-checkbox {
+	display					: inline-block;
+    padding-left			: 30px;
+    margin-top				: -30px;
+    vertical-align			: top;
+}
