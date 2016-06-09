@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="runwaylicence" match-name="action"/>
+  <table-filter match-catalog="runwaylicence" match-name="action_action"/>
+  <table-filter match-catalog="runwaylicence" match-name="action_goal"/>
+  <table-filter match-catalog="runwaylicence" match-name="action_rule"/>
+  <table-filter match-catalog="runwaylicence" match-name="calendar"/>
+  <table-filter match-catalog="runwaylicence" match-name="configuration"/>
+  <table-filter match-catalog="runwaylicence" match-name="flag"/>
+  <table-filter match-catalog="runwaylicence" match-name="game"/>
+  <table-filter match-catalog="runwaylicence" match-name="game_action"/>
+  <table-filter match-catalog="runwaylicence" match-name="game_mission"/>
+  <table-filter match-catalog="runwaylicence" match-name="goal"/>
+  <table-filter match-catalog="runwaylicence" match-name="mission"/>
+  <table-filter match-catalog="runwaylicence" match-name="mission_goal"/>
+  <table-filter match-catalog="runwaylicence" match-name="rule"/>
+  <table-filter match-catalog="runwaylicence" match-name="student"/>
+  <table-filter match-catalog="runwaylicence" match-name="student_action"/>
+  <table-filter match-catalog="runwaylicence" match-name="student_game"/>
+</hibernate-reverse-engineering>

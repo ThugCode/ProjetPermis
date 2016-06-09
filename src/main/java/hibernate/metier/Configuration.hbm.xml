@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 9 juin 2016 10:42:21 by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="hibernate.metier.Configuration" table="configuration" catalog="runwaylicence">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="25" />
+        </property>
+        <property name="value" type="string">
+            <column name="value" length="25" />
+        </property>
+    </class>
+</hibernate-mapping>

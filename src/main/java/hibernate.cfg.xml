@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="SessionFactory">
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">epul</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/runwaylicence</property>
+        <property name="hibernate.connection.username">userepul</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping resource="hibernate/metier/Student.hbm.xml" />
+        <mapping resource="hibernate/metier/Mission.hbm.xml" />
+        <mapping resource="hibernate/metier/Configuration.hbm.xml" />
+        <mapping resource="hibernate/metier/Goal.hbm.xml" />
+        <mapping resource="hibernate/metier/Rule.hbm.xml" />
+        <mapping resource="hibernate/metier/Game.hbm.xml" />
+        <mapping resource="hibernate/metier/StudentAction.hbm.xml" />
+        <mapping resource="hibernate/metier/Flag.hbm.xml" />
+        <mapping resource="hibernate/metier/Calendar.hbm.xml" />
+        <mapping resource="hibernate/metier/Action.hbm.xml" />
+    </session-factory>
+</hibernate-configuration>

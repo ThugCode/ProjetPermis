@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 9 juin 2016 10:42:21 by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="hibernate.metier.Action" table="action" catalog="runwaylicence">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="25" />
+        </property>
+        <set name="flags" table="flag" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_action" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.metier.Flag" />
+        </set>
+        <set name="actionsForIdParent" table="action_action" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_child" not-null="true" />
+            </key>
+            <many-to-many entity-name="hibernate.metier.Action">
+                <column name="id_parent" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="actionsForIdChild" table="action_action" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_parent" not-null="true" />
+            </key>
+            <many-to-many entity-name="hibernate.metier.Action">
+                <column name="id_child" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="rules" table="action_rule" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_action" not-null="true" />
+            </key>
+            <many-to-many entity-name="hibernate.metier.Rule">
+                <column name="id_rule" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="games" table="game_action" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_action" not-null="true" />
+            </key>
+            <many-to-many entity-name="hibernate.metier.Game">
+                <column name="id_game" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="studentActions" table="student_action" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_action" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.metier.StudentAction" />
+        </set>
+        <set name="goals" table="action_goal" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_action" not-null="true" />
+            </key>
+            <many-to-many entity-name="hibernate.metier.Goal">
+                <column name="id_goal" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

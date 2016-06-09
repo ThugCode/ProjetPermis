@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 9 juin 2016 10:42:21 by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="hibernate.metier.Student" table="student" catalog="runwaylicence">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="lastname" type="string">
+            <column name="lastname" length="25" />
+        </property>
+        <property name="firstname" type="string">
+            <column name="firstname" length="25" />
+        </property>
+        <property name="mail" type="string">
+            <column name="mail" length="25" not-null="true" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" not-null="true" />
+        </property>
+        <set name="games" table="student_game" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_student" not-null="true" />
+            </key>
+            <many-to-many entity-name="hibernate.metier.Game">
+                <column name="id_game" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="studentActions" table="student_action" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_student" not-null="true" />
+            </key>
+            <one-to-many class="hibernate.metier.StudentAction" />
+        </set>
+    </class>
+</hibernate-mapping>
