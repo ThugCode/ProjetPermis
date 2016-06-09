@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+
+html {
+	
+	background-image 		: url(../img/backLogin.jpg);
+	background-size			: cover;
+	background-position		: center center;
+	background-repeat		: no-repeat;
+	background-attachment	: fixed;
+}
+
+.login-page {
+    background: rgba(200, 200, 200, 0.5);
+    width: 50%;
+    margin: auto;
+}
+
+.login-box {
+    padding-bottom: 40px;
+}

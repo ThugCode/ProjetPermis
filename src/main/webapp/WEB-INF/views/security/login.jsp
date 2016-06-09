@@ -17,6 +17,7 @@
         <c:url value="/assets/css/admin-lte.min.css" var="_url" />
         <link rel="stylesheet" type="text/css" href="${fn:escapeXml(_url)}" media="screen" />
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/blue.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/assets/css/login.css"/>
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -25,11 +26,11 @@
     <body class="hold-transition login-page">
     	<div class="login-box">
 	    	<div class="login-logo">
-    			<b>ABC</b>DEF
+    			<b>Aéroport</b> de Nice
 	    	</div>
 	    	<div class="login-box-body">
 	    		<p class="login-box-msg">
-	    			Connectez-vous pour démarrer votre session
+	    			<b>Connectez-vous</b> pour démarrer votre session
 	    		</p>
 	    		<c:url value="/login" var="_url" />
 	    		<form method="post" action="${_url}">
@@ -50,7 +51,7 @@
 					        type="password"
 					        name="password"
 					        class="form-control"
-					        placeholder="Password"
+					        placeholder="Mot de passe"
 					        name=""
 				        />
 				        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
@@ -59,20 +60,22 @@
 				        <div class="col-xs-8">
 				          	<div class="checkbox icheck">
 				            	<label>
-				              		<input type="checkbox" name="_remember_me" /> Remember Me
+				              		<input type="checkbox" name="_remember_me" /> Se souvenir de moi
 					            </label>
 				          	</div>
 				        </div>
 				        <!-- /.col -->
 				        <div class="col-xs-4">
-				          	<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+				          	<button type="submit" class="btn btn-primary btn-block btn-flat">Connexion</button>
 				        </div>
 				        <!-- /.col -->
 				    </div>
 	    		</form>
 	    		<c:url value="/register" var="_url" />
+	    		<br/>
+	    		Vous n'avez pas de compte ?
 				<a class="text-center" href="${_url}">
-					Je ne suis pas encore inscrit
+					Demander un compte
 				</a>
 	    	</div>
     	</div>
