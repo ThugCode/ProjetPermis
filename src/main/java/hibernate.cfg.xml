@@ -12,15 +12,15 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
-        <mapping resource="hibernate/metier/Student.hbm.xml" />
-        <mapping resource="hibernate/metier/Mission.hbm.xml" />
-        <mapping resource="hibernate/metier/Configuration.hbm.xml" />
-        <mapping resource="hibernate/metier/Goal.hbm.xml" />
-        <mapping resource="hibernate/metier/Rule.hbm.xml" />
-        <mapping resource="hibernate/metier/Game.hbm.xml" />
-        <mapping resource="hibernate/metier/StudentAction.hbm.xml" />
-        <mapping resource="hibernate/metier/Flag.hbm.xml" />
-        <mapping resource="hibernate/metier/Calendar.hbm.xml" />
-        <mapping resource="hibernate/metier/Action.hbm.xml" />
+        <mapping resource="com/project/permis/entities/Student.hbm.xml" />
+        <mapping resource="com/project/permis/entities/Mission.hbm.xml" />
+        <mapping resource="com/project/permis/entities/Configuration.hbm.xml" />
+        <mapping resource="com/project/permis/entities/Goal.hbm.xml" />
+        <mapping resource="com/project/permis/entities/Rule.hbm.xml" />
+        <mapping resource="com/project/permis/entities/Game.hbm.xml" />
+        <mapping resource="com/project/permis/entities/StudentAction.hbm.xml" />
+        <mapping resource="com/project/permis/entities/Flag.hbm.xml" />
+        <mapping resource="com/project/permis/entities/Calendar.hbm.xml" />
+        <mapping resource="com/project/permis/entities/Action.hbm.xml" />
     </session-factory>
 </hibernate-configuration>
