@@ -7,7 +7,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.project.permis.entities.Game;
 import com.project.permis.entities.Rule;
 
 /**
@@ -34,7 +33,6 @@ public class RuleRepository extends AbstractRepository
 		// Fetch the rule
 		try
 		{
-			
 			Query query = this.getSession().createQuery(
 				"FROM Rule AS r WHERE r.id = :id"
 			);

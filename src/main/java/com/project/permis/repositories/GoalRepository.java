@@ -33,7 +33,6 @@ public class GoalRepository extends AbstractRepository
 		// Fetch the goal
 		try
 		{
-			
 			Query query = this.getSession().createQuery(
 				"FROM Goal AS g WHERE g.id = :id"
 			);

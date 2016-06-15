@@ -33,7 +33,6 @@ public class StudentRepository extends AbstractRepository
 		// Fetch the student
 		try
 		{
-			
 			Query query = this.getSession().createQuery(
 				"FROM Student AS s WHERE s.id = :id"
 			);

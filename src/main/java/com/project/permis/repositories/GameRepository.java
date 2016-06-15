@@ -33,7 +33,6 @@ public class GameRepository extends AbstractRepository
 		// Fetch the game
 		try
 		{
-			
 			Query query = this.getSession().createQuery(
 				"FROM Game AS g WHERE g.id = :id"
 			);

@@ -33,7 +33,6 @@ public class ActionRepository extends AbstractRepository
 		// Fetch the action
 		try
 		{
-			
 			Query query = this.getSession().createQuery(
 				"FROM Action AS a WHERE a.id = :id"
 			);

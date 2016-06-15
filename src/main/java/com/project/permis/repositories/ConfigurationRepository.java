@@ -33,7 +33,6 @@ public class ConfigurationRepository extends AbstractRepository
 		// Fetch the configuration
 		try
 		{
-			
 			Query query = this.getSession().createQuery(
 				"FROM Configuration AS c WHERE c.id = :id"
 			);

@@ -7,7 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.project.permis.entities.Mission;
+import com.project.permis.entities.Flag;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -17,35 +17,35 @@ import com.project.permis.entities.Mission;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class MissionRepository extends AbstractRepository
+public class FlagRepository extends AbstractRepository
 {
 	/**
-	 * Fetches a single existing mission from the database.
+	 * Fetches a single existing flag from the database.
 	 * 
-	 * @param id The mission's id.
-	 * @return The mission, or {@code null} if there are no matching mission.
-	 * @throws com.project.permis.repositories.RepositoryException If the mission can't
+	 * @param id The flag's id.
+	 * @return The flag, or {@code null} if there are no matching flag.
+	 * @throws com.project.permis.repositories.RepositoryException If the flag can't
 	 * be properly fetched.
 	 */
-	public Mission fetch(int id)
+	public Flag fetch(int id)
 	throws RepositoryException
 	{
-		// Fetch the mission
+		// Fetch the flag
 		try
 		{
 			Query query = this.getSession().createQuery(
-				"FROM Mission AS m WHERE m.id = :id"
+				"FROM Flag AS f WHERE f.id = :id"
 			);
 			query.setInteger("id", id);
 			
-			return (Mission) query.uniqueResult();
+			return (Flag) query.uniqueResult();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
 				String.format(
-					"Impossible de récupérer la mission #%d.",
+					"Impossible de récupérer l'option #%d.",
 					id
 				)
 			);
@@ -53,90 +53,90 @@ public class MissionRepository extends AbstractRepository
 	}
 	
 	/**
-	 * Fetches every existing mission from the database.
+	 * Fetches every existing flag from the database.
 	 * 
-	 * @return The list of missions.
-	 * @throws com.project.permis.repositories.RepositoryException If the missions can't
+	 * @return The list of flags.
+	 * @throws com.project.permis.repositories.RepositoryException If the flags can't
 	 * be properly fetched.
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Mission> fetchAll()
+	public List<Flag> fetchAll()
 	throws RepositoryException
 	{
-		// Fetch the missions
+		// Fetch the flags
 		try
 		{
 			Query query = this.getSession().createQuery(
-				"FROM Mission AS m"
+				"FROM Flag AS f"
 			);
 			
-			return (List<Mission>) query.list();
+			return (List<Flag>) query.list();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de récupérer la liste des missions."
+				"Impossible de récupérer la liste des options."
 			);
 		}
 	}
 	
 	/**
-	 * Saves a mission into the database.
+	 * Saves a flag into the database.
 	 * 
-	 * @param mission The mission to save.
-	 * @throws com.project.permis.repositories.RepositoryException If the mission can't
+	 * @param flag The flag to save.
+	 * @throws com.project.permis.repositories.RepositoryException If the flag can't
 	 * be properly saved.
 	 */
-	public void save(Mission mission)
+	public void save(Flag flag)
 	throws RepositoryException
 	{
 		// Initialize vars
 		Session session = this.getSession();
 		Transaction transaction = null;
 		
-		// Save the mission
+		// Save the flag
 		try
 		{
 			transaction = session.beginTransaction();
-			session.saveOrUpdate(mission);
+			session.saveOrUpdate(flag);
 			transaction.commit();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de sauvegarder une mission."
+				"Impossible de sauvegarder une option."
 			);
 		}
 	}
 	
 	/**
-	 * Removes a mission from the database.
+	 * Removes a flag from the database.
 	 * 
-	 * @param mission The mission to delete.
-	 * @throws com.project.permis.repositories.RepositoryException If the mission can't
+	 * @param flag The flag to delete.
+	 * @throws com.project.permis.repositories.RepositoryException If the flag can't
 	 * be properly deleted.
 	 */
-	public void delete(Mission mission)
+	public void delete(Flag flag)
 	throws RepositoryException
 	{
 		// Initialize vars
 		Session session = this.getSession();
 		Transaction transaction = null;
 		
-		// Delete the mission
+		// Delete the flag
 		try
 		{
 			transaction = session.beginTransaction();
-			session.delete(mission);
+			session.delete(flag);
 			transaction.commit();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de supprimer une mission."
+				"Impossible de supprimer une option."
 			);
 		}
 	}
