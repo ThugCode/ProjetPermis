@@ -7,7 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.project.permis.entities.Action;
+import com.project.permis.entities.Student;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -17,36 +17,36 @@ import com.project.permis.entities.Action;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class ActionRepository extends AbstractRepository
+public class StudentRepository extends AbstractRepository
 {
 	/**
-	 * Fetches a single existing action from the database.
+	 * Fetches a single existing student from the database.
 	 * 
-	 * @param id The action's id.
-	 * @return The action, or {@code null} if there are no matching action.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param id The student's id.
+	 * @return The student, or {@code null} if there are no matching student.
+	 * @throws com.project.permis.repositories.RepositoryException If the student can't
 	 * be properly fetched.
 	 */
-	public Action fetch(int id)
+	public Student fetch(int id)
 	throws RepositoryException
 	{
-		// Fetch the action
+		// Fetch the student
 		try
 		{
 			
 			Query query = this.getSession().createQuery(
-				"FROM Action AS a WHERE a.id = :id"
+				"FROM Student AS s WHERE s.id = :id"
 			);
 			query.setInteger("id", id);
 			
-			return (Action) query.uniqueResult();
+			return (Student) query.uniqueResult();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
 				String.format(
-					"Impossible de récupérer l'action #%d.",
+					"Impossible de récupérer l'étudiant #%d.",
 					id
 				)
 			);
@@ -54,90 +54,90 @@ public class ActionRepository extends AbstractRepository
 	}
 	
 	/**
-	 * Fetches every existing action from the database.
+	 * Fetches every existing student from the database.
 	 * 
-	 * @return The list of actions.
-	 * @throws com.project.permis.repositories.RepositoryException If the actions can't
+	 * @return The list of students.
+	 * @throws com.project.permis.repositories.RepositoryException If the students can't
 	 * be properly fetched.
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Action> fetchAll()
+	public List<Student> fetchAll()
 	throws RepositoryException
 	{
-		// Fetch the actions
+		// Fetch the students
 		try
 		{
 			Query query = this.getSession().createQuery(
-				"FROM Action AS a"
+				"FROM Student AS s"
 			);
 			
-			return (List<Action>) query.list();
+			return (List<Student>) query.list();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de récupérer la liste des actions."
+				"Impossible de récupérer la liste des étudiants."
 			);
 		}
 	}
 	
 	/**
-	 * Saves an action into the database.
+	 * Saves a student into the database.
 	 * 
-	 * @param action The action to save.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param student The student to save.
+	 * @throws com.project.permis.repositories.RepositoryException If the student can't
 	 * be properly saved.
 	 */
-	public void save(Action action)
+	public void save(Student student)
 	throws RepositoryException
 	{
 		// Initialize vars
 		Session session = this.getSession();
 		Transaction transaction = null;
 		
-		// Save the action
+		// Save the student
 		try
 		{
 			transaction = session.beginTransaction();
-			session.saveOrUpdate(action);
+			session.saveOrUpdate(student);
 			transaction.commit();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de sauvegarder une action."
+				"Impossible de sauvegarder un étudiant."
 			);
 		}
 	}
 	
 	/**
-	 * Removes an action from the database.
+	 * Removes a student from the database.
 	 * 
-	 * @param action The action to delete.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param student The student to delete.
+	 * @throws com.project.permis.repositories.RepositoryException If the student can't
 	 * be properly deleted.
 	 */
-	public void delete(Action action)
+	public void delete(Student student)
 	throws RepositoryException
 	{
 		// Initialize vars
 		Session session = this.getSession();
 		Transaction transaction = null;
 		
-		// Delete the action
+		// Delete the student
 		try
 		{
 			transaction = session.beginTransaction();
-			session.delete(action);
+			session.delete(student);
 			transaction.commit();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de supprimer une action."
+				"Impossible de supprimer un étudiant."
 			);
 		}
 	}

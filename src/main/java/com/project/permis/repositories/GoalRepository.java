@@ -7,7 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.project.permis.entities.Action;
+import com.project.permis.entities.Goal;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -17,36 +17,36 @@ import com.project.permis.entities.Action;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class ActionRepository extends AbstractRepository
+public class GoalRepository extends AbstractRepository
 {
 	/**
-	 * Fetches a single existing action from the database.
+	 * Fetches a single existing goal from the database.
 	 * 
-	 * @param id The action's id.
-	 * @return The action, or {@code null} if there are no matching action.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param id The goal's id.
+	 * @return The goal, or {@code null} if there are no matching goal.
+	 * @throws com.project.permis.repositories.RepositoryException If the goal can't
 	 * be properly fetched.
 	 */
-	public Action fetch(int id)
+	public Goal fetch(int id)
 	throws RepositoryException
 	{
-		// Fetch the action
+		// Fetch the goal
 		try
 		{
 			
 			Query query = this.getSession().createQuery(
-				"FROM Action AS a WHERE a.id = :id"
+				"FROM Goal AS g WHERE g.id = :id"
 			);
 			query.setInteger("id", id);
 			
-			return (Action) query.uniqueResult();
+			return (Goal) query.uniqueResult();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
 				String.format(
-					"Impossible de récupérer l'action #%d.",
+					"Impossible de récupérer l'objectif #%d.",
 					id
 				)
 			);
@@ -54,90 +54,90 @@ public class ActionRepository extends AbstractRepository
 	}
 	
 	/**
-	 * Fetches every existing action from the database.
+	 * Fetches every existing goal from the database.
 	 * 
-	 * @return The list of actions.
-	 * @throws com.project.permis.repositories.RepositoryException If the actions can't
+	 * @return The list of goals.
+	 * @throws com.project.permis.repositories.RepositoryException If the goals can't
 	 * be properly fetched.
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Action> fetchAll()
+	public List<Goal> fetchAll()
 	throws RepositoryException
 	{
-		// Fetch the actions
+		// Fetch the goals
 		try
 		{
 			Query query = this.getSession().createQuery(
-				"FROM Action AS a"
+				"FROM Goal AS g"
 			);
 			
-			return (List<Action>) query.list();
+			return (List<Goal>) query.list();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de récupérer la liste des actions."
+				"Impossible de récupérer la liste des objectifs."
 			);
 		}
 	}
 	
 	/**
-	 * Saves an action into the database.
+	 * Saves a goal into the database.
 	 * 
-	 * @param action The action to save.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param goal The goal to save.
+	 * @throws com.project.permis.repositories.RepositoryException If the goal can't
 	 * be properly saved.
 	 */
-	public void save(Action action)
+	public void save(Goal goal)
 	throws RepositoryException
 	{
 		// Initialize vars
 		Session session = this.getSession();
 		Transaction transaction = null;
 		
-		// Save the action
+		// Save the goal
 		try
 		{
 			transaction = session.beginTransaction();
-			session.saveOrUpdate(action);
+			session.saveOrUpdate(goal);
 			transaction.commit();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de sauvegarder une action."
+				"Impossible de sauvegarder un objectif."
 			);
 		}
 	}
 	
 	/**
-	 * Removes an action from the database.
+	 * Removes a goal from the database.
 	 * 
-	 * @param action The action to delete.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param goal The goal to delete.
+	 * @throws com.project.permis.repositories.RepositoryException If the goal can't
 	 * be properly deleted.
 	 */
-	public void delete(Action action)
+	public void delete(Goal goal)
 	throws RepositoryException
 	{
 		// Initialize vars
 		Session session = this.getSession();
 		Transaction transaction = null;
 		
-		// Delete the action
+		// Delete the goal
 		try
 		{
 			transaction = session.beginTransaction();
-			session.delete(action);
+			session.delete(goal);
 			transaction.commit();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de supprimer une action."
+				"Impossible de supprimer un objectif."
 			);
 		}
 	}

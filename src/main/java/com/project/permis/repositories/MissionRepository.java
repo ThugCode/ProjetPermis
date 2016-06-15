@@ -7,7 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.project.permis.entities.Action;
+import com.project.permis.entities.Mission;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -17,36 +17,36 @@ import com.project.permis.entities.Action;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class ActionRepository extends AbstractRepository
+public class MissionRepository extends AbstractRepository
 {
 	/**
-	 * Fetches a single existing action from the database.
+	 * Fetches a single existing mission from the database.
 	 * 
-	 * @param id The action's id.
-	 * @return The action, or {@code null} if there are no matching action.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param id The mission's id.
+	 * @return The mission, or {@code null} if there are no matching mission.
+	 * @throws com.project.permis.repositories.RepositoryException If the mission can't
 	 * be properly fetched.
 	 */
-	public Action fetch(int id)
+	public Mission fetch(int id)
 	throws RepositoryException
 	{
-		// Fetch the action
+		// Fetch the mission
 		try
 		{
 			
 			Query query = this.getSession().createQuery(
-				"FROM Action AS a WHERE a.id = :id"
+				"FROM Mission AS m WHERE m.id = :id"
 			);
 			query.setInteger("id", id);
 			
-			return (Action) query.uniqueResult();
+			return (Mission) query.uniqueResult();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
 				String.format(
-					"Impossible de récupérer l'action #%d.",
+					"Impossible de récupérer la mission #%d.",
 					id
 				)
 			);
@@ -54,90 +54,90 @@ public class ActionRepository extends AbstractRepository
 	}
 	
 	/**
-	 * Fetches every existing action from the database.
+	 * Fetches every existing mission from the database.
 	 * 
-	 * @return The list of actions.
-	 * @throws com.project.permis.repositories.RepositoryException If the actions can't
+	 * @return The list of missions.
+	 * @throws com.project.permis.repositories.RepositoryException If the missions can't
 	 * be properly fetched.
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Action> fetchAll()
+	public List<Mission> fetchAll()
 	throws RepositoryException
 	{
-		// Fetch the actions
+		// Fetch the missions
 		try
 		{
 			Query query = this.getSession().createQuery(
-				"FROM Action AS a"
+				"FROM Mission AS m"
 			);
 			
-			return (List<Action>) query.list();
+			return (List<Mission>) query.list();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de récupérer la liste des actions."
+				"Impossible de récupérer la liste des missions."
 			);
 		}
 	}
 	
 	/**
-	 * Saves an action into the database.
+	 * Saves a mission into the database.
 	 * 
-	 * @param action The action to save.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param mission The mission to save.
+	 * @throws com.project.permis.repositories.RepositoryException If the mission can't
 	 * be properly saved.
 	 */
-	public void save(Action action)
+	public void save(Mission mission)
 	throws RepositoryException
 	{
 		// Initialize vars
 		Session session = this.getSession();
 		Transaction transaction = null;
 		
-		// Save the action
+		// Save the mission
 		try
 		{
 			transaction = session.beginTransaction();
-			session.saveOrUpdate(action);
+			session.saveOrUpdate(mission);
 			transaction.commit();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de sauvegarder une action."
+				"Impossible de sauvegarder une mission."
 			);
 		}
 	}
 	
 	/**
-	 * Removes an action from the database.
+	 * Removes a mission from the database.
 	 * 
-	 * @param action The action to delete.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param mission The mission to delete.
+	 * @throws com.project.permis.repositories.RepositoryException If the mission can't
 	 * be properly deleted.
 	 */
-	public void delete(Action action)
+	public void delete(Mission mission)
 	throws RepositoryException
 	{
 		// Initialize vars
 		Session session = this.getSession();
 		Transaction transaction = null;
 		
-		// Delete the action
+		// Delete the mission
 		try
 		{
 			transaction = session.beginTransaction();
-			session.delete(action);
+			session.delete(mission);
 			transaction.commit();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de supprimer une action."
+				"Impossible de supprimer une mission."
 			);
 		}
 	}

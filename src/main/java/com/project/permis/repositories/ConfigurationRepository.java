@@ -7,7 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.project.permis.entities.Action;
+import com.project.permis.entities.Configuration;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -17,36 +17,36 @@ import com.project.permis.entities.Action;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class ActionRepository extends AbstractRepository
+public class ConfigurationRepository extends AbstractRepository
 {
 	/**
-	 * Fetches a single existing action from the database.
+	 * Fetches a single existing configuration from the database.
 	 * 
-	 * @param id The action's id.
-	 * @return The action, or {@code null} if there are no matching action.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param id The configuration's id.
+	 * @return The configuration, or {@code null} if there are no matching configuration.
+	 * @throws com.project.permis.repositories.RepositoryException If the configuration can't
 	 * be properly fetched.
 	 */
-	public Action fetch(int id)
+	public Configuration fetch(int id)
 	throws RepositoryException
 	{
-		// Fetch the action
+		// Fetch the configuration
 		try
 		{
 			
 			Query query = this.getSession().createQuery(
-				"FROM Action AS a WHERE a.id = :id"
+				"FROM Configuration AS c WHERE c.id = :id"
 			);
 			query.setInteger("id", id);
 			
-			return (Action) query.uniqueResult();
+			return (Configuration) query.uniqueResult();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
 				String.format(
-					"Impossible de récupérer l'action #%d.",
+					"Impossible de récupérer le paramètre #%d.",
 					id
 				)
 			);
@@ -54,90 +54,90 @@ public class ActionRepository extends AbstractRepository
 	}
 	
 	/**
-	 * Fetches every existing action from the database.
+	 * Fetches every existing configuration from the database.
 	 * 
-	 * @return The list of actions.
-	 * @throws com.project.permis.repositories.RepositoryException If the actions can't
+	 * @return The list of configurations.
+	 * @throws com.project.permis.repositories.RepositoryException If the configurations can't
 	 * be properly fetched.
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Action> fetchAll()
+	public List<Configuration> fetchAll()
 	throws RepositoryException
 	{
-		// Fetch the actions
+		// Fetch the configurations
 		try
 		{
 			Query query = this.getSession().createQuery(
-				"FROM Action AS a"
+				"FROM Configuration AS c"
 			);
 			
-			return (List<Action>) query.list();
+			return (List<Configuration>) query.list();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de récupérer la liste des actions."
+				"Impossible de récupérer la liste des paramètres."
 			);
 		}
 	}
 	
 	/**
-	 * Saves an action into the database.
+	 * Saves a configuration into the database.
 	 * 
-	 * @param action The action to save.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param configuration The configuration to save.
+	 * @throws com.project.permis.repositories.RepositoryException If the configuration can't
 	 * be properly saved.
 	 */
-	public void save(Action action)
+	public void save(Configuration configuration)
 	throws RepositoryException
 	{
 		// Initialize vars
 		Session session = this.getSession();
 		Transaction transaction = null;
 		
-		// Save the action
+		// Save the configuration
 		try
 		{
 			transaction = session.beginTransaction();
-			session.saveOrUpdate(action);
+			session.saveOrUpdate(configuration);
 			transaction.commit();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de sauvegarder une action."
+				"Impossible de sauvegarder un paramètre."
 			);
 		}
 	}
 	
 	/**
-	 * Removes an action from the database.
+	 * Removes a configuration from the database.
 	 * 
-	 * @param action The action to delete.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param configuration The configuration to delete.
+	 * @throws com.project.permis.repositories.RepositoryException If the configuration can't
 	 * be properly deleted.
 	 */
-	public void delete(Action action)
+	public void delete(Configuration configuration)
 	throws RepositoryException
 	{
 		// Initialize vars
 		Session session = this.getSession();
 		Transaction transaction = null;
 		
-		// Delete the action
+		// Delete the configuration
 		try
 		{
 			transaction = session.beginTransaction();
-			session.delete(action);
+			session.delete(configuration);
 			transaction.commit();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de supprimer une action."
+				"Impossible de supprimer un paramètre."
 			);
 		}
 	}

@@ -7,7 +7,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.project.permis.entities.Action;
+import com.project.permis.entities.Game;
+import com.project.permis.entities.Rule;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -17,36 +18,36 @@ import com.project.permis.entities.Action;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class ActionRepository extends AbstractRepository
+public class RuleRepository extends AbstractRepository
 {
 	/**
-	 * Fetches a single existing action from the database.
+	 * Fetches a single existing rule from the database.
 	 * 
-	 * @param id The action's id.
-	 * @return The action, or {@code null} if there are no matching action.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param id The rule's id.
+	 * @return The rule, or {@code null} if there are no matching rule.
+	 * @throws com.project.permis.repositories.RepositoryException If the rule can't
 	 * be properly fetched.
 	 */
-	public Action fetch(int id)
+	public Rule fetch(int id)
 	throws RepositoryException
 	{
-		// Fetch the action
+		// Fetch the rule
 		try
 		{
 			
 			Query query = this.getSession().createQuery(
-				"FROM Action AS a WHERE a.id = :id"
+				"FROM Rule AS r WHERE r.id = :id"
 			);
 			query.setInteger("id", id);
 			
-			return (Action) query.uniqueResult();
+			return (Rule) query.uniqueResult();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
 				String.format(
-					"Impossible de récupérer l'action #%d.",
+					"Impossible de récupérer la règle #%d.",
 					id
 				)
 			);
@@ -54,90 +55,90 @@ public class ActionRepository extends AbstractRepository
 	}
 	
 	/**
-	 * Fetches every existing action from the database.
+	 * Fetches every existing rule from the database.
 	 * 
-	 * @return The list of actions.
-	 * @throws com.project.permis.repositories.RepositoryException If the actions can't
+	 * @return The list of rules.
+	 * @throws com.project.permis.repositories.RepositoryException If the rules can't
 	 * be properly fetched.
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Action> fetchAll()
+	public List<Rule> fetchAll()
 	throws RepositoryException
 	{
-		// Fetch the actions
+		// Fetch the rules
 		try
 		{
 			Query query = this.getSession().createQuery(
-				"FROM Action AS a"
+				"FROM Rule AS r"
 			);
 			
-			return (List<Action>) query.list();
+			return (List<Rule>) query.list();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de récupérer la liste des actions."
+				"Impossible de récupérer la liste des règles."
 			);
 		}
 	}
 	
 	/**
-	 * Saves an action into the database.
+	 * Saves a rule into the database.
 	 * 
-	 * @param action The action to save.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param rule The rule to save.
+	 * @throws com.project.permis.repositories.RepositoryException If the rule can't
 	 * be properly saved.
 	 */
-	public void save(Action action)
+	public void save(Rule rule)
 	throws RepositoryException
 	{
 		// Initialize vars
 		Session session = this.getSession();
 		Transaction transaction = null;
 		
-		// Save the action
+		// Save the rule
 		try
 		{
 			transaction = session.beginTransaction();
-			session.saveOrUpdate(action);
+			session.saveOrUpdate(rule);
 			transaction.commit();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de sauvegarder une action."
+				"Impossible de sauvegarder une règle."
 			);
 		}
 	}
 	
 	/**
-	 * Removes an action from the database.
+	 * Removes a rule from the database.
 	 * 
-	 * @param action The action to delete.
-	 * @throws com.project.permis.repositories.RepositoryException If the action can't
+	 * @param rule The rule to delete.
+	 * @throws com.project.permis.repositories.RepositoryException If the rule can't
 	 * be properly deleted.
 	 */
-	public void delete(Action action)
+	public void delete(Rule rule)
 	throws RepositoryException
 	{
 		// Initialize vars
 		Session session = this.getSession();
 		Transaction transaction = null;
 		
-		// Delete the action
+		// Delete the rule
 		try
 		{
 			transaction = session.beginTransaction();
-			session.delete(action);
+			session.delete(rule);
 			transaction.commit();
 		}
 		catch(HibernateException ex)
 		{
 			throw new RepositoryException(
 				ex,
-				"Impossible de supprimer une action."
+				"Impossible de supprimer une règle."
 			);
 		}
 	}
