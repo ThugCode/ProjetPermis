@@ -1,2 +1,6 @@
 @CHARSET "UTF-8";
 
+.user-panel>.info
+{
+	position:static;
+}

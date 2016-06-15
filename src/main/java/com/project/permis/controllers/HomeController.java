@@ -58,7 +58,7 @@ public class HomeController extends AbstractController
 		games.add(c);
 		Student user = new Student();
 		user.setId(-1);
-		user.setFirstname("Léo");
+		user.setFirstname("Leo");
 		user.setLastname("Letourneur");
 		user.setMail("letourneur.leo@gmail.com");
 		user.setGames(games);
