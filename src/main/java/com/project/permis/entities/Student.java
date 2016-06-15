@@ -1,5 +1,5 @@
 package com.project.permis.entities;
-// Generated 9 juin 2016 10:42:20 by Hibernate Tools 4.0.0.Final
+// Generated 15 juin 2016 14:18:02 by Hibernate Tools 4.0.0.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +15,7 @@ public class Student implements java.io.Serializable {
 	private String mail;
 	private String password;
 	private Set games = new HashSet(0);
+	private Set messages = new HashSet(0);
 	private Set studentActions = new HashSet(0);
 
 	public Student() {
@@ -25,12 +26,14 @@ public class Student implements java.io.Serializable {
 		this.password = password;
 	}
 
-	public Student(String lastname, String firstname, String mail, String password, Set games, Set studentActions) {
+	public Student(String lastname, String firstname, String mail, String password, Set games, Set messages,
+			Set studentActions) {
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.mail = mail;
 		this.password = password;
 		this.games = games;
+		this.messages = messages;
 		this.studentActions = studentActions;
 	}
 
@@ -80,6 +83,14 @@ public class Student implements java.io.Serializable {
 
 	public void setGames(Set games) {
 		this.games = games;
+	}
+
+	public Set getMessages() {
+		return this.messages;
+	}
+
+	public void setMessages(Set messages) {
+		this.messages = messages;
 	}
 
 	public Set getStudentActions() {

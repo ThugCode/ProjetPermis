@@ -13,6 +13,7 @@
   <table-filter match-catalog="runwaylicence" match-name="game_action"/>
   <table-filter match-catalog="runwaylicence" match-name="game_mission"/>
   <table-filter match-catalog="runwaylicence" match-name="goal"/>
+  <table-filter match-catalog="runwaylicence" match-name="message"/>
   <table-filter match-catalog="runwaylicence" match-name="mission"/>
   <table-filter match-catalog="runwaylicence" match-name="mission_goal"/>
   <table-filter match-catalog="runwaylicence" match-name="rule"/>

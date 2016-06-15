@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 9 juin 2016 10:42:21 by Hibernate Tools 4.0.0.Final -->
+<!-- Generated 15 juin 2016 14:18:03 by Hibernate Tools 4.0.0.Final -->
 <hibernate-mapping>
-    <class name="hibernate.metier.Action" table="action" catalog="runwaylicence">
+    <class name="com.project.permis.entities.Action" table="action" catalog="runwaylicence">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -15,13 +15,13 @@
             <key>
                 <column name="id_action" not-null="true" />
             </key>
-            <one-to-many class="hibernate.metier.Flag" />
+            <one-to-many class="com.project.permis.entities.Flag" />
         </set>
         <set name="actionsForIdParent" table="action_action" inverse="false" lazy="true" fetch="select">
             <key>
                 <column name="id_child" not-null="true" />
             </key>
-            <many-to-many entity-name="hibernate.metier.Action">
+            <many-to-many entity-name="com.project.permis.entities.Action">
                 <column name="id_parent" not-null="true" />
             </many-to-many>
         </set>
@@ -29,7 +29,7 @@
             <key>
                 <column name="id_parent" not-null="true" />
             </key>
-            <many-to-many entity-name="hibernate.metier.Action">
+            <many-to-many entity-name="com.project.permis.entities.Action">
                 <column name="id_child" not-null="true" />
             </many-to-many>
         </set>
@@ -37,7 +37,7 @@
             <key>
                 <column name="id_action" not-null="true" />
             </key>
-            <many-to-many entity-name="hibernate.metier.Rule">
+            <many-to-many entity-name="com.project.permis.entities.Rule">
                 <column name="id_rule" not-null="true" />
             </many-to-many>
         </set>
@@ -45,7 +45,7 @@
             <key>
                 <column name="id_action" not-null="true" />
             </key>
-            <many-to-many entity-name="hibernate.metier.Game">
+            <many-to-many entity-name="com.project.permis.entities.Game">
                 <column name="id_game" not-null="true" />
             </many-to-many>
         </set>
@@ -53,13 +53,13 @@
             <key>
                 <column name="id_action" not-null="true" />
             </key>
-            <one-to-many class="hibernate.metier.StudentAction" />
+            <one-to-many class="com.project.permis.entities.StudentAction" />
         </set>
         <set name="goals" table="action_goal" inverse="false" lazy="true" fetch="select">
             <key>
                 <column name="id_action" not-null="true" />
             </key>
-            <many-to-many entity-name="hibernate.metier.Goal">
+            <many-to-many entity-name="com.project.permis.entities.Goal">
                 <column name="id_goal" not-null="true" />
             </many-to-many>
         </set>

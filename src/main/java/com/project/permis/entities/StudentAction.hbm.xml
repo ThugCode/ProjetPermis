@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 9 juin 2016 10:42:21 by Hibernate Tools 4.0.0.Final -->
+<!-- Generated 15 juin 2016 14:18:03 by Hibernate Tools 4.0.0.Final -->
 <hibernate-mapping>
-    <class name="hibernate.metier.StudentAction" table="student_action" catalog="runwaylicence">
-        <composite-id name="id" class="hibernate.metier.StudentActionId">
+    <class name="com.project.permis.entities.StudentAction" table="student_action" catalog="runwaylicence">
+        <composite-id name="id" class="com.project.permis.entities.StudentActionId">
             <key-property name="idStudent" type="int">
                 <column name="id_student" />
             </key-property>
@@ -15,13 +15,13 @@
                 <column name="date" length="10" />
             </key-property>
         </composite-id>
-        <many-to-one name="action" class="hibernate.metier.Action" update="false" insert="false" fetch="select">
+        <many-to-one name="action" class="com.project.permis.entities.Action" update="false" insert="false" fetch="select">
             <column name="id_action" not-null="true" />
         </many-to-one>
-        <many-to-one name="calendar" class="hibernate.metier.Calendar" update="false" insert="false" fetch="select">
+        <many-to-one name="calendar" class="com.project.permis.entities.Calendar" update="false" insert="false" fetch="select">
             <column name="date" length="10" not-null="true" />
         </many-to-one>
-        <many-to-one name="student" class="hibernate.metier.Student" update="false" insert="false" fetch="select">
+        <many-to-one name="student" class="com.project.permis.entities.Student" update="false" insert="false" fetch="select">
             <column name="id_student" not-null="true" />
         </many-to-one>
         <property name="value" type="java.lang.Integer">

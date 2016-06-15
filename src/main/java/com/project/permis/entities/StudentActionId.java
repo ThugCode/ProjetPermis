@@ -1,5 +1,5 @@
 package com.project.permis.entities;
-// Generated 9 juin 2016 10:42:20 by Hibernate Tools 4.0.0.Final
+// Generated 15 juin 2016 14:18:02 by Hibernate Tools 4.0.0.Final
 
 import java.util.Date;
 

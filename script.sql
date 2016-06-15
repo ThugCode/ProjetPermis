@@ -21,6 +21,20 @@ CREATE TABLE IF NOT EXISTS `student` (
 );
 
 /*==============================================================*/
+/* Table : message                                              */
+/*==============================================================*/
+
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE IF NOT EXISTS `message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `subject` char(50) DEFAULT NULL,
+  `body` char(255) DEFAULT NULL,
+  `id_student` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`id_student`) REFERENCES student(id)
+);
+
+/*==============================================================*/
 /* Table : game                                                 */
 /*==============================================================*/
 
@@ -91,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `rule` (
 DROP TABLE IF EXISTS `configuration`;
 CREATE TABLE IF NOT EXISTS `configuration` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`name` char(25) DEFAULT NULL,
+	`name` char(25) UNIQUE,
 	`value` char(25) DEFAULT NULL,
 	PRIMARY KEY (`id`)
 );

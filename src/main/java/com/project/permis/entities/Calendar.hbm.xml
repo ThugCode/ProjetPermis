@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 9 juin 2016 10:42:21 by Hibernate Tools 4.0.0.Final -->
+<!-- Generated 15 juin 2016 14:18:03 by Hibernate Tools 4.0.0.Final -->
 <hibernate-mapping>
-    <class name="hibernate.metier.Calendar" table="calendar" catalog="runwaylicence">
+    <class name="com.project.permis.entities.Calendar" table="calendar" catalog="runwaylicence">
         <id name="date" type="date">
             <column name="date" length="10" />
             <generator class="assigned" />
@@ -12,7 +12,7 @@
             <key>
                 <column name="date" length="10" not-null="true" />
             </key>
-            <one-to-many class="hibernate.metier.StudentAction" />
+            <one-to-many class="com.project.permis.entities.StudentAction" />
         </set>
     </class>
 </hibernate-mapping>

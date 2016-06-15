@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 9 juin 2016 10:42:21 by Hibernate Tools 4.0.0.Final -->
+<!-- Generated 15 juin 2016 14:18:03 by Hibernate Tools 4.0.0.Final -->
 <hibernate-mapping>
-    <class name="hibernate.metier.Game" table="game" catalog="runwaylicence">
+    <class name="com.project.permis.entities.Game" table="game" catalog="runwaylicence">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -15,7 +15,7 @@
             <key>
                 <column name="id_game" not-null="true" />
             </key>
-            <many-to-many entity-name="hibernate.metier.Mission">
+            <many-to-many entity-name="com.project.permis.entities.Mission">
                 <column name="id_mission" not-null="true" />
             </many-to-many>
         </set>
@@ -23,7 +23,7 @@
             <key>
                 <column name="id_game" not-null="true" />
             </key>
-            <many-to-many entity-name="hibernate.metier.Student">
+            <many-to-many entity-name="com.project.permis.entities.Student">
                 <column name="id_student" not-null="true" />
             </many-to-many>
         </set>
@@ -31,7 +31,7 @@
             <key>
                 <column name="id_game" not-null="true" />
             </key>
-            <many-to-many entity-name="hibernate.metier.Action">
+            <many-to-many entity-name="com.project.permis.entities.Action">
                 <column name="id_action" not-null="true" />
             </many-to-many>
         </set>
