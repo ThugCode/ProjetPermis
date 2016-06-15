@@ -175,38 +175,55 @@
 		<aside class="main-sidebar">
 			<section class="sidebar">
 				<div class="user-panel">
-					<div class="pull-left image">
-						<img src="<%=request.getContextPath()%>/assets/img/formation.png"
-							class="img-circle" alt="User Image" />
+	        		<div class="pull-left image">
+		          		<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+		        	</div>
+	        		<div class="pull-left info">
+		          		<p>Alexander Pierce</p>
+		          		<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+		        	</div>
+		      	</div>
+				<form class="sidebar-form" method="get" action="#">
+					<div class="input-group">
+						<input type="text" name="q" class="form-control" placeholder="Rechercher..." />
+						<span class="input-group-btn">
+							<button type="submit" name="search" id="search-btn" class="btn btn-flat">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
 					</div>
-					<div class="pull-left info">
-						Mes formations 
-					</div>
-					<br/>
-				</div>
-				<div class="user-panel">
-					<div class="pull-left image">
-						<img src="<%=request.getContextPath()%>/assets/img/learners.png"
-							class="img-circle" alt="User Image" />
-					</div>
-					<div class="pull-left info">
-						Utilisateurs
-					</div>
-					<br/>
-				</div>
-					<form class="sidebar-form" method="get" action="#">
-						<div class="input-group">
-							<input type="text" name="q" class="form-control"
-								placeholder="Rechercher..." /> <span class="input-group-btn">
-								<button type="submit" name="search" id="search-btn"
-									class="btn btn-flat">
-									<i class="fa fa-search"></i>
-								</button>
-							</span>
-						</div>
-					</form>
-					<ul class="sidebar-menu">
-					</ul>
+				</form>
+				<ul class="sidebar-menu">
+					<li>
+						<c:url value="/" var="_url"/>
+					 	<a href="${fn:escapeXml(_url)}">
+					 		<i class="fa fa-graduation-cap"></i>
+					 		<span>Mes formations</span>
+					 	</a>
+					</li>
+					<li>
+						<c:url value="/" var="_url"/>
+					 	<a href="${fn:escapeXml(_url)}">
+					 		<i class="fa fa-users"></i>
+					 		<span>Utilisateurs</span>
+					 	</a>
+					</li>
+					<!--
+					<li class="treeview">
+			          	<a href="#">
+				            <i class="fa fa-pie-chart"></i>
+			            	<span>Charts</span>
+				            <i class="fa fa-angle-left pull-right"></i>
+			          	</a>
+			          	<ul class="treeview-menu">
+			            	<li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+			            	<li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
+			            	<li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
+			            	<li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+			          	</ul>
+			        </li>
+			        -->
+				</ul>
 			</section>
 		</aside>
 		<div class="content-wrapper">
