@@ -26,116 +26,20 @@
 		
 		<jsp:invoke fragment="_page_stylesheets" />
 		
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<c:url value="/assets/js/admin-lte.min.js" var="_url" />
+		<script type="text/javascript" src="${_url}"></script>
+		
+		<jsp:invoke fragment="_page_scripts" />
+		
 	</head>
-<body class="hold-transition skin-black sidebar-mini">
+	
+	<body class="hold-transition skin-black sidebar-mini">
 	<div class="wrapper">
-
-		<header class="main-header">
-			<c:url value="/" var="_url" />
-			<a class="logo" href="${_url}"> <span class="logo-mini"><b>A</b>d<b>N</b></span>
-				<span class="logo-lg"><b>A</b>d<b>N</b> Formations</span>
-			</a>
-			<nav class="navbar navbar-static-top">
-				<a class="sidebar-toggle" data-toggle="offcanvas" role="button"
-					href="#"> <span class="sr-only">Afficher / Cacher la
-						navigation</span>
-				</a>
-				<div class="navbar-custom-menu">
-					<ul class="nav navbar-nav">
-						<li class="dropdown messages-menu">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<i class="fa fa-envelope"></i>
-								<span class="label label-success">${fn:length(user.messages)}</span>
-							</a>
-							<ul class="dropdown-menu">
-								<li class="header">Vous avez ${fn:length(user.messages)} messages</li>
-								<li>
-									<!-- inner menu: contains the actual data -->
-									<ul class="menu">
-
-									<c:forEach items="${user.messages}" var="item">
-										<li><a href="#">
-											<div class="pull-left">
-												<i class="fa fa-bookmark<c:if test='${item.read}'>-o</c:if>"></i>
-											</div>
-											<h4>
-												${item.subject}
-												<small><i class="fa fa-clock-o"></i>${item.dateReceipt}</small>
-											</h4>
-											<p>${item.body}</p>
-										</a></li>
-									</c:forEach>
-									</ul>
-								</li>
-								<li class="footer"><a href="#">Voir tous mes messages</a></li>
-							</ul></li>
-
-						<!-- Tasks: style can be found in dropdown.less -->
-
-
-						<li class="dropdown tasks-menu">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<i class="fa fa-graduation-cap"></i>
-								<span class="label label-danger">${fn:length(user.games)}</span>
-							</a>
-							<ul class="dropdown-menu">
-								<li class="header">Vous avez ${fn:length(user.games)} formations</li>
-								<li>
-									<!-- inner menu: contains the actual data -->
-									<ul class="menu">
-
-										<c:forEach items="${user.games}" var="item">
-
-											<li>
-												<!-- Task item --> <a href="#">
-													<h3>
-														${item.name} <small class="pull-right">20%</small>
-													</h3>
-													<div class="progress xs">
-														<!-- progress-bar-green ou progress-bar-red ou progress-bar-yellow -->
-														<div class="progress-bar progress-bar-aqua"
-															style="width: 20%" role="progressbar" aria-valuenow="20"
-															aria-valuemin="0" aria-valuemax="100">
-															<span class="sr-only">20% Complete</span>
-														</div>
-													</div>
-											</a>
-											</li>
-
-										</c:forEach>
-
-									</ul>
-								</li>
-								<li class="footer"><a href="#">Voir toutes mes formations</a></li>
-							</ul></li>
-						<!-- User Account: style can be found in dropdown.less -->
-						<li class="dropdown user user-menu">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<i class="fa fa-user fa-lg"></i>
-								<span class="hidden-xs">${user.firstname} ${user.lastname}</span>
-							</a>
-							<ul class="dropdown-menu">
-								<!-- User image -->
-								<li class="user-header"><img
-									src="<%=request.getContextPath()%>/assets/img/bigUser.png"
-									class="img-circle" alt="User Image" />
-									<p>
-										${user.firstname} ${user.lastname} <small>${user.mail}</small>
-									</p></li>
-								<!-- Menu Footer-->
-								<li class="user-footer">
-									<div class="pull-left">
-										<a href="#" class="btn btn-default btn-flat">Profil</a>
-									</div>
-									<div class="pull-right">
-										<a href="#" class="btn btn-default btn-flat">Déconnexion</a>
-									</div>
-								</li>
-							</ul></li>
-					</ul>
-				</div>
-			</nav>
-		</header>
+		
+		<t:header></t:header>
+		
 		<aside class="main-sidebar">
 			<section class="sidebar">
 
@@ -165,7 +69,7 @@
 					 	</a>
 					</li>
 					<li>
-						<c:url value="/" var="_url"/>
+						<c:url value="/users/" var="_url"/>
 					 	<a href="${fn:escapeXml(_url)}">
 					 		<i class="fa fa-users fa-lg"></i>
 					 		<span>Utilisateurs</span>
@@ -203,6 +107,7 @@
 				</ul>
 			</section>
 		</aside>
+		
 		<div class="content-wrapper">
 			<section class="content-header">
 				<h1>
@@ -213,16 +118,12 @@
 				<jsp:doBody />
 			</section>
 		</div>
-		<t:footer>
-		</t:footer>
+		
+		<t:footer></t:footer>
+		
 		<aside class="control-sidebar control-sidebar-dark"></aside>
 		<div class="control-sidebar-bg"></div>
 	</div>
-
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
-	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<c:url value="/assets/js/admin-lte.min.js" var="_url" />
-	<script type="text/javascript" src="${_url}"></script>
-	<jsp:invoke fragment="_page_scripts" />
+	
 </body>
 </html>

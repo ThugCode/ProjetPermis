@@ -1,6 +1,7 @@
 package com.project.permis.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +24,10 @@ public class UserController extends AbstractController
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public ModelAndView list()
 	{
-		return this.render("user/list");
+		ModelMap model = new ModelMap();
+		
+		model.addAttribute("page", "Utilisateurs");
+		
+		return this.render("user/list", model);
 	}
 }
