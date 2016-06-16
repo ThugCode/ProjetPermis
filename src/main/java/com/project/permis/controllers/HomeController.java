@@ -66,6 +66,8 @@ public class HomeController extends AbstractController
 		
 		model.addAttribute("user", user);
 		
+		model.addAttribute("page", "Statistiques");
+		
 		return this.render("static/home", model);
 	}
 }

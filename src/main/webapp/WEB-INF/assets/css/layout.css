@@ -1,2 +1,19 @@
 @CHARSET "UTF-8";
 
+.sidebar-menu>li>a>.fa-lg {
+    width: 30px!important;
+}
+
+.navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a>p,
+.navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a>h4 {
+    margin: 0 0 0 20px;
+    overflow : hidden;
+}
+
+.content-wrapper {
+    background-image 		: url(../img/layout.png);
+	background-size			: cover;
+	background-position		: center center;
+	background-repeat		: no-repeat;
+	background-attachment	: fixed;
+}

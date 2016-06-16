@@ -53,7 +53,7 @@
 					<ul class="nav navbar-nav">
 						<li class="dropdown messages-menu"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"> <i
-								class="fa fa-envelope-o"></i> <span class="label label-success">3</span>
+								class="fa fa-envelope"></i> <span class="label label-success">3</span>
 						</a>
 							<ul class="dropdown-menu">
 								<li class="header">Vous avez 3 messages</li>
@@ -63,41 +63,33 @@
 
 										<li><a href="#">
 												<div class="pull-left">
-													<img
-														src="<%=request.getContextPath()%>/assets/img/notify_B.png"
-														class="img-circle" alt="User Image">
+													<i class="fa fa-bookmark"></i>
 												</div>
 												<h4>
-													Bienvenue <small><i class="fa fa-clock-o"></i> 1
-														semaine</small>
+													Bienvenue 
+													<small><i class="fa fa-clock-o"></i> 1 semaine</small>
 												</h4>
 												<p>Bienvenue sur votre plateforme de formation</p>
 										</a></li>
 										<li><a href="#">
 												<div class="pull-left">
-													<img
-														src="<%=request.getContextPath()%>/assets/img/notify_NF.png"
-														class="img-circle" alt="User Image">
+													<i class="fa fa-bookmark"></i>
 												</div>
 												<h4>
-													Nouvelle Formation <small><i class="fa fa-clock-o"></i>
-														2 heures</small>
+													Nouvelle Formation 
+													<small><i class="fa fa-clock-o"></i> 2 heures</small>
 												</h4>
-												<p>Vous avez été incrit à une nouvelle formation :
-													Formation 3</p>
+												<p>Vous avez été incrit à une nouvelle formation : Formation 3</p>
 										</a></li>
 										<li><a href="#">
 												<div class="pull-left">
-													<img
-														src="<%=request.getContextPath()%>/assets/img/notify_A.png"
-														class="img-circle" alt="User Image">
+													<i class="fa fa-bookmark-o"></i>
 												</div>
 												<h4>
-													Message Administrateur <small><i
-														class="fa fa-clock-o"></i> 1 heures</small>
+													Message Administrateur
+													<small><i class="fa fa-clock-o"></i> 1 heures</small>
 												</h4>
-												<p>Bonjour, votre formation seront disponible pendant 6
-													mois.</p>
+												<p>Bonjour, votre formation seront disponible pendant 6 mois.</p>
 										</a></li>
 									</ul>
 								</li>
@@ -107,10 +99,11 @@
 						<!-- Tasks: style can be found in dropdown.less -->
 
 
-						<li class="dropdown tasks-menu"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"> <i
-								class="fa fa-flag-o"></i> <span class="label label-danger">${fn:length(user.games)}</span>
-						</a>
+						<li class="dropdown tasks-menu">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="fa fa-graduation-cap"></i>
+								<span class="label label-danger">${fn:length(user.games)}</span>
+							</a>
 							<ul class="dropdown-menu">
 								<li class="header">Vous avez ${fn:length(user.games)}
 									formations</li>
@@ -144,12 +137,11 @@
 										formations</a></li>
 							</ul></li>
 						<!-- User Account: style can be found in dropdown.less -->
-						<li class="dropdown user user-menu"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"> <img
-								src="<%=request.getContextPath()%>/assets/img/user.png"
-								class="user-image" alt="User Image" /> <span class="hidden-xs">${user.firstname}
-									${user.lastname}</span>
-						</a>
+						<li class="dropdown user user-menu">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="fa fa-user fa-lg"></i>
+								<span class="hidden-xs">${user.firstname} ${user.lastname}</span>
+							</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
 								<li class="user-header"><img
@@ -174,15 +166,6 @@
 		</header>
 		<aside class="main-sidebar">
 			<section class="sidebar">
-				<div class="user-panel">
-	        		<div class="pull-left image">
-		          		<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
-		        	</div>
-	        		<div class="pull-left info">
-		          		<p>Alexander Pierce</p>
-		          		<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-		        	</div>
-		      	</div>
 				<form class="sidebar-form" method="get" action="#">
 					<div class="input-group">
 						<input type="text" name="q" class="form-control" placeholder="Rechercher..." />
@@ -197,15 +180,36 @@
 					<li>
 						<c:url value="/" var="_url"/>
 					 	<a href="${fn:escapeXml(_url)}">
-					 		<i class="fa fa-graduation-cap"></i>
+					 		<i class="fa fa-pie-chart fa-lg"></i>
+					 		<span>Statistiques</span>
+					 	</a>
+					</li>
+					<li>
+						<c:url value="/" var="_url"/>
+					 	<a href="${fn:escapeXml(_url)}">
+					 		<i class="fa fa-graduation-cap fa-lg"></i>
 					 		<span>Mes formations</span>
 					 	</a>
 					</li>
 					<li>
 						<c:url value="/" var="_url"/>
 					 	<a href="${fn:escapeXml(_url)}">
-					 		<i class="fa fa-users"></i>
+					 		<i class="fa fa-users fa-lg"></i>
 					 		<span>Utilisateurs</span>
+					 	</a>
+					</li>
+					<li>
+						<c:url value="/" var="_url"/>
+					 	<a href="${fn:escapeXml(_url)}">
+					 		<i class="fa fa-files-o fa-lg"></i>
+					 		<span>Parcours</span>
+					 	</a>
+					</li>
+					<li>
+						<c:url value="/" var="_url"/>
+					 	<a href="${fn:escapeXml(_url)}">
+					 		<i class="fa fa-file-o fa-lg"></i>
+					 		<span>Modules</span>
 					 	</a>
 					</li>
 					<!--
@@ -229,12 +233,8 @@
 		<div class="content-wrapper">
 			<section class="content-header">
 				<h1>
-					Titre <small>Sous-titre</small>
+					${page}
 				</h1>
-				<ol class="breadcrumb">
-					<li><c:url value="/" var="_url" /> <a href="${_url}">Accueil</a>
-					</li>
-				</ol>
 			</section>
 			<section class="content">
 				<jsp:doBody />
