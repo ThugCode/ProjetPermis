@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 16 juin 2016 13:42:42 by Hibernate Tools 4.0.0.Final -->
 <hibernate-mapping>
-    <class name="com.project.permis.entities.Message" table="message" catalog="runwaylicence">
+    <class name="com.project.permis.entities.LogLogins" table="log_logins" catalog="runwaylicence">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -11,17 +11,8 @@
         <many-to-one name="student" class="com.project.permis.entities.Student" fetch="select">
             <column name="id_student" not-null="true" />
         </many-to-one>
-        <property name="subject" type="string">
-            <column name="subject" length="50" />
-        </property>
-        <property name="body" type="string">
-            <column name="body" />
-        </property>
-        <property name="read" type="java.lang.Boolean">
-            <column name="read" />
-        </property>
-        <property name="dateReceipt" type="date">
-            <column name="dateReceipt" length="10" />
+        <property name="dateLogin" type="timestamp">
+            <column name="date_login" length="19" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

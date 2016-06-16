@@ -30,6 +30,21 @@ CREATE TABLE IF NOT EXISTS `message` (
   `subject` char(50) DEFAULT NULL,
   `body` char(255) DEFAULT NULL,
   `id_student` int(11) NOT NULL,
+  `read` boolean,
+  `dateReceipt` date,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`id_student`) REFERENCES student(id)
+);
+
+/*==============================================================*/
+/* Table : log_logins                                              */
+/*==============================================================*/
+
+DROP TABLE IF EXISTS `log_logins`;
+CREATE TABLE IF NOT EXISTS `log_logins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_student` int(11) NOT NULL,
+  `date_login` datetime NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_student`) REFERENCES student(id)
 );

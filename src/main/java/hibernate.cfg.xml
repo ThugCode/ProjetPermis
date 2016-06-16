@@ -17,6 +17,7 @@
         <mapping resource="com/project/permis/entities/Action.hbm.xml" />
         <mapping resource="com/project/permis/entities/Flag.hbm.xml" />
         <mapping resource="com/project/permis/entities/StudentAction.hbm.xml" />
+        <mapping resource="com/project/permis/entities/LogLogins.hbm.xml" />
         <mapping resource="com/project/permis/entities/Mission.hbm.xml" />
         <mapping resource="com/project/permis/entities/Message.hbm.xml" />
         <mapping resource="com/project/permis/entities/Student.hbm.xml" />
