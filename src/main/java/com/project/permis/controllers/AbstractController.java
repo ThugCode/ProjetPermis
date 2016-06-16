@@ -1,6 +1,7 @@
 package com.project.permis.controllers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.project.permis.AbstractException;
+import com.project.permis.entities.Game;
+import com.project.permis.entities.Message;
+import com.project.permis.entities.Student;
 import com.project.permis.session.Flash;
 
 /**
@@ -54,10 +58,43 @@ public abstract class AbstractController
     protected ModelAndView render(String viewName, ModelMap model)
     {
     	// Append common data to model
-    	model.addAttribute("_user_id", 0);
-    	model.addAttribute("_user_first_name", "");
-    	model.addAttribute("_user_last_name", "");
-    	// ...
+    	
+    	/*Données static en attendant les dynamiques*/
+		HashSet<Game> games = new HashSet<Game>();
+		Game a = new Game();
+		a.setName("Formation 1");
+		Game b = new Game();
+		b.setName("Formation 2");
+		Game c = new Game();
+		c.setName("Formation 3");
+		games.add(a);
+		games.add(b);
+		games.add(c);
+		
+		HashSet<Message> messages = new HashSet<Message>();
+		Message am = new Message();
+		am.setSubject("Bienvenue");
+		am.setBody("Bienvenue sur votre plateforme de formation AdN !");
+		Message bm = new Message();
+		bm.setSubject("Nouvelle formation");
+		bm.setBody("Bienvenue sur votre plateforme de formation AdN !");
+		Message cm = new Message();
+		cm.setSubject("Message administrateur");
+		cm.setBody("Votre formation est active pendant 6 mois");
+		messages.add(am);
+		messages.add(bm);
+		messages.add(cm);
+		
+		Student user = new Student();
+		user.setId(-1);
+		user.setFirstname("Leo");
+		user.setLastname("Letourneur");
+		user.setMail("letourneur.leo@gmail.com");
+		user.setGames(games);
+		user.setMessages(messages);
+		/* Fin données statics*/
+		
+		model.addAttribute("user", user);
     	
         return new ModelAndView(viewName, model);
     }

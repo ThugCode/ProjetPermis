@@ -24,7 +24,6 @@
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/assets/css/layout.css" />
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/assets/css/reset.css" />
 		
-		<c:set var="contextPath" value="<%=request.getContextPath()%>"/>
 		<jsp:invoke fragment="_page_stylesheets" />
 		
 	</head>
@@ -43,46 +42,29 @@
 				</a>
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
-						<li class="dropdown messages-menu"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"> <i
-								class="fa fa-envelope"></i> <span class="label label-success">3</span>
-						</a>
+						<li class="dropdown messages-menu">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="fa fa-envelope"></i>
+								<span class="label label-success">${fn:length(user.messages)}</span>
+							</a>
 							<ul class="dropdown-menu">
-								<li class="header">Vous avez 3 messages</li>
+								<li class="header">Vous avez ${fn:length(user.messages)} messages</li>
 								<li>
 									<!-- inner menu: contains the actual data -->
 									<ul class="menu">
 
+									<c:forEach items="${user.messages}" var="item">
 										<li><a href="#">
-												<div class="pull-left">
-													<i class="fa fa-bookmark"></i>
-												</div>
-												<h4>
-													Bienvenue 
-													<small><i class="fa fa-clock-o"></i> 1 semaine</small>
-												</h4>
-												<p>Bienvenue sur votre plateforme de formation</p>
+											<div class="pull-left">
+												<i class="fa fa-bookmark"></i>
+											</div>
+											<h4>
+												${item.subject}
+												<small><i class="fa fa-clock-o"></i> 1 semaine</small>
+											</h4>
+											<p>${item.body}</p>
 										</a></li>
-										<li><a href="#">
-												<div class="pull-left">
-													<i class="fa fa-bookmark"></i>
-												</div>
-												<h4>
-													Nouvelle Formation 
-													<small><i class="fa fa-clock-o"></i> 2 heures</small>
-												</h4>
-												<p>Vous avez été incrit à une nouvelle formation : Formation 3</p>
-										</a></li>
-										<li><a href="#">
-												<div class="pull-left">
-													<i class="fa fa-bookmark-o"></i>
-												</div>
-												<h4>
-													Message Administrateur
-													<small><i class="fa fa-clock-o"></i> 1 heures</small>
-												</h4>
-												<p>Bonjour, votre formation seront disponible pendant 6 mois.</p>
-										</a></li>
+									</c:forEach>
 									</ul>
 								</li>
 								<li class="footer"><a href="#">Voir tous mes messages</a></li>
@@ -97,8 +79,7 @@
 								<span class="label label-danger">${fn:length(user.games)}</span>
 							</a>
 							<ul class="dropdown-menu">
-								<li class="header">Vous avez ${fn:length(user.games)}
-									formations</li>
+								<li class="header">Vous avez ${fn:length(user.games)} formations</li>
 								<li>
 									<!-- inner menu: contains the actual data -->
 									<ul class="menu">
