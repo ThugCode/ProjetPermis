@@ -56,11 +56,11 @@
 									<c:forEach items="${user.messages}" var="item">
 										<li><a href="#">
 											<div class="pull-left">
-												<i class="fa fa-bookmark"></i>
+												<i class="fa fa-bookmark<c:if test='${item.read}'>-o</c:if>"></i>
 											</div>
 											<h4>
 												${item.subject}
-												<small><i class="fa fa-clock-o"></i> 1 semaine</small>
+												<small><i class="fa fa-clock-o"></i>${item.dateReceipt}</small>
 											</h4>
 											<p>${item.body}</p>
 										</a></li>
@@ -106,8 +106,7 @@
 
 									</ul>
 								</li>
-								<li class="footer"><a href="#">Voir toutes mes
-										formations</a></li>
+								<li class="footer"><a href="#">Voir toutes mes formations</a></li>
 							</ul></li>
 						<!-- User Account: style can be found in dropdown.less -->
 						<li class="dropdown user user-menu">

@@ -1,6 +1,7 @@
 package com.project.permis.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -75,12 +76,18 @@ public abstract class AbstractController
 		Message am = new Message();
 		am.setSubject("Bienvenue");
 		am.setBody("Bienvenue sur votre plateforme de formation AdN !");
+		am.setRead(true);
+		am.setDateReceipt(new Date());
 		Message bm = new Message();
-		bm.setSubject("Nouvelle formation");
-		bm.setBody("Bienvenue sur votre plateforme de formation AdN !");
+		bm.setSubject("Formation");
+		bm.setBody("Vous avez été inscrit à une nouvelle formation : Formation 3.");
+		bm.setRead(false);
+		bm.setDateReceipt(new Date());
 		Message cm = new Message();
-		cm.setSubject("Message administrateur");
-		cm.setBody("Votre formation est active pendant 6 mois");
+		cm.setSubject("Message admin");
+		cm.setBody("Votre formation est active pendant 6 mois.");
+		cm.setRead(false);
+		cm.setDateReceipt(new Date());
 		messages.add(am);
 		messages.add(bm);
 		messages.add(cm);
