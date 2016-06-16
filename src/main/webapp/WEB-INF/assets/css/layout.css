@@ -1,13 +1,13 @@
 @CHARSET "UTF-8";
 
 .sidebar-menu>li>a>.fa-lg {
-    width: 30px!important;
+    width					: 30px!important;
 }
 
 .navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a>p,
 .navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a>h4 {
-    margin: 0 0 0 20px;
-    overflow : hidden;
+    margin					: 0 0 0 20px;
+    overflow 				: hidden;
 }
 
 .content-wrapper {
@@ -20,5 +20,5 @@
 
 .user-panel>.info
 {
-	position:static;
+	position				: static;
 }

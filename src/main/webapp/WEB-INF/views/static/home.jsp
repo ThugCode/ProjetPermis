@@ -1,11 +1,12 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="t"%>
+
 <t:layout>
 	<jsp:attribute name="_page_title">
         Accueil
     </jsp:attribute>
 	<jsp:attribute name="_page_stylesheets">
-        <!-- Stylesheets -->
+		<link rel="stylesheet" type="text/css" href="${contextPath}/assets/css/home.css" media="screen" />
     </jsp:attribute>
 	<jsp:attribute name="_page_scripts">
         <!-- Scripts -->
@@ -39,7 +40,7 @@
 	          		</div>
 	
 					<!-- REPARTITION APPRENANT -->
-					<div class="box box-danger">
+					<div class="box box-primary">
 						<div class="box-header with-border">
 							<h3 class="box-title">Répartition des apprenants par formation (admin)</h3>
 							<div class="box-tools pull-right">
@@ -85,7 +86,7 @@
 				<div class="col-md-6">
 
 					<!-- TEMPS MOYEN -->
-					<div class="box box-info">
+					<div class="box box-primary">
 						<div class="box-header with-border">
 							<h3 class="box-title">Temps moyen par formation (admin et apprenant)</h3>
 							<div class="box-tools pull-right">
@@ -106,7 +107,7 @@
 					</div>
 	
 					<!-- COMPLETION CHART -->
-					<div class="box box-success">
+					<div class="box box-primary">
 						<div class="box-header with-border">
 							<h3 class="box-title">Completion moyenne (admin et apprenant)</h3>
 							<div class="box-tools pull-right">

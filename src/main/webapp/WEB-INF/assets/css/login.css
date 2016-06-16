@@ -11,11 +11,11 @@ html {
 }
 
 .login-page {
-    background: rgba(200, 200, 200, 0.5);
-    width: 50%;
-    margin: auto;
+    background				: rgba(200, 200, 200, 0.5);
+    width					: 50%;
+    margin					: auto;
 }
 
 .login-box {
-    padding-bottom: 40px;
+    padding-bottom			: 40px;
 }
