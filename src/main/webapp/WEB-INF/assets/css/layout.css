@@ -17,3 +17,8 @@
 	background-repeat		: no-repeat;
 	background-attachment	: fixed;
 }
+
+.user-panel>.info
+{
+	position:static;
+}

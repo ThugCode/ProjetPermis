@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+
+/* FICHIER POUR FAIRE DU RESPONSIVE A LA MANO (quand bootstrap est pas suffisant) */
+
+/* PORTABLES */
+@media screen and (max-width: 639px)
+{
+	
+}
+
+/* TABLETTES */
+@media screen and (min-width: 640px) and (max-width : 1279px)
+{
+	
+}
+
+/* ORDINATEURS */
+@media screen and (min-width: 1280px)
+{
+	
+}

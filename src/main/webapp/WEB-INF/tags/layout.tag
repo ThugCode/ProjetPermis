@@ -32,13 +32,16 @@
 <jsp:invoke fragment="_page_stylesheets" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/assets/css/layout.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/assets/css/reset.css" />
 <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/assets/favicon.ico" />
 </head>
 <body class="hold-transition skin-black sidebar-mini">
 	<div class="wrapper">
+
 		<header class="main-header">
 			<c:url value="/" var="_url" />
 			<a class="logo" href="${_url}"> <span class="logo-mini"><b>A</b>d<b>N</b></span>
@@ -166,6 +169,7 @@
 		</header>
 		<aside class="main-sidebar">
 			<section class="sidebar">
+
 				<form class="sidebar-form" method="get" action="#">
 					<div class="input-group">
 						<input type="text" name="q" class="form-control" placeholder="Rechercher..." />
@@ -240,12 +244,8 @@
 				<jsp:doBody />
 			</section>
 		</div>
-		<footer class="main-footer">
-			<div class="pull-right hidden-xs">
-				<b>Version</b> 1.0
-			</div>
-			<strong>&copy; Portail de formation, Aéroport de Nice</strong>, 2016
-		</footer>
+		<t:footer>
+		</t:footer>
 		<aside class="control-sidebar control-sidebar-dark"></aside>
 		<div class="control-sidebar-bg"></div>
 	</div>
