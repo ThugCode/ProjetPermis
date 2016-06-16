@@ -25,7 +25,7 @@
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/assets/css/reset.css" />
 		
 		<c:set var="contextPath" value="<%=request.getContextPath()%>"/>
-		<jsp:invoke fragment="_page_stylesheets" var="contextPath"/>
+		<jsp:invoke fragment="_page_stylesheets" />
 		
 	</head>
 <body class="hold-transition skin-black sidebar-mini">

@@ -1,12 +1,15 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="t"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <t:layout>
 	<jsp:attribute name="_page_title">
         Accueil
     </jsp:attribute>
 	<jsp:attribute name="_page_stylesheets">
-		<link rel="stylesheet" type="text/css" href="${contextPath}/assets/css/home.css" media="screen" />
+		<c:url value="/assets/css/home.css" var="_url" />
+		<link rel="stylesheet" type="text/css" href="${fn:escapeXml(_url)}" media="screen" />
     </jsp:attribute>
 	<jsp:attribute name="_page_scripts">
         <!-- Scripts -->
