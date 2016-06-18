@@ -78,15 +78,15 @@
 					<li>
 						<c:url value="/" var="_url"/>
 					 	<a href="${fn:escapeXml(_url)}">
-					 		<i class="fa fa-files-o fa-lg"></i>
-					 		<span>Parcours</span>
+					 		<i class="fa fa-th fa-lg"></i>
+					 		<span>Epreuves</span>
 					 	</a>
 					</li>
 					<li>
-						<c:url value="/" var="_url"/>
+						<c:url value="/missions/" var="_url"/>
 					 	<a href="${fn:escapeXml(_url)}">
-					 		<i class="fa fa-file-o fa-lg"></i>
-					 		<span>Modules</span>
+					 		<i class="fa fa-list-alt fa-lg"></i>
+					 		<span>Missions</span>
 					 	</a>
 					</li>
 					<li>
