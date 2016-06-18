@@ -89,6 +89,13 @@
 					 		<span>Modules</span>
 					 	</a>
 					</li>
+					<li>
+						<c:url value="/goals/" var="_url"/>
+					 	<a href="${fn:escapeXml(_url)}">
+					 		<i class="fa fa-check-square fa-lg"></i>
+					 		<span>Objectifs</span>
+					 	</a>
+					</li>
 					<!--
 					<li class="treeview">
 			          	<a href="#">

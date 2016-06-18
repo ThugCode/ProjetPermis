@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+#content-margin {
+    margin 					: auto;
+}
+
+.box {
+    background				: rgba(255,255,255,0.9)!important;
+}
+
+#btn-add {
+	float					: right;
+    width					: 200px;
+    margin-top				: -40px;
+}
+
+.actionCol {
+  float						: right;
+}

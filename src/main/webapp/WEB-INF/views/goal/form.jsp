@@ -5,9 +5,9 @@
 
 <t:layout>
 	<jsp:attribute name="_page_title">
-        Ajouter un utilisateur
+        Ajouter un objectif
     </jsp:attribute>
-
+    
 	<jsp:body>
 		<section class="content">
 			<div class="row">
@@ -21,19 +21,6 @@
 								<div class="form-group">
 									<label for="exampleInputEmail1">Nom</label>
 									<input type="email" class="form-control" id="inputName" placeholder="Nom">
-								</div>
-								<div class="form-group">
-									<label for="exampleInputEmail1">Prénom</label>
-									<input type="email" class="form-control" id="inputSurname" placeholder="Prénom">
-								</div>
-								<div class="form-group">
-									<label for="exampleInputEmail1">Email</label>
-									<input type="email" class="form-control" id="inputEmail" placeholder="Email">
-								</div>
-								<div class="checkbox">
-									<label>
-										<input id="cbAdmin" type="checkbox"/> Administrateur
-									</label>
 								</div>
 							</div>
 							<!-- /.box-body -->
