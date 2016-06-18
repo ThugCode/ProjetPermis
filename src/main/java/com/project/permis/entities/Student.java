@@ -1,5 +1,5 @@
 package com.project.permis.entities;
-// Generated 16 juin 2016 13:42:42 by Hibernate Tools 4.0.0.Final
+// Generated 18 juin 2016 09:54:13 by Hibernate Tools 4.0.0.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +14,7 @@ public class Student implements java.io.Serializable {
 	private String firstname;
 	private String mail;
 	private String password;
+	private boolean isEnabled;
 	private Set games = new HashSet(0);
 	private Set logLoginses = new HashSet(0);
 	private Set messages = new HashSet(0);
@@ -22,17 +23,19 @@ public class Student implements java.io.Serializable {
 	public Student() {
 	}
 
-	public Student(String mail, String password) {
+	public Student(String mail, String password, boolean isEnabled) {
 		this.mail = mail;
 		this.password = password;
+		this.isEnabled = isEnabled;
 	}
 
-	public Student(String lastname, String firstname, String mail, String password, Set games, Set logLoginses,
-			Set messages, Set studentActions) {
+	public Student(String lastname, String firstname, String mail, String password, boolean isEnabled, Set games,
+			Set logLoginses, Set messages, Set studentActions) {
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.mail = mail;
 		this.password = password;
+		this.isEnabled = isEnabled;
 		this.games = games;
 		this.logLoginses = logLoginses;
 		this.messages = messages;
@@ -77,6 +80,14 @@ public class Student implements java.io.Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isIsEnabled() {
+		return this.isEnabled;
+	}
+
+	public void setIsEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
 	}
 
 	public Set getGames() {
