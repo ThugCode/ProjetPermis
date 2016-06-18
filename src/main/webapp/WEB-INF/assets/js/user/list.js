@@ -6,6 +6,11 @@ $(function () {
 		"ordering": true,
 		"info": true,
 		"autoWidth": true,
+		"bSort": true,
+		"order": [[ 3, "desc" ]],
+		"aoColumnDefs": [{
+			"sClass": "controlColumn", "aTargets": [ 4 ] 
+		}],
 		"oLanguage": {
 			"sProcessing":     "Traitement en cours...",
 		    "sSearch":         "Rechercher&nbsp;:",

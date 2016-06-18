@@ -38,6 +38,9 @@ public class UserController extends AbstractController
 			add.setFirstname("Letourneur "+i);
 			add.setLastname("Léo "+i);
 			add.setMail("letourneur.leo@blabla");
+			if(i%10==0) {
+				add.setIsEnabled(true);
+			}
 			users.add(add);
 		}
 		

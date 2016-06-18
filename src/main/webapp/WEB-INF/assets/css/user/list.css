@@ -13,3 +13,16 @@
     width					: 200px;
     margin-top				: -40px;
 }
+
+.controlColumn {
+  float						: right;
+}
+
+.waitingActivate {
+	background-color		: #ffcc99!important;
+}
+
+.waitingActivate td {
+	border-color			: #CCC!important;
+	border					: none; 
+}

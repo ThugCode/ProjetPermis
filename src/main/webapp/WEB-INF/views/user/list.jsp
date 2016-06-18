@@ -10,6 +10,11 @@
 	<jsp:attribute name="_page_stylesheets">
 		<c:url value="/assets/css/user/list.css" var="_url" />
 		<link rel="stylesheet" type="text/css" href="${fn:escapeXml(_url)}" media="screen" />
+		
+		<c:url value="/assets/js/datatables/dataTables.bootstrap.css" var="_url" />
+		<link rel="stylesheet" href="${fn:escapeXml(_url)}">
+  
+		
     </jsp:attribute>
 	<jsp:attribute name="_page_scripts">
 		<c:url value="/assets/js/user/list.js" var="_url" />
@@ -42,17 +47,24 @@
                   <th>Nom</th>
                   <th>Prénom</th>
                   <th>Email</th>
+                  <th>En attente de validation</th>
                   <th>Contrôles</th>
                 </tr>
                 </thead>
                 <tbody>
                 
                 <c:forEach items="${users}" var="item">
-					<tr>
+					<tr class="<c:if test='${item.isEnabled}'>waitingActivate</c:if>">
 						<td>${item.lastname}</td>
 						<td>${item.firstname}</td>
 						<td>${item.mail}</td>
-						<td class="actionCol">
+						<td><c:if test='${item.isEnabled}'>OUI</c:if></td>
+						<td class="actionCol dt-right">
+							<c:if test='${item.isEnabled}'>
+								<a type="button" class="btn self-border" title="Valider">
+									<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+								</a>
+							</c:if>
 							<a type="button" class="btn self-border" title="Modifier">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 							</a>

@@ -43,7 +43,9 @@
 									<input type="email" class="form-control" id="inputEmail" placeholder="Email">
 								</div>
 								<div class="checkbox">
-									<label><input id="cbAdmin" type="checkbox"> Administrateur</label>
+									<label>
+										<input id="cbAdmin" type="checkbox"/> Administrateur
+									</label>
 								</div>
 							</div>
 							<!-- /.box-body -->
