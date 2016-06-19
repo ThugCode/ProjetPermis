@@ -4,6 +4,10 @@
     width					: 30px!important;
 }
 
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header {
+	height: auto;
+}
+
 .navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a>p,
 .navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a>h4 {
     margin					: 0 0 0 20px;
