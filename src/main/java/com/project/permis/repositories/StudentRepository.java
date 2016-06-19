@@ -82,6 +82,38 @@ public class StudentRepository extends AbstractRepository
 	}
 	
 	/**
+	 * Fetches a single existing student from the database according to their mail address.
+	 * 
+	 * @param mail The student's mail.
+	 * @return The student, or {@code null} if there are no matching student.
+	 * @throws com.project.permis.repositories.RepositoryException If the student can't
+	 * be properly fetched.
+	 */
+	public Student findByMail(String mail)
+	{
+		// Fetch the student
+		try
+		{
+			Query query = this.getSession().createQuery(
+				"FROM Student AS s WHERE s.mail = :mail"
+			);
+			query.setString("mail", mail);
+			
+			return (Student) query.uniqueResult();
+		}
+		catch(HibernateException ex)
+		{
+			throw new RepositoryException(
+				ex,
+				String.format(
+					"Impossible de récupérer l'étudiant dont l'adresse email est %s.",
+					mail
+				)
+			);
+		}
+	}
+	
+	/**
 	 * Saves a student into the database.
 	 * 
 	 * @param student The student to save.

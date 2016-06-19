@@ -35,19 +35,22 @@
 	    		</p>
 	    		<c:url value="/login" var="_url" />
 	    		<form method="post" action="${_url}">
-	    			<div class="form-group has-feedback">
+	    			<div class="form-group has-feedback<c:if test="${not empty _error_email}"> has-error</c:if>">
 				        <input
 					        type="email"
 					        name="email"
 					        class="form-control"
 					        placeholder="Adresse email"
 					        <c:if test="${not empty _last_email}">
-					        	value="${fn:escapeXml(_last_email)}
+					        	value="${fn:escapeXml(_last_email)}"
 					        </c:if>
 				        />
 				        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+				        <c:if test="${not empty _error_email}">
+				            <span class="help-block">${_error_email}</span>
+				        </c:if>
 				    </div>
-				    <div class="form-group has-feedback">
+				    <div class="form-group has-feedback<c:if test="${not empty _error_password}"> has-error</c:if>">
 				        <input
 					        type="password"
 					        name="password"
@@ -56,12 +59,27 @@
 					        name=""
 				        />
 				        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        <c:if test="${not empty _error_password}">
+                            <span class="help-block">${_error_password}</span>
+                        </c:if>
 				    </div>
+				    <c:if test="${not empty _error}">
+					    <p class="text-red text-justify">
+	                        ${_error}
+	                    </p>
+				    </c:if>
 				    <div class="row">
 				        <div class="col-xs-8">
 				          	<div class="checkbox icheck">
 				            	<label>
-				              		<input type="checkbox" name="remember_me" /> Se souvenir de moi
+				              		<input
+				              		type="checkbox"
+				              		name="remember_me"
+				              		<c:if test="${not empty _remember_me && _remember_me}">
+				              		    checked="checked"
+				              		</c:if>
+				              		/> 
+				              		Se souvenir de moi
 					            </label>
 				          	</div>
 				        </div>

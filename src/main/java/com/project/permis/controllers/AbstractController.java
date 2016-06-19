@@ -18,14 +18,15 @@ import com.project.permis.AbstractException;
 import com.project.permis.entities.Game;
 import com.project.permis.entities.Message;
 import com.project.permis.entities.Student;
+import com.project.permis.repositories.StudentRepository;
 import com.project.permis.session.Flash;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
- * @author L�o Letourneur (leo.letourneur@etu.univ-lyon1.fr)
+ * @author Léo Letourneur (leo.letourneur@etu.univ-lyon1.fr)
  * @author Thomas Arnaud (thomas.arnaud@etu.univ-lyon1.fr)
  * @author Karl Gorgoglione (karl.gorgoglione@etu.univ-lyon1.fr)
- * @author Lo�c Gerland (loic.gerland@etu.univ-lyon1.fr)
+ * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
 public abstract class AbstractController
@@ -58,51 +59,62 @@ public abstract class AbstractController
      */
     protected ModelAndView render(String viewName, ModelMap model)
     {
-    	// Append common data to model
-    	
-    	/*Données static en attendant les dynamiques*/
-		HashSet<Game> games = new HashSet<Game>();
-		Game a = new Game();
-		a.setName("Formation 1");
-		Game b = new Game();
-		b.setName("Formation 2");
-		Game c = new Game();
-		c.setName("Formation 3");
-		games.add(a);
-		games.add(b);
-		games.add(c);
-		
-		HashSet<Message> messages = new HashSet<Message>();
-		Message am = new Message();
-		am.setSubject("Bienvenue");
-		am.setBody("Bienvenue sur votre plateforme de formation AdN !");
-		am.setRead(true);
-		am.setDateReceipt(new Date());
-		Message bm = new Message();
-		bm.setSubject("Formation");
-		bm.setBody("Vous avez été inscrit à une nouvelle formation : Formation 3.");
-		bm.setRead(false);
-		bm.setDateReceipt(new Date());
-		Message cm = new Message();
-		cm.setSubject("Message admin");
-		cm.setBody("Votre formation est active pendant 6 mois.");
-		cm.setRead(false);
-		cm.setDateReceipt(new Date());
-		messages.add(am);
-		messages.add(bm);
-		messages.add(cm);
-		
-		Student user = new Student();
-		user.setId(-1);
-		user.setFirstname("Leo");
-		user.setLastname("Letourneur");
-		user.setMail("letourneur.leo@gmail.com");
-		user.setGames(games);
-		user.setMessages(messages);
-		/* Fin données statics*/
-		
-		model.addAttribute("user", user);
-    	
+        // Initialize vars
+        /*
+        Student user = this.getUser();
+        
+        // Append common data to model
+        if(null != user)
+        {
+            model.addAttribute("_user_first_name", user.getFirstname());
+            model.addAttribute("_user_last_name", user.getLastname());
+            model.addAttribute("_user_email", user.getMail());
+        }
+        */
+        
+        /*Données static en attendant les dynamiques*/
+        HashSet<Game> games = new HashSet<Game>();
+        Game a = new Game();
+        a.setName("Formation 1");
+        Game b = new Game();
+        b.setName("Formation 2");
+        Game c = new Game();
+        c.setName("Formation 3");
+        games.add(a);
+        games.add(b);
+        games.add(c);
+        
+        HashSet<Message> messages = new HashSet<Message>();
+        Message am = new Message();
+        am.setSubject("Bienvenue");
+        am.setBody("Bienvenue sur votre plateforme de formation AdN !");
+        am.setRead(true);
+        am.setDateReceipt(new Date());
+        Message bm = new Message();
+        bm.setSubject("Formation");
+        bm.setBody("Vous avez été inscrit à une nouvelle formation : Formation 3.");
+        bm.setRead(false);
+        bm.setDateReceipt(new Date());
+        Message cm = new Message();
+        cm.setSubject("Message admin");
+        cm.setBody("Votre formation est active pendant 6 mois.");
+        cm.setRead(false);
+        cm.setDateReceipt(new Date());
+        messages.add(am);
+        messages.add(bm);
+        messages.add(cm);
+        
+        Student user = new Student();
+        user.setId(-1);
+        user.setFirstname("Leo");
+        user.setLastname("Letourneur");
+        user.setMail("letourneur.leo@gmail.com");
+        user.setGames(games);
+        user.setMessages(messages);
+        /* Fin données statics*/
+        
+        model.addAttribute("user", this.getUser());
+        
         return new ModelAndView(viewName, model);
     }
     
@@ -142,7 +154,7 @@ public abstract class AbstractController
      * @return The flash list.
      */
     @SuppressWarnings("unchecked")
-	protected List<Flash> getFlashList()
+    protected List<Flash> getFlashList()
     {
         // Initialize vars
         Object flashListObject = this.request.getSession().getAttribute("_flashes");
@@ -198,5 +210,38 @@ public abstract class AbstractController
         // Add the flash message and memorize the new list
         flashList.add(new Flash(type, contents));
         session.setAttribute("_flashes", flashList);
+    }
+    
+    /**
+     * Gets the user instance if they are logged in.
+     * 
+     * @return The user or {@code null} if they aren't logged in.
+     */
+    protected Student getUser()
+    {
+        // Initialize vars
+        HttpSession session = this.request.getSession();
+        Object userId = session.getAttribute("_user_id");
+        
+        if(null != userId && userId instanceof Integer)
+        {
+            // Initialize additional vars
+            int id = (Integer) userId;
+            StudentRepository repository = new StudentRepository();
+            
+            return repository.fetch(id);
+        }
+        
+        return null;
+    }
+    
+    /**
+     * Tests if the user is logged in.
+     * 
+     * @return {@code true} if the user is logged in, {@code false} otherwise.
+     */
+    protected boolean isLoggedIn()
+    {
+        return null != this.getUser();
     }
 }
