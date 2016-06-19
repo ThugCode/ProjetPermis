@@ -62,11 +62,6 @@
                             <span class="help-block">${_error_password}</span>
                         </c:if>
 				    </div>
-				    <c:if test="${not empty _error}">
-					    <p class="text-red text-justify">
-	                        ${_error}
-	                    </p>
-				    </c:if>
 				    <div class="row">
 				        <div class="col-xs-8">
 				          	<div class="checkbox icheck">

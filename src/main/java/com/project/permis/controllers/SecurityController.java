@@ -131,7 +131,7 @@ public class SecurityController extends AbstractController
 			else
 			{
 				// This user doesn't exist
-				model.addAttribute("_error", "Aucun compte n'est associé à cette adresse email");
+				model.addAttribute("_error_email", "Aucun compte n'est associé à cette adresse email");
 			}
 		}
 
