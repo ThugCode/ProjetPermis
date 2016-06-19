@@ -33,16 +33,15 @@ import com.project.permis.utils.HashUtil;
 @Controller
 public class SecurityController extends AbstractController
 {
-	private static final Logger logger = LoggerFactory.getLogger(SecurityController.class);
-	
 	/**
+	 * Displays the login form.
 	 * 
-	 * @return
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login()
 	{
-		return this.render("security/login");
+		return this.isLoggedIn() ? this.redirect("/") : this.render("security/login");
 	}
 	
 	/**
@@ -51,7 +50,7 @@ public class SecurityController extends AbstractController
 	 * @param email The entered email.
 	 * @param password The entered password.
 	 * @param rememberMe The "Remember me" checkbox.
-	 * @return
+	 * @return The view to display or a redirection response.
 	 * @todo Handles "Remember me" checkbox.
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -61,6 +60,12 @@ public class SecurityController extends AbstractController
 		@RequestParam(value="remember_me", required=false) boolean rememberMe
 	)
 	{
+		if(this.isLoggedIn())
+		{
+			// The user is already logged in, redirect them to the home page
+			return this.redirect("/");
+		}
+		
 		// Initialize vars
 		ModelMap model = new ModelMap();
 		boolean errorHappened = false;
@@ -102,36 +107,43 @@ public class SecurityController extends AbstractController
 			if(null != user)
 			{
 				// This user does exist
-				try
+				if(user.isIsEnabled())
 				{
-					if(user.getPassword().equals(HashUtil.sha256(email + password)))
+					try
 					{
-						// Password is valid, save user's id
-						HttpSession session = this.request.getSession();
-						session.setAttribute("_user_id", user.getId());
-						
-						// Register login date
-						LogLoginsRepository loginLogRepository = new LogLoginsRepository();
-						loginLogRepository.save(new LogLogins(user, new Date()));
-						
-						return this.redirect("/");
+						if(user.getPassword().equals(HashUtil.sha256(email + password)))
+						{
+							// Password is valid, save user's relevant data
+							this.startSession(user);
+							
+							// Register login date
+							LogLoginsRepository loginLogRepository = new LogLoginsRepository();
+							loginLogRepository.save(new LogLogins(user, new Date()));
+							
+							return this.redirect("/");
+						}
+						else
+						{
+							// Password is invalid
+							model.addAttribute("_error_password", "Ce mot de passe est incorrect.");
+						}
 					}
-					else
+					catch(NoSuchAlgorithmException e)
 					{
-						// Password is invalid
-						model.addAttribute("_error_password", "Ce mot de passe est incorrect.");
+						// Password can't be hashed
+						model.addAttribute("_error_password", "Impossible de vérifier votre mot de passe.");
 					}
 				}
-				catch(NoSuchAlgorithmException e)
+				else
 				{
-					// Password can't be hashed
-					model.addAttribute("_error_password", "Impossible de vérifier votre mot de passe.");
+					// This user isn't enabled yet
+					model.addAttribute("_error_email", "Le compte associé à cette adresse email n'est pas encore activé.");
 				}
 			}
 			else
 			{
 				// This user doesn't exist
-				model.addAttribute("_error_email", "Aucun compte n'est associé à cette adresse email");
+				model.addAttribute("_error_email", "Aucun compte n'est associé à cette adresse email.");
 			}
 		}
 
@@ -143,18 +155,20 @@ public class SecurityController extends AbstractController
 	}
 	
 	/**
+	 * Displays the register form.
 	 * 
-	 * @return
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register()
 	{
-		return this.render("security/register");
+		return this.isLoggedIn() ? this.redirect("/") : this.render("security/register");
 	}
 	
 	/**
+	 * Handles the register process.
 	 * 
-	 * @return
+	 * @return The view to display or a redirection response.
 	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView doRegister()
@@ -163,17 +177,16 @@ public class SecurityController extends AbstractController
 	}
 	
 	/**
+	 * Handles the logout process.
 	 * 
-	 * @return
+	 * @return The redirection response.
 	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView logout()
 	{
 		if(this.isLoggedIn())
 		{
-			// Remove user's id from the session
-			HttpSession session = this.request.getSession();
-			session.removeAttribute("_user_id");
+			this.closeSession();
 		}
 
 		return this.redirect("login");

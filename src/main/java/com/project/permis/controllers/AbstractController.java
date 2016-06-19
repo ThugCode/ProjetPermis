@@ -236,12 +236,53 @@ public abstract class AbstractController
     }
     
     /**
-     * Tests if the user is logged in.
+     * Starts the session for a user by saving relevant data into it.
+     *  
+     * @param user The user.
+     */
+    public void startSession(Student user)
+    {
+    	// Initialize vars
+        HttpSession session = this.request.getSession();
+        
+        // Register revelant data
+        session.setAttribute("_user_id", user.getId());
+    }
+    
+    /**
+     * Closes the session for a user by removing the associated data.
+     */
+    protected void closeSession()
+    {
+    	// Initialize vars
+        HttpSession session = this.request.getSession();
+        
+        // Register revelant data
+        session.removeAttribute("_user_id");
+    }
+    
+    /**
+     * Tests if the user is logged in. If the user is logged in but no longer enabled,
+     * then their session is closed.
      * 
      * @return {@code true} if the user is logged in, {@code false} otherwise.
      */
     protected boolean isLoggedIn()
     {
-        return null != this.getUser();
+    	Student user = this.getUser();
+    	
+    	if(null != user)
+    	{
+    		if(user.isIsEnabled())
+    		{
+    			return true;
+    		}
+    		else
+    		{
+    			this.closeSession();
+    		}
+    	}
+    	
+        return false;
     }
 }
