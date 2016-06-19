@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   `mail` char(25) NOT NULL UNIQUE,
   `password` char(255) NOT NULL,
   `is_enabled` boolean NOT NULL,
+  `is_admin` boolean NOT NULL,
   PRIMARY KEY (`id`)
 );
 

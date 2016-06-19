@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 18 juin 2016 09:54:14 by Hibernate Tools 4.0.0.Final -->
+<!-- Generated 19 juin 2016 15:18:35 by Hibernate Tools 4.0.0.Final -->
 <hibernate-mapping>
     <class name="com.project.permis.entities.StudentAction" table="student_action" catalog="runwaylicence">
         <composite-id name="id" class="com.project.permis.entities.StudentActionId">

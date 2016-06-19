@@ -1,5 +1,5 @@
 package com.project.permis.entities;
-// Generated 18 juin 2016 09:54:13 by Hibernate Tools 4.0.0.Final
+// Generated 19 juin 2016 15:18:34 by Hibernate Tools 4.0.0.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +15,7 @@ public class Student implements java.io.Serializable {
 	private String mail;
 	private String password;
 	private boolean isEnabled;
+	private boolean isAdmin;
 	private Set games = new HashSet(0);
 	private Set logLoginses = new HashSet(0);
 	private Set messages = new HashSet(0);
@@ -23,19 +24,21 @@ public class Student implements java.io.Serializable {
 	public Student() {
 	}
 
-	public Student(String mail, String password, boolean isEnabled) {
+	public Student(String mail, String password, boolean isEnabled, boolean isAdmin) {
 		this.mail = mail;
 		this.password = password;
 		this.isEnabled = isEnabled;
+		this.isAdmin = isAdmin;
 	}
 
-	public Student(String lastname, String firstname, String mail, String password, boolean isEnabled, Set games,
-			Set logLoginses, Set messages, Set studentActions) {
+	public Student(String lastname, String firstname, String mail, String password, boolean isEnabled, boolean isAdmin,
+			Set games, Set logLoginses, Set messages, Set studentActions) {
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.mail = mail;
 		this.password = password;
 		this.isEnabled = isEnabled;
+		this.isAdmin = isAdmin;
 		this.games = games;
 		this.logLoginses = logLoginses;
 		this.messages = messages;
@@ -88,6 +91,14 @@ public class Student implements java.io.Serializable {
 
 	public void setIsEnabled(boolean isEnabled) {
 		this.isEnabled = isEnabled;
+	}
+
+	public boolean isIsAdmin() {
+		return this.isAdmin;
+	}
+
+	public void setIsAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	public Set getGames() {
