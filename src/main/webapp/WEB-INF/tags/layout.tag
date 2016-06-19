@@ -62,7 +62,7 @@
 					 	</a>
 					</li>
 					<li>
-						<c:url value="/" var="_url"/>
+						<c:url value="/mygames/" var="_url"/>
 					 	<a href="${fn:escapeXml(_url)}">
 					 		<i class="fa fa-graduation-cap fa-lg"></i>
 					 		<span>Mes formations</span>

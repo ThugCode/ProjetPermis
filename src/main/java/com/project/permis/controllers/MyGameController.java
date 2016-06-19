@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.permis.entities.Student;
+import com.project.permis.entities.Game;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -19,43 +19,44 @@ import com.project.permis.entities.Student;
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
 @Controller
-public class UserController extends AbstractController
+public class MyGameController extends AbstractController
 {
 	/**
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	@RequestMapping(value = "/mygames", method = RequestMethod.GET)
 	public ModelAndView list()
 	{
 		ModelMap model = new ModelMap();
 		
-		model.addAttribute("page", "Liste des utilisateurs");
+		model.addAttribute("page", "Mes formations");
 		
-		HashSet<Student> users = new HashSet<Student>();
-		for(int i=0;i<40;i++) {
-			Student add = new Student();
-			add.setFirstname("Letourneur "+i);
-			add.setLastname("Léo "+i);
-			add.setMail("letourneur.leo@blabla");
-			if(i%10==0) {
-				add.setIsEnabled(true);
-			}
-			users.add(add);
+		HashSet<Game> games = new HashSet<Game>();
+		for(int i=0;i<10;i++) {
+			Game add = new Game();
+			add.setId(i);
+			add.setName("Game "+i);
+			games.add(add);
 		}
 		
-		model.addAttribute("users", users);
+		model.addAttribute("games", games);
 		
-		return this.render("user/list", model);
+		return this.render("mygame/list", model);
 	}
 	
-	@RequestMapping(value = "/users/add", method = RequestMethod.GET)
-	public ModelAndView addUser()
+	@RequestMapping(value = "/mygames/{id}", method = RequestMethod.GET)
+	public ModelAndView practice(String id)
 	{
 		ModelMap model = new ModelMap();
 		
-		model.addAttribute("page", "Ajouter un utilisateur");
+		Game game = new Game();
+		game.setName("Game "+id);
 		
-		return this.render("user/form", model);
+		model.addAttribute("game", game);
+		
+		model.addAttribute("page", "Epreuve "+game.getName());
+		
+		return this.render("mygame/view", model);
 	}
 }
