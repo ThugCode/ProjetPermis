@@ -53,6 +53,7 @@
 						 		<span>Mes formations</span>
 						 	</a>
 						</li>
+						<c:if test="${user.isAdmin}">
 						<li>
 							<c:url value="/users/" var="_url"/>
 						 	<a href="${fn:escapeXml(_url)}">
@@ -88,6 +89,7 @@
 						 		<span>Actions</span>
 						 	</a>
 						</li>
+						</c:if>
 						<!--
 						<li class="treeview">
 				          	<a href="#">

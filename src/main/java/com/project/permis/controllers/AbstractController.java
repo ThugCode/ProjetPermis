@@ -72,47 +72,6 @@ public abstract class AbstractController
         }
         */
         
-        /*Données static en attendant les dynamiques*/
-        HashSet<Game> games = new HashSet<Game>();
-        Game a = new Game();
-        a.setName("Formation 1");
-        Game b = new Game();
-        b.setName("Formation 2");
-        Game c = new Game();
-        c.setName("Formation 3");
-        games.add(a);
-        games.add(b);
-        games.add(c);
-        
-        HashSet<Message> messages = new HashSet<Message>();
-        Message am = new Message();
-        am.setSubject("Bienvenue");
-        am.setBody("Bienvenue sur votre plateforme de formation AdN !");
-        am.setRead(true);
-        am.setDateReception(new Date());
-        Message bm = new Message();
-        bm.setSubject("Formation");
-        bm.setBody("Vous avez été inscrit à une nouvelle formation : Formation 3.");
-        bm.setRead(false);
-        bm.setDateReception(new Date());
-        Message cm = new Message();
-        cm.setSubject("Message admin");
-        cm.setBody("Votre formation est active pendant 6 mois.");
-        cm.setRead(false);
-        cm.setDateReception(new Date());
-        messages.add(am);
-        messages.add(bm);
-        messages.add(cm);
-        
-        Student user = new Student();
-        user.setId(-1);
-        user.setFirstname("Leo");
-        user.setLastname("Letourneur");
-        user.setMail("letourneur.leo@gmail.com");
-        user.setGames(games);
-        user.setMessages(messages);
-        /* Fin données statics*/
-        
         model.addAttribute("user", this.getUser());
         
         return new ModelAndView(viewName, model);
