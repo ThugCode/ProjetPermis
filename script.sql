@@ -13,10 +13,10 @@ USE `runwaylicence`;
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `lastname` char(25) DEFAULT NULL,
-  `firstname` char(25) DEFAULT NULL,
-  `mail` char(25) NOT NULL UNIQUE,
-  `password` char(255) NOT NULL,
+  `lastname` varchar(100) DEFAULT NULL,
+  `firstname` varchar(100) DEFAULT NULL,
+  `mail` varchar(100) NOT NULL UNIQUE,
+  `password` char(64) NOT NULL,
   `is_enabled` boolean NOT NULL,
   `is_admin` boolean NOT NULL,
   PRIMARY KEY (`id`)
@@ -29,11 +29,11 @@ CREATE TABLE IF NOT EXISTS `student` (
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE IF NOT EXISTS `message` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `subject` char(50) DEFAULT NULL,
-  `body` char(255) DEFAULT NULL,
+  `subject` varchar(100) DEFAULT NULL,
+  `body` varchar(255) DEFAULT NULL,
   `id_student` int(11) NOT NULL,
   `read` boolean,
-  `dateReceipt` date,
+  `dateReception` date,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_student`) REFERENCES student(id)
 );
@@ -58,7 +58,8 @@ CREATE TABLE IF NOT EXISTS `log_logins` (
 DROP TABLE IF EXISTS `game`;
 CREATE TABLE IF NOT EXISTS `game` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` char(25) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -69,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `game` (
 DROP TABLE IF EXISTS `action`;
 CREATE TABLE IF NOT EXISTS `action` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` char(25) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -80,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `action` (
 DROP TABLE IF EXISTS `mission`;
 CREATE TABLE IF NOT EXISTS `mission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` char(25) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -101,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `calendar` (
 DROP TABLE IF EXISTS `goal`;
 CREATE TABLE IF NOT EXISTS `goal` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` char(25) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -111,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `goal` (
 DROP TABLE IF EXISTS `rule`;
 CREATE TABLE IF NOT EXISTS `rule` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`name` char(25) DEFAULT NULL,
+	`name` varchar(100) DEFAULT NULL,
 	`minimum_score` int(11) DEFAULT NULL,
 	PRIMARY KEY (`id`)
 );
@@ -122,8 +123,8 @@ CREATE TABLE IF NOT EXISTS `rule` (
 DROP TABLE IF EXISTS `configuration`;
 CREATE TABLE IF NOT EXISTS `configuration` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`name` char(25) UNIQUE,
-	`value` char(25) DEFAULT NULL,
+	`name` varchar(100) UNIQUE,
+	`value` varchar(100) DEFAULT NULL,
 	PRIMARY KEY (`id`)
 );
   
@@ -187,7 +188,7 @@ DROP TABLE IF EXISTS `flag`;
 CREATE TABLE IF NOT EXISTS `flag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_action` int(11) NOT NULL,
-  `description` char(20),
+  `description` varchar(100),
   `value` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_action`) REFERENCES action(id)

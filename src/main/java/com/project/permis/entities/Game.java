@@ -1,5 +1,5 @@
 package com.project.permis.entities;
-// Generated 19 juin 2016 15:18:34 by Hibernate Tools 4.0.0.Final
+// Generated 19 juin 2016 22:00:37 by Hibernate Tools 4.0.0.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +11,7 @@ public class Game implements java.io.Serializable {
 
 	private Integer id;
 	private String name;
+	private String image;
 	private Set missions = new HashSet(0);
 	private Set students = new HashSet(0);
 	private Set actions = new HashSet(0);
@@ -18,8 +19,9 @@ public class Game implements java.io.Serializable {
 	public Game() {
 	}
 
-	public Game(String name, Set missions, Set students, Set actions) {
+	public Game(String name, String image, Set missions, Set students, Set actions) {
 		this.name = name;
+		this.image = image;
 		this.missions = missions;
 		this.students = students;
 		this.actions = actions;
@@ -39,6 +41,14 @@ public class Game implements java.io.Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getImage() {
+		return this.image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public Set getMissions() {

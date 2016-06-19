@@ -1,5 +1,5 @@
 package com.project.permis.entities;
-// Generated 19 juin 2016 15:18:34 by Hibernate Tools 4.0.0.Final
+// Generated 19 juin 2016 22:00:37 by Hibernate Tools 4.0.0.Final
 
 import java.util.Date;
 
@@ -13,7 +13,7 @@ public class Message implements java.io.Serializable {
 	private String subject;
 	private String body;
 	private Boolean read;
-	private Date dateReceipt;
+	private Date dateReception;
 
 	public Message() {
 	}
@@ -22,12 +22,12 @@ public class Message implements java.io.Serializable {
 		this.student = student;
 	}
 
-	public Message(Student student, String subject, String body, Boolean read, Date dateReceipt) {
+	public Message(Student student, String subject, String body, Boolean read, Date dateReception) {
 		this.student = student;
 		this.subject = subject;
 		this.body = body;
 		this.read = read;
-		this.dateReceipt = dateReceipt;
+		this.dateReception = dateReception;
 	}
 
 	public Integer getId() {
@@ -70,12 +70,12 @@ public class Message implements java.io.Serializable {
 		this.read = read;
 	}
 
-	public Date getDateReceipt() {
-		return this.dateReceipt;
+	public Date getDateReception() {
+		return this.dateReception;
 	}
 
-	public void setDateReceipt(Date dateReceipt) {
-		this.dateReceipt = dateReceipt;
+	public void setDateReception(Date dateReception) {
+		this.dateReception = dateReception;
 	}
 
 }
