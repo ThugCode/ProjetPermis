@@ -25,6 +25,7 @@
 				<th>Prénom</th>
 				<th>Email</th>
 				<th>En attente de validation</th>
+				<th>Admin</th>
 				<th>Contrôles</th>
 			</tr>
 		</thead>
@@ -35,6 +36,7 @@
 					<td>${item.firstname}</td>
 					<td>${item.mail}</td>
 					<td><c:if test='${item.isEnabled}'>OUI</c:if></td>
+					<td><c:if test='${item.isAdmin}'>OUI</c:if></td>
 					<td class="actionCol dt-right">
 					<c:if test='${item.isEnabled}'>
 						<a type="button" class="btn self-border" title="Valider">
