@@ -19,15 +19,15 @@
 						<form role="form">
 							<div class="box-body">
 								<div class="form-group">
-									<label for="exampleInputEmail1">Nom</label>
-									<input type="email" class="form-control" id="inputName" placeholder="Nom">
+									<label for="inputName">Nom</label>
+									<input class="form-control" id="inputName" placeholder="Nom">
 								</div>
 								<div class="form-group">
-									<label for="exampleInputEmail1">Prénom</label>
-									<input type="email" class="form-control" id="inputSurname" placeholder="Prénom">
+									<label for="inputSurname">Prénom</label>
+									<input class="form-control" id="inputSurname" placeholder="Prénom">
 								</div>
 								<div class="form-group">
-									<label for="exampleInputEmail1">Email</label>
+									<label for="inputEmail">Email</label>
 									<input type="email" class="form-control" id="inputEmail" placeholder="Email">
 								</div>
 								<div class="checkbox">

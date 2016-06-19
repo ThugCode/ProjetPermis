@@ -20,12 +20,17 @@
 							<div class="box-body">
 								<div class="form-group">
 									<label for="inputTitle">Titre</label>
-									<input type="email" class="form-control" id="inputTitle" placeholder="Titre">
+									<input class="form-control" id="inputTitle" placeholder="Titre">
 								</div>
-							</div>
-							<div class="box-body">
-								<h5>Associer des objectifs</h5>
-								<button class="btn btn-bitbucket"><i class="fa fa-plus"></i>&nbsp;Ajouter un objectif</button>
+								<div class="panel panel-default">
+									<div class="panel-heading">Objectifs requis pour valider la mission</div>
+									<div class="panel-body">
+										Aucun objectif pour le moment
+									</div>
+									<div class="panel-footer text-center">
+										<button class="btn btn-bitbucket"><i class="fa fa-plus"></i>&nbsp;Ajouter un objectif</button>
+									</div>
+								</div>
 							</div>
 							<!-- /.box-body -->
 							<div class="box-footer">

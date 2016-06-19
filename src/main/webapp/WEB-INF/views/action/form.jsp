@@ -5,7 +5,7 @@
 
 <t:layout>
 	<jsp:attribute name="_page_title">
-        Ajouter un objectif
+        Ajouter une action
     </jsp:attribute>
     
 	<jsp:body>
@@ -21,15 +21,6 @@
 								<div class="form-group">
 									<label for="inputName">Nom</label>
 									<input class="form-control" id="inputName" placeholder="Nom">
-								</div>
-								<div class="panel panel-default">
-									<div class="panel-heading">Actions requises pour valider l'objectif</div>
-									<div class="panel-body">
-										Aucune action pour le moment
-									</div>
-									<div class="panel-footer text-center">
-										<button class="btn btn-bitbucket"><i class="fa fa-plus"></i>&nbsp;Ajouter une action</button>
-									</div>
 								</div>
 							</div>
 							<!-- /.box-body -->

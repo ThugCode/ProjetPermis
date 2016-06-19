@@ -31,7 +31,7 @@ public class MissionController extends AbstractController
 	{
 		ModelMap model = new ModelMap();
 		
-		model.addAttribute("page", "Missions");
+		model.addAttribute("page", "Liste des missions");
 		
 		HashSet<Mission> missions = new HashSet<Mission>();
 		for(int i=0;i<40;i++) {
@@ -54,7 +54,7 @@ public class MissionController extends AbstractController
 	{
 		ModelMap model = new ModelMap();
 		
-		model.addAttribute("page", "Ajouter ue mission");
+		model.addAttribute("page", "Ajouter une mission");
 		
 		return this.render("mission/form", model);
 	}

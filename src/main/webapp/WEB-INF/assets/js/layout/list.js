@@ -3,8 +3,12 @@ $(function () {
 	if (typeof orderDefault == 'undefined') {
 		orderDefault = 0;
 	}
+	
+	if (typeof orderDirectionDefault == 'undefined') {
+		orderDirectionDefault = "asc";
+	}
 
-	$("#tableList").DataTable({
+	var table = $("#tableList").DataTable({
 		"paging": true,
 		"lengthChange": true,
 		"searching": true,
@@ -12,7 +16,7 @@ $(function () {
 		"info": true,
 		"autoWidth": true,
 		"bSort": true,
-		"order": [[ orderDefault, "desc" ]],
+		"order": [[ orderDefault, orderDirectionDefault ]],
 		"oLanguage": {
 			"sProcessing":     "Traitement en cours...",
 		    "sSearch":         "Rechercher&nbsp;:",

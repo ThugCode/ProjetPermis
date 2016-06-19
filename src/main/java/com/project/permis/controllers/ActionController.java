@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.permis.entities.Action;
-import com.project.permis.entities.Goal;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -20,43 +19,38 @@ import com.project.permis.entities.Goal;
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
 @Controller
-public class GoalController extends AbstractController
+public class ActionController extends AbstractController
 {
 	/**
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/goals", method = RequestMethod.GET)
+	@RequestMapping(value = "/actions", method = RequestMethod.GET)
 	public ModelAndView list()
 	{
 		ModelMap model = new ModelMap();
 		
-		model.addAttribute("page", "Liste des objectifs");
+		model.addAttribute("page", "Liste des actions");
 		
-		HashSet<Goal> goals = new HashSet<Goal>();
+		HashSet<Action> actions = new HashSet<Action>();
 		for(int i=0;i<40;i++) {
-			Goal add = new Goal();
-			add.setName("Objectif "+i);
-			
-			HashSet<Action> actions = new HashSet<Action>();
-			actions.add(new Action("action", null, null, null, null, null, null, null));
-			add.setActions(actions);
-			
-			goals.add(add);
+			Action add = new Action();
+			add.setName("Action "+i);
+			actions.add(add);
 		}
 		
-		model.addAttribute("goals", goals);
+		model.addAttribute("actions", actions);
 		
-		return this.render("goal/list", model);
+		return this.render("action/list", model);
 	}
 	
-	@RequestMapping(value = "/goals/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/actions/add", method = RequestMethod.GET)
 	public ModelAndView addGoal()
 	{
 		ModelMap model = new ModelMap();
 		
-		model.addAttribute("page", "Ajouter un objectif");
+		model.addAttribute("page", "Ajouter une action");
 		
-		return this.render("goal/form", model);
+		return this.render("action/form", model);
 	}
 }

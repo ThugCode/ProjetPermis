@@ -5,22 +5,20 @@
 
 <t:list>
 
-	<jsp:attribute name="_name">un objectif</jsp:attribute>
-	<jsp:attribute name="_names">objectifs</jsp:attribute>
+	<jsp:attribute name="_name">une action</jsp:attribute>
+	<jsp:attribute name="_names">actions</jsp:attribute>
     
 	<jsp:body>
 		<thead>
 			<tr>
 				<th>Nom</th>
-				<th>Nombre d'actions associées</th>
 				<th>Contrôles</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${goals}" var="item">
+			<c:forEach items="${actions}" var="item">
 				<tr>
 					<td>${item.name}</td>
-					<td>${fn:length(item.actions)}</td>
 					<td class="actionCol">
 						<a type="button" class="btn self-border" title="Modifier">
 							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>

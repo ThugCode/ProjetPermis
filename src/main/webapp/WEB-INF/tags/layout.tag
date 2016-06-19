@@ -96,6 +96,13 @@
 					 		<span>Objectifs</span>
 					 	</a>
 					</li>
+					<li>
+						<c:url value="/actions/" var="_url"/>
+					 	<a href="${fn:escapeXml(_url)}">
+					 		<i class="fa fa-star fa-lg"></i>
+					 		<span>Actions</span>
+					 	</a>
+					</li>
 					<!--
 					<li class="treeview">
 			          	<a href="#">
