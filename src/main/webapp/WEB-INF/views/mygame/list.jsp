@@ -11,21 +11,23 @@
 	<jsp:body>
 		<section class="content">
 			<div class="row">
-				<c:forEach items="${games}" var="item">
+				<c:forEach items="${games}" var="item" varStatus="loop">
 					<a href="${item.id}">
-			        <div class="col-md-4 col-sm-6 col-xs-12">
-			        	<div class="info-box">
-			            	<span class="info-box-icon btn-bitbucket">
-			            		<c:url value="/assets/img/games/default.png" var="_url" />
-			            		<img src="${fn:escapeXml(_url)}"></img>
-			            	</span>
-			            	<div class="info-box-content">
-			              		<span class="info-box-text">${item.name}</span>
-			              		<span class="info-box-number">${fn:length(item.missions)} missions</span>
-			            	</div>
-			          	</div>
-			        </div>
+				        <div class="col-md-3 col-sm-6 col-xs-12">
+				        	<div class="info-box">
+				            	<span class="info-box-icon bg-navy">
+				            		<i class="fa fa-graduation-cap"></i>
+				            	</span>
+				            	<div class="info-box-content">
+				              		<span class="info-box-text">${item.name}</span>
+				              		<span class="info-box-number">${fn:length(item.missions)} missions</span>
+				            	</div>
+				          	</div>
+				        </div>
 			        </a>
+			        <c:if test="${loop.index > 0 && loop.index % 2 == 1}">
+			            <div class="clearfix visible-sm-block"></div>
+			        </c:if>
 				</c:forEach>
 			</div>
 		</section>
