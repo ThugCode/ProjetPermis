@@ -4,11 +4,13 @@ import java.util.HashSet;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.permis.entities.Game;
+import com.project.permis.entities.Mission;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -46,16 +48,22 @@ public class MyGameController extends AbstractController
 	}
 	
 	@RequestMapping(value = "/mygames/{id}", method = RequestMethod.GET)
-	public ModelAndView practice(String id)
+	public ModelAndView practice(@PathVariable("id")int id)
 	{
 		ModelMap model = new ModelMap();
 		
 		Game game = new Game();
 		game.setName("Game "+id);
 		
+		HashSet<Mission> missions = new HashSet<Mission>();
+		missions.add(new Mission("Mission 1", null, null));
+		missions.add(new Mission("Mission 2", null, null));
+		missions.add(new Mission("Mission 3", null, null));
+		game.setMissions(missions);
+		
 		model.addAttribute("game", game);
 		
-		model.addAttribute("page", "Epreuve "+game.getName());
+		model.addAttribute("page", "Epreuve");
 		
 		return this.render("mygame/view", model);
 	}

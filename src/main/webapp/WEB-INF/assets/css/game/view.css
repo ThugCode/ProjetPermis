@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+.missionLine:hover .panel {
+	opacity 					: 0.6;
+}
+
+.progress {
+    margin-bottom				: 0px;
+}
+
+.alert-info {
+	background-color 			: #3C8DBC!important;
+	border-color 				: #3C8DBC!important;
+}
