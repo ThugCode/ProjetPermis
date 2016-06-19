@@ -37,7 +37,7 @@
 					<td>${item.mail}</td>
 					<td><c:if test='${item.isEnabled}'>OUI</c:if></td>
 					<td><c:if test='${item.isAdmin}'>OUI</c:if></td>
-					<td class="actionCol dt-right">
+					<td class="actionCol">
 					<c:if test='${item.isEnabled}'>
 						<a type="button" class="btn self-border" title="Valider">
 							<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
