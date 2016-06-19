@@ -28,27 +28,44 @@ public class ActionController extends AbstractController
 	@RequestMapping(value = "/actions", method = RequestMethod.GET)
 	public ModelAndView list()
 	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
 		ModelMap model = new ModelMap();
-		
 		model.addAttribute("page", "Liste des actions");
 		
 		HashSet<Action> actions = new HashSet<Action>();
-		for(int i=0;i<40;i++) {
+		model.addAttribute("actions", actions);
+		
+		for(int i = 0; i < 40; i++)
+		{
 			Action add = new Action();
-			add.setName("Action "+i);
+			add.setName("Action " + i);
 			actions.add(add);
 		}
-		
-		model.addAttribute("actions", actions);
 		
 		return this.render("action/list", model);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/actions/add", method = RequestMethod.GET)
 	public ModelAndView addGoal()
 	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
 		ModelMap model = new ModelMap();
-		
 		model.addAttribute("page", "Ajouter une action");
 		
 		return this.render("action/form", model);

@@ -28,32 +28,52 @@ public class UserController extends AbstractController
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public ModelAndView list()
 	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
 		ModelMap model = new ModelMap();
-		
 		model.addAttribute("page", "Liste des utilisateurs");
 		
 		HashSet<Student> users = new HashSet<Student>();
-		for(int i=0;i<40;i++) {
+		model.addAttribute("users", users);
+		
+		for(int i = 0; i < 40; i++)
+		{
 			Student add = new Student();
-			add.setFirstname("Letourneur "+i);
-			add.setLastname("Léo "+i);
+			add.setFirstname("Letourneur " + i);
+			add.setLastname("Léo " + i);
 			add.setMail("letourneur.leo@blabla");
-			if(i%10==0) {
+			
+			if(i % 10 == 0)
+			{
 				add.setIsEnabled(true);
 			}
+			
 			users.add(add);
 		}
-		
-		model.addAttribute("users", users);
 		
 		return this.render("user/list", model);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/users/add", method = RequestMethod.GET)
 	public ModelAndView addUser()
 	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
 		ModelMap model = new ModelMap();
-		
 		model.addAttribute("page", "Ajouter un utilisateur");
 		
 		return this.render("user/form", model);

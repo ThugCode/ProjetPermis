@@ -29,31 +29,48 @@ public class MissionController extends AbstractController
 	@RequestMapping(value = "/missions", method = RequestMethod.GET)
 	public ModelAndView list()
 	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
 		ModelMap model = new ModelMap();
-		
 		model.addAttribute("page", "Liste des missions");
 		
 		HashSet<Mission> missions = new HashSet<Mission>();
-		for(int i=0;i<40;i++) {
+		model.addAttribute("missions", missions);
+		
+		for(int i = 0; i < 40; i++) 
+		{
 			Mission add = new Mission();
-			add.setTitle("mission "+i);
+			add.setTitle("mission " + i);
 			
 			HashSet<Goal> goals = new HashSet<Goal>();
 			goals.add(new Goal("objectif", null, null));
 			add.setGoals(goals);
 			missions.add(add);
-		}
-		
-		model.addAttribute("missions", missions);
+		}		
 		
 		return this.render("mission/list", model);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/missions/add", method = RequestMethod.GET)
 	public ModelAndView addMission()
 	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
 		ModelMap model = new ModelMap();
-		
 		model.addAttribute("page", "Ajouter une mission");
 		
 		return this.render("mission/form", model);

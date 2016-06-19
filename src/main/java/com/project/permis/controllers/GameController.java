@@ -30,14 +30,23 @@ public class GameController extends AbstractController
 	@RequestMapping(value = "/games", method = RequestMethod.GET)
 	public ModelAndView list()
 	{
-		ModelMap model = new ModelMap();
-		
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
+		ModelMap model = new ModelMap();		
 		model.addAttribute("page", "Liste des épreuves");
 		
 		HashSet<Game> games = new HashSet<Game>();
-		for(int i=0;i<40;i++) {
+		model.addAttribute("games", games);
+		
+		for(int i = 0; i < 40; i++)
+		{
 			Game add = new Game();
-			add.setName("game "+i);
+			add.setName("game " + i);
 			
 			HashSet<Mission> missions = new HashSet<Mission>();
 			missions.add(new Mission("Mission", null, null));
@@ -50,16 +59,24 @@ public class GameController extends AbstractController
 			games.add(add);
 		}
 		
-		model.addAttribute("games", games);
-		
 		return this.render("game/list", model);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/games/add", method = RequestMethod.GET)
 	public ModelAndView addMission()
 	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
 		ModelMap model = new ModelMap();
-		
 		model.addAttribute("page", "Ajouter une épreuve");
 		
 		return this.render("game/form", model);

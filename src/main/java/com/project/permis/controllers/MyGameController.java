@@ -30,26 +30,44 @@ public class MyGameController extends AbstractController
 	@RequestMapping(value = "/mygames", method = RequestMethod.GET)
 	public ModelAndView list()
 	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
 		ModelMap model = new ModelMap();
-		
 		model.addAttribute("page", "Mes formations");
 		
 		HashSet<Game> games = new HashSet<Game>();
-		for(int i=0;i<10;i++) {
+		model.addAttribute("games", games);
+		
+		for(int i = 0; i < 10; i++)
+		{
 			Game add = new Game();
 			add.setId(i);
-			add.setName("Game "+i);
+			add.setName("Game " + i);
 			games.add(add);
 		}
-		
-		model.addAttribute("games", games);
 		
 		return this.render("mygame/list", model);
 	}
 	
+	/**
+	 * 
+	 * @return 
+	 */
 	@RequestMapping(value = "/mygames/{id}", method = RequestMethod.GET)
 	public ModelAndView practice(@PathVariable("id")int id)
 	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
 		ModelMap model = new ModelMap();
 		
 		Game game = new Game();
@@ -62,8 +80,7 @@ public class MyGameController extends AbstractController
 		game.setMissions(missions);
 		
 		model.addAttribute("game", game);
-		
-		model.addAttribute("page", "Epreuve");
+		model.addAttribute("page", "Épreuve");
 		
 		return this.render("mygame/view", model);
 	}

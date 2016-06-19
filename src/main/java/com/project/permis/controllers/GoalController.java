@@ -29,14 +29,23 @@ public class GoalController extends AbstractController
 	@RequestMapping(value = "/goals", method = RequestMethod.GET)
 	public ModelAndView list()
 	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
 		ModelMap model = new ModelMap();
-		
 		model.addAttribute("page", "Liste des objectifs");
 		
 		HashSet<Goal> goals = new HashSet<Goal>();
-		for(int i=0;i<40;i++) {
+		model.addAttribute("goals", goals);
+		
+		for(int i = 0; i < 40; i++)
+		{
 			Goal add = new Goal();
-			add.setName("Objectif "+i);
+			add.setName("Objectif " + i);
 			
 			HashSet<Action> actions = new HashSet<Action>();
 			actions.add(new Action("action", null, null, null, null, null, null, null));
@@ -45,16 +54,24 @@ public class GoalController extends AbstractController
 			goals.add(add);
 		}
 		
-		model.addAttribute("goals", goals);
-		
 		return this.render("goal/list", model);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/goals/add", method = RequestMethod.GET)
 	public ModelAndView addGoal()
 	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
 		ModelMap model = new ModelMap();
-		
 		model.addAttribute("page", "Ajouter un objectif");
 		
 		return this.render("goal/form", model);
