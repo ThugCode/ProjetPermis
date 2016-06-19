@@ -38,37 +38,64 @@
 	    		<c:url value="/register" var="_url" />
 	    		<form method="post" action="${_url}">
 	    			<div class="form-group has-feedback">
-				        <input type="text" class="form-control" placeholder="NOM Prénom">
+				        <input
+				            type="text"
+				            name="first_name"
+				            class="form-control"
+				            placeholder="Prénom"
+				        />
 			        	<span class="glyphicon glyphicon-user form-control-feedback"></span>
 			      	</div>
 			      	<div class="form-group has-feedback">
-				        <input type="email" class="form-control" placeholder="Email">
+                        <input
+	                        type="text"
+	                        name="last_name"
+	                        class="form-control"
+	                        placeholder="Nom"
+                        />
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+			      	<div class="form-group has-feedback">
+				        <input
+					        type="email"
+					        name="email"
+					        class="form-control"
+					        placeholder="Email"
+				        />
 				        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 			    	</div>
 				    <div class="form-group has-feedback">
-				        <input type="password" class="form-control" placeholder="Mot de passe">
+				        <input
+					        type="password"
+					        name="password"
+					        class="form-control"
+					        placeholder="Mot de passe"
+				        />
 				        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				    </div>
 				    <div class="form-group has-feedback">
-				        <input type="password" class="form-control" placeholder="Vérification mot de passe">
+				        <input
+					        type="password"
+					        name="password_confirm"
+					        class="form-control"
+					        placeholder="Vérification mot de passe"
+				        />
 				        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
 				    </div>
 				    <div class="row">
 				        <div class="col-xs-8">
 				          	<div class="checkbox icheck">
 				            	<label>
-				              		<input type="checkbox"/> 
+				              		<input type="checkbox" name="conditions" /> 
 				              		<span class="text-checkbox">
 				              			J'accepte la <a href="#">charte de l'aéroport de Nice</a>
 				              		</span>
 			            		</label>
 				          	</div>
 			        	</div>
-				        <!-- /.col -->
 				        <div class="col-xs-4">
 				          	<button id="register-btn" type="submit" class="btn btn-primary btn-block btn-flat">Valider</button>
 				        </div>
-				        <!-- /.col -->
 				    </div>
 				    <div class="row all-width">
 				    	Vous avez déjà un compte ? 

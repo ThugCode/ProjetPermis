@@ -17,7 +17,8 @@
         <c:url value="/assets/css/admin-lte.min.css" var="_url" />
         <link rel="stylesheet" type="text/css" href="${fn:escapeXml(_url)}" media="screen" />
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/blue.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/assets/css/login.css"/>
+        <c:url value="/assets/css/login.css" var="_url" />
+        <link rel="stylesheet" type="text/css" href="${_url}"/>
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -60,7 +61,7 @@
 				        <div class="col-xs-8">
 				          	<div class="checkbox icheck">
 				            	<label>
-				              		<input type="checkbox" name="_remember_me" /> Se souvenir de moi
+				              		<input type="checkbox" name="remember_me" /> Se souvenir de moi
 					            </label>
 				          	</div>
 				        </div>
