@@ -76,7 +76,7 @@
 					 	</a>
 					</li>
 					<li>
-						<c:url value="/" var="_url"/>
+						<c:url value="/games/" var="_url"/>
 					 	<a href="${fn:escapeXml(_url)}">
 					 		<i class="fa fa-th fa-lg"></i>
 					 		<span>Epreuves</span>
