@@ -16,17 +16,18 @@
 					<!-- general form elements -->
 					<div class="box box-primary">
 						<!-- form start -->
-						<form role="form">
+						<form role="form" action="/permis/actions/add" method="post">
 							<div class="box-body">
+								<input type="hidden" id="inputId" name="inputId" value="${action.id}">
 								<div class="form-group">
 									<label for="inputName">Nom</label>
-									<input class="form-control" id="inputName" placeholder="Nom">
+									<input class="form-control" id="inputName" name="inputName" placeholder="Nom" value="${action.name}">
 								</div>
 							</div>
 							<!-- /.box-body -->
 							<div class="box-footer">
-								<a href="../" class="btn btn-warning">Annuler</a>
-								<button type="submit" class="btn btn-bitbucket pull-right">&nbsp;&nbsp;Créer&nbsp;&nbsp;</button>
+								<a href="/permis/actions/" class="btn btn-warning">Annuler</a>
+								<button type="submit" class="btn btn-bitbucket pull-right">${buttonSubmit}</button>
 							</div>
 						</form>
 					</div>

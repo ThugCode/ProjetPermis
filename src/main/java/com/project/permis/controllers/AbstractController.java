@@ -1,8 +1,6 @@
 package com.project.permis.controllers;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.project.permis.AbstractException;
-import com.project.permis.entities.Game;
-import com.project.permis.entities.Message;
 import com.project.permis.entities.Student;
 import com.project.permis.repositories.StudentRepository;
 import com.project.permis.session.Flash;
@@ -31,6 +27,8 @@ import com.project.permis.session.Flash;
  */
 public abstract class AbstractController
 {
+	protected String successMessage;
+	
     /**
      * The request sent to the server.
      */

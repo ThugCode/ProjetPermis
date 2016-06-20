@@ -38,11 +38,20 @@
     
 	<jsp:body>
 	
-		<a id="btn-add" href="add" class="btn btn-block btn-social btn-bitbucket">
-			<i class="fa fa-plus"></i> Ajouter <jsp:invoke fragment="_name"/>
-		</a>
 		<div id="content-margin" class="content-wrapper">
-			<section class="content">
+		<section class="content">
+			<a id="btn-add" href="add" class="btn btn-block btn-social btn-bitbucket">
+				<i class="fa fa-plus"></i> Ajouter <jsp:invoke fragment="_name"/>
+			</a>
+			<div class="clear"></div>
+			
+			<c:if test="${not empty successMessage}">
+			<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<h5><i class="icon fa fa-check"></i>${successMessage}</h5>
+			</div>
+			</c:if>
+			
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="box">
