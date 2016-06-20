@@ -6,14 +6,20 @@
 <t:layout>
 	<jsp:attribute name="_page_title">Ajouter un objectif</jsp:attribute>
     
+    <jsp:attribute name="_page_scripts">
+		<c:url value="/assets/js/goal/form.js" var="_url" />
+        <script type="text/javascript" src="${fn:escapeXml(_url)}"></script>
+    </jsp:attribute>
+    
 	<jsp:body>
 		<section class="content">
 			<div class="row">
 				<div class="col-md-12 col-lg-8 col-lg-offset-2">
 					<div class="box box-primary">
-						<form role="form" action="/permis/goals/add" method="post">
+						<form id="form" role="form" action="/permis/goals/add" method="post">
 							<div class="box-body">
 								<input type="hidden" id="inputId" name="inputId" value="${goal.id}">
+								<input type="hidden" id="inputActions" name="inputActions">
 								<div class="form-group">
 									<label for="inputName">Nom</label>
 									<input class="form-control" id="inputName" name="inputName" placeholder="Nom" value="${goal.name}">
@@ -21,10 +27,26 @@
 								<div class="panel panel-default">
 									<div class="panel-heading">Actions requises pour valider l'objectif</div>
 									<div class="panel-body">
-										Aucune action pour le moment
+										<c:if test="${empty goal.actions}">Aucune action pour le moment</c:if>
+										<c:forEach items="${goal.actions}" var="item">
+											<div class="col-md-3 card" data-id="${item.id}">
+												<div class="box box-warning">
+													<div class="box-header with-border">
+														<h3 class="box-title">${item.name}</h3>
+														<div class="box-tools pull-right">
+															<button type="button" class="btn btn-box-tool" data-widget="remove">
+																<i class="fa fa-times"></i>
+															</button>
+														</div>
+            										</div>
+												</div>
+											</div>
+										</c:forEach>
 									</div>
 									<div class="panel-footer text-center">
-										<button class="btn btn-bitbucket"><i class="fa fa-plus"></i>&nbsp;Ajouter une action</button>
+										<button id="addAction" type="button" class="btn btn-bitbucket">
+											<i class="fa fa-plus"></i>&nbsp;Ajouter une action
+										</button>
 									</div>
 								</div>
 							</div>

@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.permis.entities.Action;
 import com.project.permis.entities.Goal;
+import com.project.permis.repositories.ActionRepository;
 import com.project.permis.repositories.GoalRepository;
 
 /**
@@ -76,7 +78,8 @@ public class GoalController extends AbstractController
 	@RequestMapping(value = "/goals/add", method = RequestMethod.POST)
 	public ModelAndView validateGoal(
 		@RequestParam(value="inputId", required=false) String id,
-		@RequestParam(value="inputName", required=true) String name
+		@RequestParam(value="inputName", required=true) String name,
+		@RequestParam(value="inputActions", required=true) String actions
 	)
 	{
 		if(!this.isLoggedIn())
@@ -92,6 +95,18 @@ public class GoalController extends AbstractController
 		}
 		goal.setName(name);
 		
+		//Set new list of actions
+		ActionRepository aRepository = new ActionRepository();
+		HashSet<Action> setActions = new HashSet<Action>();
+		String[] ids = actions.split("x");
+		Action addedAction = null;
+		for (int i = 0; i < ids.length; i++) {
+			addedAction = aRepository.fetch(Integer.parseInt(ids[i]));
+			setActions.add(addedAction);
+		}
+		goal.setActions(setActions);
+		
+		//Save new goal
 		GoalRepository repository = new GoalRepository();
 		repository.save(goal);
 
