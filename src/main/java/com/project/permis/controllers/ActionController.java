@@ -141,6 +141,6 @@ public class ActionController extends AbstractController
 		
 		this.successMessage = "Action supprimée avec succès";
 		
-		return this.redirect("/actions");
+		return this.redirect("/actions/");
 	}
 }

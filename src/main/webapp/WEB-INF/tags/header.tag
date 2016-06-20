@@ -32,7 +32,7 @@
                                            </div>
                                            <h4>
                                                ${item.subject}
-                                               <small><i class="fa fa-clock-o"></i>${item.dateReceipt}</small>
+                                               <small><i class="fa fa-clock-o"></i>${item.dateReception}</small>
                                            </h4>
                                            <p>${item.body}</p>
                                         </a>
