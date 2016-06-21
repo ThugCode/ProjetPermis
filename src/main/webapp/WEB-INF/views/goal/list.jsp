@@ -7,7 +7,10 @@
 
 	<jsp:attribute name="_name">un objectif</jsp:attribute>
 	<jsp:attribute name="_names">objectifs</jsp:attribute>
-    
+    <jsp:attribute name="_url_add">
+        <c:url value="/goals/add" var="_url"/>
+        ${fn:escapeXml(_url)}
+    </jsp:attribute>
 	<jsp:body>
 		<thead>
 			<tr>

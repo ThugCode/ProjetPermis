@@ -7,7 +7,10 @@
 
 	<jsp:attribute name="_name">une épreuve</jsp:attribute>
 	<jsp:attribute name="_names">épreuves</jsp:attribute>
-    
+    <jsp:attribute name="_url_add">
+        <c:url value="/games/add" var="_url"/>
+        ${fn:escapeXml(_url)}
+    </jsp:attribute>
 	<jsp:body>
 		<thead>
 			<tr>

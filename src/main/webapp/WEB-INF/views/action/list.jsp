@@ -7,7 +7,10 @@
 
 	<jsp:attribute name="_name">une action</jsp:attribute>
 	<jsp:attribute name="_names">actions</jsp:attribute>
-    
+    <jsp:attribute name="_url_add">
+        <c:url value="/actions/add" var="_url"/>
+        ${fn:escapeXml(_url)}
+    </jsp:attribute>
 	<jsp:body>
 		<thead>
 			<tr>
