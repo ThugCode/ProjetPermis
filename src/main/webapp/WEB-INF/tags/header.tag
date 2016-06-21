@@ -1,10 +1,10 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@taglib tagdir="/WEB-INF/tags/" prefix="t"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib tagdir="/WEB-INF/tags/" prefix="t" %>
 
 <header class="main-header">
     <c:url value="/" var="_url" />
-    <a class="logo" href="${_url}">
+    <a class="logo" href="${fn:escapeXml(_url)}">
         <span class="logo-mini"><b>A</b>d<b>N</b></span>
         <span class="logo-lg"><b>A</b>d<b>N</b> Formations</span>
     </a>
@@ -20,9 +20,20 @@
                         <span class="label label-success">${fn:length(user.messages)}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">Vous avez ${fn:length(user.messages)} messages</li>
+                        <li class="header">
+                            <c:choose>
+                                <c:when test="${fn:length(user.messages) gt 1}">
+                                    Vous avez ${fn:length(user.messages)} messages
+                                </c:when>
+                                <c:when test="${fn:length(user.messages) eq 1 }">
+                                    Vous avez 1 message
+                                </c:when>
+                                <c:otherwise>
+                                    Vous n'avez aucun message
+                                </c:otherwise>
+                            </c:choose>
+                        </li>
                         <li>
-                            <!-- inner menu: contains the actual data -->
                             <ul class="menu">
                                 <c:forEach items="${user.messages}" var="item">
                                     <li>
@@ -52,7 +63,17 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">
-                            Vous avez ${fn:length(user.games)} formations
+                            <c:choose>
+                                <c:when test="${fn:length(user.messages) gt 1}">
+                                    Vous avez ${fn:length(user.games)} formations
+                                </c:when>
+                                <c:when test="${fn:length(user.messages) eq 1 }">
+                                    Vous avez 1 formation
+                                </c:when>
+                                <c:otherwise>
+                                    Vous n'avez aucune formation
+                                </c:otherwise>
+                            </c:choose>
                         </li>
                         <li>
                             <ul class="menu">
@@ -83,7 +104,7 @@
                         </li>
                         <li class="footer">
                             <c:url value="/mygames" var="_url" />
-                            <a href="${_url}">Voir toutes mes formations</a>
+                            <a href="${fn:escapeXml(_url)}">Voir toutes mes formations</a>
                         </li>
                     </ul>
                 </li>
@@ -93,23 +114,21 @@
                         <span class="hidden-xs">${user.firstname} ${user.lastname}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <!-- User image -->
                         <li class="user-header">
                             <c:url value="/assets/img/bigUser.png" var="_url" />
-                            <img src="${_url}" class="img-circle" alt="User Image" />
+                            <img src="${fn:escapeXml(_url)}" class="img-circle" alt="User Image" />
                             <p>
                                 ${user.firstname} ${user.lastname}
                                 <small>${user.mail}</small>
                             </p>
                         </li>
-                        <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="#" class="btn btn-default btn-flat">Profil</a>
                             </div>
                             <div class="pull-right">
                                 <c:url value="/logout" var="_url" />
-                                <a href="${_url}" class="btn btn-default btn-flat">Déconnexion</a>
+                                <a href="${fn:escapeXml(_url)}" class="btn btn-default btn-flat">Déconnexion</a>
                             </div>
                         </li>
                     </ul>

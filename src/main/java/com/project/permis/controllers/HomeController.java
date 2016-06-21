@@ -1,7 +1,5 @@
 package com.project.permis.controllers;
 
-import java.util.Locale;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +21,7 @@ public class HomeController extends AbstractController
      * Displays the home page with statistics.
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView home(Locale locale)
+    public ModelAndView home()
     {
     	// Check if the user is logged in
     	if(!this.isLoggedIn())

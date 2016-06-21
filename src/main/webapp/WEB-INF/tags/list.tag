@@ -8,63 +8,47 @@
 <%@attribute name="_list_scripts" fragment="true" required="false"%>
 
 <t:layout>
-	<jsp:attribute name="_page_title">
+    <jsp:attribute name="_page_title">
         Liste des <jsp:invoke fragment="_names"/>
     </jsp:attribute>
-    
-	<jsp:attribute name="_page_stylesheets">
-	
-		<c:url value="/assets/js/datatables/dataTables.bootstrap.css" var="_url" />
-		<link rel="stylesheet" href="${fn:escapeXml(_url)}">
-		<c:url value="/assets/css/layout/list.css" var="_url" />
-		<link rel="stylesheet" type="text/css" href="${fn:escapeXml(_url)}" media="screen" />
-		
-		<jsp:invoke fragment="_list_stylesheets"/>
-		
+    <jsp:attribute name="_page_stylesheets">
+        <c:url value="/assets/js/datatables/dataTables.bootstrap.css" var="_url" />
+        <link rel="stylesheet" href="${fn:escapeXml(_url)}">
+        <c:url value="/assets/css/layout/list.css" var="_url" />
+        <link rel="stylesheet" type="text/css" href="${fn:escapeXml(_url)}" media="screen" />
+        <%-- Specific stylesheets --%>
+        <jsp:invoke fragment="_list_stylesheets"/>
     </jsp:attribute>
-    
-	<jsp:attribute name="_page_scripts">
-	
-		<jsp:invoke fragment="_list_scripts"/>
-		
-		<c:url value="/assets/js/layout/list.js" var="_url" />
+    <jsp:attribute name="_page_scripts">
+        <c:url value="/assets/js/layout/list.js" var="_url" />
         <script type="text/javascript" src="${fn:escapeXml(_url)}"></script>
-		<c:url value="/assets/js/datatables/jquery.dataTables.min.js" var="_url" />
+        <c:url value="/assets/js/datatables/jquery.dataTables.min.js" var="_url" />
         <script type="text/javascript" src="${fn:escapeXml(_url)}"></script>
         <c:url value="/assets/js/datatables/dataTables.bootstrap.min.js" var="_url" />
         <script type="text/javascript" src="${fn:escapeXml(_url)}"></script>
-        
+        <%-- Specific scripts --%>
+        <jsp:invoke fragment="_list_scripts"/>
     </jsp:attribute>
-    
-	<jsp:body>
-	
-		<div id="content-margin" class="content-wrapper">
-		<section class="content">
-			<a id="btn-add" href="add" class="btn btn-block btn-social btn-bitbucket">
-				<i class="fa fa-plus"></i> Ajouter <jsp:invoke fragment="_name"/>
-			</a>
-			<div class="clear"></div>
-			
-			<c:if test="${not empty successMessage}">
-			<div class="alert alert-success alert-dismissible">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<h5><i class="icon fa fa-check"></i>${successMessage}</h5>
-			</div>
-			</c:if>
-			
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="box">
-							<div class="box-body">
-								<table id="tableList" class="table table-bordered table-striped">
-									<jsp:doBody/>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
-
-	</jsp:body>
+    <jsp:body>
+        <a id="btn-add" href="add" class="btn btn-block btn-social btn-bitbucket">
+            <i class="fa fa-plus"></i>
+            Ajouter <jsp:invoke fragment="_name"/>
+        </a>
+        <div class="clear"></div>
+        <c:if test="${not empty _flashes && fn:length(_flashes) gt 0}">
+            <c:forEach items="_flashes" var="flash">
+                <div class="alert alert-${flash.type} alert-dismissible">
+		            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		            ${flash.contents}
+		        </div>
+            </c:forEach>
+        </c:if>
+        <div class="box">
+            <div class="box-body">
+                <table id="tableList" class="table table-bordered table-striped">
+                    <jsp:doBody />
+                </table>
+            </div>
+        </div>
+    </jsp:body>
 </t:layout>
