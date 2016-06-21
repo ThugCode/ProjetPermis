@@ -23,102 +23,102 @@
         <![endif]-->
     </head>
     <body class="hold-transition register-page">
-    	<div class="register-box">
-	    	<div class="register-logo">
-	    		<c:url value="/login" var="_url" />
-	    		<a href="${_url}">
-	    			<b>Aéroport</b> de Nice
-	    		</a>
-	    	</div>
-	    	<div class="register-box-body">
-	    		<p class="login-box-msg">
-	    			<b>Demandez</b> votre compte pour parcourir la plateforme. Vous recevrez un mail de confirmation lorsqu'il sera disponible.
-	    		</p>
-	    		<c:url value="/register" var="_url" />
-	    		<form method="post" action="${_url}">
-	    			<div class="form-group has-feedback">
-				        <input
-				            type="text"
-				            name="first_name"
-				            class="form-control"
-				            placeholder="Prénom"
-				        />
-			        	<span class="glyphicon glyphicon-user form-control-feedback"></span>
-			      	</div>
-			      	<div class="form-group has-feedback">
+        <div class="register-box">
+            <div class="register-logo">
+                <c:url value="/login" var="_url" />
+                <a href="${_url}">
+                    <b>Aéroport</b> de Nice
+                </a>
+            </div>
+            <div class="register-box-body">
+                <p class="login-box-msg">
+                    <b>Demandez</b> votre compte pour parcourir la plateforme. Vous recevrez un mail de confirmation lorsqu'il sera disponible.
+                </p>
+                <c:url value="/register" var="_url" />
+                <form method="post" action="${_url}">
+                    <div class="form-group has-feedback">
                         <input
-	                        type="text"
-	                        name="last_name"
-	                        class="form-control"
-	                        placeholder="Nom"
+                            type="text"
+                            name="first_name"
+                            class="form-control"
+                            placeholder="Prénom"
+                        />
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <input
+                            type="text"
+                            name="last_name"
+                            class="form-control"
+                            placeholder="Nom"
                         />
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
-			      	<div class="form-group has-feedback">
-				        <input
-					        type="email"
-					        name="email"
-					        class="form-control"
-					        placeholder="Email"
-				        />
-				        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-			    	</div>
-				    <div class="form-group has-feedback">
-				        <input
-					        type="password"
-					        name="password"
-					        class="form-control"
-					        placeholder="Mot de passe"
-				        />
-				        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-				    </div>
-				    <div class="form-group has-feedback">
-				        <input
-					        type="password"
-					        name="password_confirm"
-					        class="form-control"
-					        placeholder="Vérification mot de passe"
-				        />
-				        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-				    </div>
-				    <div class="row">
-				        <div class="col-xs-8">
-				          	<div class="checkbox icheck">
-				            	<label>
-				              		<input type="checkbox" name="conditions" /> 
-				              		<span class="text-checkbox">
-				              			J'accepte la <a href="#">charte de l'aéroport de Nice</a>
-				              		</span>
-			            		</label>
-				          	</div>
-			        	</div>
-				        <div class="col-xs-4">
-				          	<button id="register-btn" type="submit" class="btn btn-primary btn-block btn-flat">Valider</button>
-				        </div>
-				    </div>
-				    <div class="row all-width">
-				    	Vous avez déjà un compte ? 
-				    	<c:url value="/login" var="_url" />
-						<a href="${_url}">
-							Se connecter
-						</a>
-				    </div>
-	    		</form>
-	    		
-	    	</div>
-    	</div>
-    	
-    	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+                      <div class="form-group has-feedback">
+                        <input
+                            type="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Email"
+                        />
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Mot de passe"
+                        />
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input
+                            type="password"
+                            name="password_confirm"
+                            class="form-control"
+                            placeholder="Vérification mot de passe"
+                        />
+                        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                              <div class="checkbox icheck">
+                                <label>
+                                      <input type="checkbox" name="conditions" /> 
+                                      <span class="text-checkbox">
+                                          J'accepte la <a href="#">charte de l'aéroport de Nice</a>
+                                      </span>
+                                </label>
+                              </div>
+                        </div>
+                        <div class="col-xs-4">
+                              <button id="register-btn" type="submit" class="btn btn-primary btn-block btn-flat">Valider</button>
+                        </div>
+                    </div>
+                    <div class="row all-width">
+                        Vous avez déjà un compte ? 
+                        <c:url value="/login" var="_url" />
+                        <a href="${_url}">
+                            Se connecter
+                        </a>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
         <script type="text/javascript">
-        	$(function() {
-        		$("input").iCheck({
-       		      	checkboxClass: "icheckbox_square-blue",
-       		      	radioClass: "iradio_square-blue",
-       		      	increaseArea: "20%"
-       		    });
-        	});
+            $(function() {
+                $("input").iCheck({
+                         checkboxClass: "icheckbox_square-blue",
+                         radioClass: "iradio_square-blue",
+                         increaseArea: "20%"
+                   });
+            });
         </script>
     </body>
-   </html>
+</html>

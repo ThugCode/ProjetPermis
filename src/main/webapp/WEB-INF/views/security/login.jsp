@@ -24,86 +24,86 @@
         <![endif]-->
     </head>
     <body class="hold-transition login-page">
-    	<div class="login-box">
-	    	<div class="login-logo">
-    			<b>Aéroport</b> de Nice
-	    	</div>
-	    	<div class="login-box-body">
-	    		<p class="login-box-msg">
-	    			<b>Connectez-vous</b> pour démarrer votre session
-	    		</p>
-	    		<c:url value="/login" var="_url" />
-	    		<form method="post" action="${_url}">
-	    			<div class="form-group has-feedback<c:if test="${not empty _error_email}"> has-error</c:if>">
-				        <input
-					        type="email"
-					        name="email"
-					        class="form-control"
-					        placeholder="Adresse email"
-					        <c:if test="${not empty _last_email}">
-					        	value="${fn:escapeXml(_last_email)}"
-					        </c:if>
-				        />
-				        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-				        <c:if test="${not empty _error_email}">
-				            <span class="help-block">${_error_email}</span>
-				        </c:if>
-				    </div>
-				    <div class="form-group has-feedback<c:if test="${not empty _error_password}"> has-error</c:if>">
-				        <input
-					        type="password"
-					        name="password"
-					        class="form-control"
-					        placeholder="Mot de passe"
-					        name=""
-				        />
-				        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <div class="login-box">
+            <div class="login-logo">
+                <b>Aéroport</b> de Nice
+            </div>
+            <div class="login-box-body">
+                <p class="login-box-msg">
+                    <b>Connectez-vous</b> pour démarrer votre session
+                </p>
+                <c:url value="/login" var="_url" />
+                <form method="post" action="${_url}">
+                    <div class="form-group has-feedback<c:if test="${not empty _error_email}"> has-error</c:if>">
+                        <input
+                            type="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Adresse email"
+                            <c:if test="${not empty _last_email}">
+                                value="${fn:escapeXml(_last_email)}"
+                            </c:if>
+                        />
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        <c:if test="${not empty _error_email}">
+                            <span class="help-block">${_error_email}</span>
+                        </c:if>
+                    </div>
+                    <div class="form-group has-feedback<c:if test="${not empty _error_password}"> has-error</c:if>">
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Mot de passe"
+                            name=""
+                        />
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         <c:if test="${not empty _error_password}">
                             <span class="help-block">${_error_password}</span>
                         </c:if>
-				    </div>
-				    <div class="row">
-				        <div class="col-xs-8">
-				          	<div class="checkbox icheck">
-				            	<label>
-				              		<input
-				              		type="checkbox"
-				              		name="remember_me"
-				              		<c:if test="${not empty _remember_me && _remember_me}">
-				              		    checked="checked"
-				              		</c:if>
-				              		/> 
-				              		Se souvenir de moi
-					            </label>
-				          	</div>
-				        </div>
-				        <!-- /.col -->
-				        <div class="col-xs-4">
-				          	<button type="submit" class="btn btn-primary btn-block btn-flat">Connexion</button>
-				        </div>
-				        <!-- /.col -->
-				    </div>
-	    		</form>
-	    		<c:url value="/register" var="_url" />
-	    		<br/>
-	    		Vous n'avez pas de compte ?
-				<a class="text-center" href="${_url}">
-					Demander un compte
-				</a>
-	    	</div>
-    	</div>
-    	
-    	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                              <div class="checkbox icheck">
+                                <label>
+                                      <input
+                                      type="checkbox"
+                                      name="remember_me"
+                                      <c:if test="${not empty _remember_me && _remember_me}">
+                                          checked="checked"
+                                      </c:if>
+                                      /> 
+                                      Se souvenir de moi
+                                </label>
+                              </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-xs-4">
+                              <button type="submit" class="btn btn-primary btn-block btn-flat">Connexion</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+                <c:url value="/register" var="_url" />
+                <br/>
+                Vous n'avez pas de compte ?
+                <a class="text-center" href="${_url}">
+                    Demander un compte
+                </a>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
         <script type="text/javascript">
-        	$(function() {
-        		$("input").iCheck({
-       		      	checkboxClass: "icheckbox_square-blue",
-       		      	radioClass: "iradio_square-blue",
-       		      	increaseArea: "20%"
-       		    });
-        	});
+            $(function() {
+                $("input").iCheck({
+                         checkboxClass: "icheckbox_square-blue",
+                         radioClass: "iradio_square-blue",
+                         increaseArea: "20%"
+                   });
+            });
         </script>
     </body>
-   </html>
+</html>
