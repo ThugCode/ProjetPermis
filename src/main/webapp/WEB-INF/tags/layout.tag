@@ -24,8 +24,10 @@
         <link rel="stylesheet" type="text/css" href="${fn:escapeXml(_url)}" media="screen" />
         <c:url value="/assets/css/layout.css" var="_url" />
         <link rel="stylesheet" type="text/css" href="${fn:escapeXml(_url)}" media="screen" />
+        <%--
         <c:url value="/assets/css/reset.css" var="_url" />
         <link rel="stylesheet" type="text/css" href="${fn:escapeXml(_url)}" media="screen" />
+        --%>
         <jsp:invoke fragment="_page_stylesheets" />
     </head>
     <body class="hold-transition skin-black sidebar-mini">
