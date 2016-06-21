@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.project.permis.entities.Flag;
+import com.project.permis.utils.HibernateUtil;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -17,7 +18,7 @@ import com.project.permis.entities.Flag;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class FlagRepository extends AbstractRepository
+public class FlagRepository
 {
 	/**
 	 * Fetches a single existing flag from the database.
@@ -33,7 +34,7 @@ public class FlagRepository extends AbstractRepository
 		// Fetch the flag
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM Flag AS f WHERE f.id = :id"
 			);
 			query.setInteger("id", id);
@@ -66,7 +67,7 @@ public class FlagRepository extends AbstractRepository
 		// Fetch the flags
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM Flag AS f"
 			);
 			
@@ -92,7 +93,7 @@ public class FlagRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Save the flag
@@ -122,7 +123,7 @@ public class FlagRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Delete the flag

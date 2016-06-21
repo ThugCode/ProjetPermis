@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.project.permis.entities.Goal;
+import com.project.permis.utils.HibernateUtil;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -17,7 +18,7 @@ import com.project.permis.entities.Goal;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class GoalRepository extends AbstractRepository
+public class GoalRepository
 {
 	/**
 	 * Fetches a single existing goal from the database.
@@ -33,7 +34,7 @@ public class GoalRepository extends AbstractRepository
 		// Fetch the goal
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM Goal AS g WHERE g.id = :id"
 			);
 			query.setInteger("id", id);
@@ -66,7 +67,7 @@ public class GoalRepository extends AbstractRepository
 		// Fetch the goals
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM Goal AS g"
 			);
 			
@@ -92,7 +93,7 @@ public class GoalRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Save the goal
@@ -122,7 +123,7 @@ public class GoalRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Delete the goal

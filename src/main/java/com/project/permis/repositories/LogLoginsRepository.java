@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.project.permis.entities.LogLogins;
+import com.project.permis.utils.HibernateUtil;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -17,7 +18,7 @@ import com.project.permis.entities.LogLogins;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class LogLoginsRepository extends AbstractRepository
+public class LogLoginsRepository
 {
 	/**
 	 * Fetches a single existing login log from the database.
@@ -33,7 +34,7 @@ public class LogLoginsRepository extends AbstractRepository
 		// Fetch the login log
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM LogLogins AS l WHERE l.id = :id"
 			);
 			query.setInteger("id", id);
@@ -66,7 +67,7 @@ public class LogLoginsRepository extends AbstractRepository
 		// Fetch the login logs
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM LogLogins AS l"
 			);
 			
@@ -92,7 +93,7 @@ public class LogLoginsRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Save the login log
@@ -122,7 +123,7 @@ public class LogLoginsRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Delete the login log

@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.project.permis.entities.Student;
+import com.project.permis.utils.HibernateUtil;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -17,7 +18,7 @@ import com.project.permis.entities.Student;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class StudentRepository extends AbstractRepository
+public class StudentRepository
 {
 	/**
 	 * Fetches a single existing student from the database.
@@ -33,7 +34,7 @@ public class StudentRepository extends AbstractRepository
 		// Fetch the student
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM Student AS s WHERE s.id = :id"
 			);
 			query.setInteger("id", id);
@@ -66,7 +67,7 @@ public class StudentRepository extends AbstractRepository
 		// Fetch the students
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM Student AS s"
 			);
 			
@@ -94,7 +95,7 @@ public class StudentRepository extends AbstractRepository
 		// Fetch the student
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM Student AS s WHERE s.mail = :mail"
 			);
 			query.setString("mail", mail);
@@ -124,7 +125,7 @@ public class StudentRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Save the student
@@ -154,7 +155,7 @@ public class StudentRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Delete the student

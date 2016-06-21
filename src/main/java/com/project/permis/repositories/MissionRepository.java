@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.project.permis.entities.Mission;
+import com.project.permis.utils.HibernateUtil;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -17,7 +18,7 @@ import com.project.permis.entities.Mission;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class MissionRepository extends AbstractRepository
+public class MissionRepository
 {
 	/**
 	 * Fetches a single existing mission from the database.
@@ -33,7 +34,7 @@ public class MissionRepository extends AbstractRepository
 		// Fetch the mission
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM Mission AS m WHERE m.id = :id"
 			);
 			query.setInteger("id", id);
@@ -66,7 +67,7 @@ public class MissionRepository extends AbstractRepository
 		// Fetch the missions
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM Mission AS m"
 			);
 			
@@ -92,7 +93,7 @@ public class MissionRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Save the mission
@@ -122,7 +123,7 @@ public class MissionRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Delete the mission

@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 
 import com.project.permis.entities.StudentAction;
 import com.project.permis.entities.StudentActionId;
+import com.project.permis.utils.HibernateUtil;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -18,7 +19,7 @@ import com.project.permis.entities.StudentActionId;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class StudentActionRepository extends AbstractRepository
+public class StudentActionRepository
 {
 	/**
 	 * Fetches a single existing student's action from the database.
@@ -34,7 +35,7 @@ public class StudentActionRepository extends AbstractRepository
 		// Fetch the rule
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM StudentAction AS a WHERE a.id.idStudent = :student_id AND a.id.idAction = :action_id"
 			);
 			query.setInteger("student_id", id.getIdStudent());
@@ -68,7 +69,7 @@ public class StudentActionRepository extends AbstractRepository
 		// Fetch the student's actions
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM StudentAction AS a"
 			);
 			
@@ -94,7 +95,7 @@ public class StudentActionRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Save the student's action
@@ -124,7 +125,7 @@ public class StudentActionRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Delete the student's action

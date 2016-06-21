@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.project.permis.entities.Rule;
+import com.project.permis.utils.HibernateUtil;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -17,7 +18,7 @@ import com.project.permis.entities.Rule;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class RuleRepository extends AbstractRepository
+public class RuleRepository
 {
 	/**
 	 * Fetches a single existing rule from the database.
@@ -33,7 +34,7 @@ public class RuleRepository extends AbstractRepository
 		// Fetch the rule
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM Rule AS r WHERE r.id = :id"
 			);
 			query.setInteger("id", id);
@@ -66,7 +67,7 @@ public class RuleRepository extends AbstractRepository
 		// Fetch the rules
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM Rule AS r"
 			);
 			
@@ -92,7 +93,7 @@ public class RuleRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Save the rule
@@ -122,7 +123,7 @@ public class RuleRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Delete the rule

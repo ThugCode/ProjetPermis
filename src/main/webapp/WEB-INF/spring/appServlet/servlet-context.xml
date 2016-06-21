@@ -27,4 +27,8 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.project.permis" />
+	<!-- Adds an interceptor to close the Hibernate sessions  -->
+	<interceptors>
+      <beans:bean class="com.project.permis.interceptors.HibernateInterceptor" />
+    </interceptors> 
 </beans:beans>

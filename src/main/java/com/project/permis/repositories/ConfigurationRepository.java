@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.project.permis.entities.Configuration;
+import com.project.permis.utils.HibernateUtil;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -17,7 +18,7 @@ import com.project.permis.entities.Configuration;
  * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
-public class ConfigurationRepository extends AbstractRepository
+public class ConfigurationRepository
 {
 	/**
 	 * Fetches a single existing configuration from the database.
@@ -33,7 +34,7 @@ public class ConfigurationRepository extends AbstractRepository
 		// Fetch the configuration
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM Configuration AS c WHERE c.id = :id"
 			);
 			query.setInteger("id", id);
@@ -66,7 +67,7 @@ public class ConfigurationRepository extends AbstractRepository
 		// Fetch the configurations
 		try
 		{
-			Query query = this.getSession().createQuery(
+			Query query = HibernateUtil.getSession().createQuery(
 				"FROM Configuration AS c"
 			);
 			
@@ -92,7 +93,7 @@ public class ConfigurationRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Save the configuration
@@ -122,7 +123,7 @@ public class ConfigurationRepository extends AbstractRepository
 	throws RepositoryException
 	{
 		// Initialize vars
-		Session session = this.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = null;
 		
 		// Delete the configuration
