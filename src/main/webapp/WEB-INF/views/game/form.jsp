@@ -20,7 +20,13 @@
 							<div class="box-body">
 								<div class="form-group">
 									<label for="inputName">Nom</label>
-									<input class="form-control" id="inputName" placeholder="Name">
+									<input class="form-control" id="inputName" placeholder="Name" value="${game.name}">
+								</div>
+								<div class="form-group">
+									<label for="inputFile">Image</label>
+									<input type="file" id="inputFile">
+									<p>${game.name}</p>
+									<p class="help-block">Image que les apprenants verront</p>
 								</div>
 								<div class="panel panel-default">
 									<div class="panel-heading">Missions de l'épreuve</div>
