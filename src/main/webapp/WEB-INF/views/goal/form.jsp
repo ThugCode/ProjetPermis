@@ -75,7 +75,6 @@
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="box-footer">
                             <c:url value="/goals" var="_url" />
                             <a href="${fn:escapeXml(_url)}" class="btn btn-warning">
