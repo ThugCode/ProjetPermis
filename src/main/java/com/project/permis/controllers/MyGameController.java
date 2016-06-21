@@ -1,16 +1,13 @@
 package com.project.permis.controllers;
 
-import java.util.HashSet;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.project.permis.entities.Game;
-import com.project.permis.entities.Mission;
+import com.project.permis.repositories.GameRepository;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -40,16 +37,8 @@ public class MyGameController extends AbstractController
 		ModelMap model = new ModelMap();
 		model.addAttribute("page", "Mes formations");
 		
-		HashSet<Game> games = new HashSet<Game>();
-		model.addAttribute("games", games);
-		
-		for(int i = 0; i < 10; i++)
-		{
-			Game add = new Game();
-			add.setId(i);
-			add.setName("Game " + i);
-			games.add(add);
-		}
+		GameRepository repository = new GameRepository();
+		model.addAttribute("games", repository.fetchAll());
 		
 		return this.render("mygame/list", model);
 	}
@@ -69,15 +58,9 @@ public class MyGameController extends AbstractController
     	
     	// Build model
 		ModelMap model = new ModelMap();
+		GameRepository gameRepository = new GameRepository();
 		
-		Game game = new Game();
-		game.setName("Game "+id);
-		
-		HashSet<Mission> missions = new HashSet<Mission>();
-		missions.add(new Mission("Mission 1", null, null));
-		missions.add(new Mission("Mission 2", null, null));
-		missions.add(new Mission("Mission 3", null, null));
-		game.setMissions(missions);
+		Game game = gameRepository.fetch(id);
 		
 		model.addAttribute("game", game);
 		model.addAttribute("page", "Épreuve");

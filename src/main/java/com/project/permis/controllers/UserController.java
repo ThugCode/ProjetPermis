@@ -1,14 +1,11 @@
 package com.project.permis.controllers;
 
-import java.util.HashSet;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.project.permis.entities.Student;
+import com.project.permis.repositories.StudentRepository;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -38,23 +35,8 @@ public class UserController extends AbstractController
 		ModelMap model = new ModelMap();
 		model.addAttribute("page", "Liste des utilisateurs");
 		
-		HashSet<Student> users = new HashSet<Student>();
-		model.addAttribute("users", users);
-		
-		for(int i = 0; i < 40; i++)
-		{
-			Student add = new Student();
-			add.setFirstname("Letourneur " + i);
-			add.setLastname("Léo " + i);
-			add.setMail("letourneur.leo@blabla");
-			
-			if(i % 10 == 0)
-			{
-				add.setIsEnabled(true);
-			}
-			
-			users.add(add);
-		}
+		StudentRepository repository = new StudentRepository();
+		model.addAttribute("users", repository.fetchAll());
 		
 		return this.render("user/list", model);
 	}

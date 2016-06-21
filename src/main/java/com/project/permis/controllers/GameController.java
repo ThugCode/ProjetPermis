@@ -1,16 +1,11 @@
 package com.project.permis.controllers;
 
-import java.util.HashSet;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.project.permis.entities.Game;
-import com.project.permis.entities.Mission;
-import com.project.permis.entities.Student;
+import com.project.permis.repositories.GameRepository;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -40,24 +35,8 @@ public class GameController extends AbstractController
 		ModelMap model = new ModelMap();		
 		model.addAttribute("page", "Liste des épreuves");
 		
-		HashSet<Game> games = new HashSet<Game>();
-		model.addAttribute("games", games);
-		
-		for(int i = 0; i < 40; i++)
-		{
-			Game add = new Game();
-			add.setName("game " + i);
-			
-			HashSet<Mission> missions = new HashSet<Mission>();
-			missions.add(new Mission("Mission", null, null));
-			add.setMissions(missions);
-			
-			HashSet<Student> students = new HashSet<Student>();
-			students.add(new Student());
-			add.setStudents(students);
-			
-			games.add(add);
-		}
+		GameRepository repository = new GameRepository();
+		model.addAttribute("games", repository.fetchAll());
 		
 		return this.render("game/list", model);
 	}

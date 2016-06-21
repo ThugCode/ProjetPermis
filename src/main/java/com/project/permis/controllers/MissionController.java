@@ -1,15 +1,11 @@
 package com.project.permis.controllers;
 
-import java.util.HashSet;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.project.permis.entities.Goal;
-import com.project.permis.entities.Mission;
+import com.project.permis.repositories.MissionRepository;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -39,19 +35,8 @@ public class MissionController extends AbstractController
 		ModelMap model = new ModelMap();
 		model.addAttribute("page", "Liste des missions");
 		
-		HashSet<Mission> missions = new HashSet<Mission>();
-		model.addAttribute("missions", missions);
-		
-		for(int i = 0; i < 40; i++) 
-		{
-			Mission add = new Mission();
-			add.setTitle("mission " + i);
-			
-			HashSet<Goal> goals = new HashSet<Goal>();
-			goals.add(new Goal("objectif", null, null));
-			add.setGoals(goals);
-			missions.add(add);
-		}		
+		MissionRepository repository = new MissionRepository();
+		model.addAttribute("missions", repository.fetchAll());
 		
 		return this.render("mission/list", model);
 	}
