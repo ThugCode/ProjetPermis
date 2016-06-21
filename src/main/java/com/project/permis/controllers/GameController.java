@@ -2,10 +2,13 @@ package com.project.permis.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.project.permis.repositories.GameRepository;
+import com.project.permis.validators.GameValidator;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -18,6 +21,18 @@ import com.project.permis.repositories.GameRepository;
 @Controller
 public class GameController extends AbstractController
 {
+	/**
+     * Initializes a binder with validators and editors to work
+     * with games.
+     *
+     * @param binder The binder to initialize.
+     */
+    @InitBinder
+    protected void initWorksBinder(WebDataBinder binder)
+    {
+        binder.setValidator(new GameValidator());
+    }
+    
 	/**
 	 * 
 	 * @return
