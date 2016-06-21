@@ -101,13 +101,15 @@ public class GoalController extends AbstractController
 		goal.setName(name);
 		
 		//Set new list of actions
-		ActionRepository aRepository = new ActionRepository();
 		HashSet<Action> setActions = new HashSet<Action>();
-		String[] ids = actions.split("x");
-		Action addedAction = null;
-		for (int i = 0; i < ids.length; i++) {
-			addedAction = aRepository.fetch(Integer.parseInt(ids[i]));
-			setActions.add(addedAction);
+		if(actions != null && actions !="") {
+			ActionRepository aRepository = new ActionRepository();
+			String[] ids = actions.split("x");
+			Action addedAction = null;
+			for (int i = 0; i < ids.length; i++) {
+				addedAction = aRepository.fetch(Integer.parseInt(ids[i]));
+				setActions.add(addedAction);
+			}
 		}
 		goal.setActions(setActions);
 		

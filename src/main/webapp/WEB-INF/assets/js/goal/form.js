@@ -19,7 +19,8 @@ function checkActions() {
 	//Already in the cards
 	var array = [];
 	$('.panel-body .card').each( function() {
-		array.push(parseInt($(this).data('id')));
+		if($(this).children('.box').css('display') != 'none')
+			array.push(parseInt($(this).data('id')));
     });
 	
 	$('#actionModal input:checkbox').each( function() {
