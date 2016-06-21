@@ -41,3 +41,7 @@
     max-height				: 300px;
     overflow-y				: scroll;
 }
+
+label.boldless {
+	font-weight: normal;
+}

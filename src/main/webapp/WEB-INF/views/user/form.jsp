@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-8 col-lg-offset-2">
                 <div class="box box-primary">
-                    <form class="form-horizontal" method="post" action="#">
+                    <form class="form-horizontal" id="form" method="post" action="#">
                         <div class="box-body">
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="inputName">
