@@ -37,9 +37,9 @@ public class GoalController extends AbstractController
      * @param binder The binder to initialize.
      */
     @InitBinder
-    protected void initWorksBinder(WebDataBinder binder)
+    protected void initBinder(WebDataBinder binder)
     {
-        binder.setValidator(new GoalValidator());
+        // binder.setValidator(new GoalValidator());
     }
     
 	/**
