@@ -4,6 +4,8 @@ import java.util.HashSet;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +16,7 @@ import com.project.permis.entities.Action;
 import com.project.permis.entities.Goal;
 import com.project.permis.repositories.ActionRepository;
 import com.project.permis.repositories.GoalRepository;
+import com.project.permis.validators.GoalValidator;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -26,6 +29,18 @@ import com.project.permis.repositories.GoalRepository;
 @Controller
 public class GoalController extends AbstractController
 {
+	/**
+     * Initializes a binder with validators and editors to work
+     * with goals.
+     *
+     * @param binder The binder to initialize.
+     */
+    @InitBinder
+    protected void initBinder(WebDataBinder binder)
+    {
+        // binder.setValidator(new GoalValidator());
+    }
+    
 	/**
 	 * 
 	 * @return
