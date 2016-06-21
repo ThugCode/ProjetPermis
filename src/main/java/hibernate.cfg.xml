@@ -12,6 +12,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
+        <property name="hibernate.connection.characterEncoding">utf8</property>
         <mapping resource="com/project/permis/entities/Rule.hbm.xml" />
         <mapping resource="com/project/permis/entities/Configuration.hbm.xml" />
         <mapping resource="com/project/permis/entities/Action.hbm.xml" />
