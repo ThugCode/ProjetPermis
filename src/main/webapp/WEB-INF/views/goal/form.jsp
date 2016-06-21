@@ -26,7 +26,7 @@
 								</div>
 								<div class="panel panel-default">
 									<div class="panel-heading">Actions requises pour valider l'objectif</div>
-									<div class="panel-body">
+									<div id="panelCards" class="panel-body">
 										<c:if test="${empty goal.actions}">Aucune action pour le moment</c:if>
 										<c:forEach items="${goal.actions}" var="item">
 											<div class="col-md-3 card" data-id="${item.id}">
@@ -44,7 +44,7 @@
 										</c:forEach>
 									</div>
 									<div class="panel-footer text-center">
-										<button id="addAction" type="button" class="btn btn-bitbucket">
+										<button id="addAction" type="button" class="btn btn-bitbucket" data-toggle="modal" data-target="#actionModal">
 											<i class="fa fa-plus"></i>&nbsp;Ajouter une action
 										</button>
 									</div>
@@ -60,5 +60,37 @@
 				</div>
 			</div>
 		</section>
+		
+		<div class="modal modal-default fade" id="actionModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 class="modal-title">Ajouter des actions</h4>
+					</div>
+					<div class="modal-body">
+						<table class="table table-bordered">
+                			<tbody>
+                				<c:forEach items="${actions}" var="item">
+	                				<tr>
+										<td style="width: 40px">
+											<input type="checkbox" value="${item.id}">
+										</td>
+										<td>${item.name}</td>
+									</tr>
+								</c:forEach>
+              				</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Annuler</button>
+						<button id="saveActions" type="button" class="btn btn-primary">Sauvegarder</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 	</jsp:body>
 </t:layout>

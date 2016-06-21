@@ -36,3 +36,8 @@
     background-color		: #dff0d8!important;
     border-color			: #d6e9c6!important;
 }
+
+.modal-body {
+    max-height				: 300px;
+    overflow-y				: scroll;
+}
