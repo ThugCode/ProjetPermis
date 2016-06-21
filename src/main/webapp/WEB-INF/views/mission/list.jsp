@@ -20,12 +20,12 @@
 			<c:forEach items="${missions}" var="item">
 				<tr>
 					<td>${item.title}</td>
-					<td>${fn:length(item.goals)}</td>
+					<td class="text-center">${fn:length(item.goals)}</td>
 					<td class="actionCol">
-						<a type="button" class="btn self-border" title="Modifier">
+						<a type="button" href="modify/${item.id}" class="btn self-border" title="Modifier">
 							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						</a>
-						<a type="button" class="btn btndel self-border" title="Supprimer">
+						<a type="button" href="delete/${item.id}" class="btn btndel self-border" title="Supprimer">
 							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 						</a>
 					</td>
