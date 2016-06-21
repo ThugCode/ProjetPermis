@@ -23,13 +23,13 @@
                         <li class="header">
                             <c:choose>
                                 <c:when test="${fn:length(user.messages) gt 1}">
-                                    Vous avez ${fn:length(user.messages)} messages
+                                    Vous avez ${fn:length(user.messages)} messages.
                                 </c:when>
                                 <c:when test="${fn:length(user.messages) eq 1 }">
-                                    Vous avez 1 message
+                                    Vous avez 1 message.
                                 </c:when>
                                 <c:otherwise>
-                                    Vous n'avez aucun message
+                                    Vous n'avez aucun message.
                                 </c:otherwise>
                             </c:choose>
                         </li>
@@ -65,13 +65,13 @@
                         <li class="header">
                             <c:choose>
                                 <c:when test="${fn:length(user.messages) gt 1}">
-                                    Vous avez ${fn:length(user.games)} formations
+                                    Vous avez ${fn:length(user.games)} formations.
                                 </c:when>
                                 <c:when test="${fn:length(user.messages) eq 1 }">
-                                    Vous avez 1 formation
+                                    Vous avez 1 formation.
                                 </c:when>
                                 <c:otherwise>
-                                    Vous n'avez aucune formation
+                                    Vous n'avez aucune formation.
                                 </c:otherwise>
                             </c:choose>
                         </li>
