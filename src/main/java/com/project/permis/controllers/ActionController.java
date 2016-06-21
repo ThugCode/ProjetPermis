@@ -1,7 +1,5 @@
 package com.project.permis.controllers;
 
-import java.util.HashSet;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,11 +40,9 @@ public class ActionController extends AbstractController
 		model.addAttribute("page", "Liste des actions");
 		
 		ActionRepository repository = new ActionRepository();
-		HashSet<Action> actions = new HashSet<Action>(repository.fetchAll());
-
-		model.addAttribute("actions", actions);
-		model.addAttribute("successMessage", this.successMessage);
+		model.addAttribute("actions", repository.fetchAll());
 		
+		model.addAttribute("successMessage", this.successMessage);
 		this.successMessage = null;
 		
 		return this.render("action/list", model);

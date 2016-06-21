@@ -1,6 +1,5 @@
 package com.project.permis.controllers;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import org.springframework.stereotype.Controller;
@@ -45,11 +44,9 @@ public class GoalController extends AbstractController
 		model.addAttribute("page", "Liste des objectifs");
 		
 		GoalRepository repository = new GoalRepository();
-		HashSet<Goal> goals = new HashSet<Goal>(repository.fetchAll());
-
-		model.addAttribute("goals", goals);
-		model.addAttribute("successMessage", this.successMessage);
+		model.addAttribute("goals", repository.fetchAll());
 		
+		model.addAttribute("successMessage", this.successMessage);
 		this.successMessage = null;
 		
 		return this.render("goal/list", model);
@@ -74,8 +71,7 @@ public class GoalController extends AbstractController
 		model.addAttribute("buttonSubmit", "Créer");
 		
 		ActionRepository aRepository = new ActionRepository();
-		ArrayList<Action> listActions = new ArrayList<Action>(aRepository.fetchAll());
-		model.addAttribute("actions", listActions);
+		model.addAttribute("actions", aRepository.fetchAll());
 		
 		return this.render("goal/form", model);
 	}
@@ -143,8 +139,7 @@ public class GoalController extends AbstractController
 		model.addAttribute("buttonSubmit", "Modifier");
 		
 		ActionRepository aRepository = new ActionRepository();
-		ArrayList<Action> listActions = new ArrayList<Action>(aRepository.fetchAll());
-		model.addAttribute("actions", listActions);
+		model.addAttribute("actions", aRepository.fetchAll());
 		
 		return this.render("goal/form", model);
 	}

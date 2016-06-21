@@ -1,6 +1,5 @@
 package com.project.permis.controllers;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 import org.springframework.stereotype.Controller;
@@ -72,8 +71,7 @@ public class MissionController extends AbstractController
 		model.addAttribute("buttonSubmit", "Créer");
 		
 		GoalRepository gRepository = new GoalRepository();
-		ArrayList<Goal> listGoals = new ArrayList<Goal>(gRepository.fetchAll());
-		model.addAttribute("goals", listGoals);
+		model.addAttribute("goals", gRepository.fetchAll());
 		
 		return this.render("mission/form", model);
 	}
@@ -139,8 +137,7 @@ public class MissionController extends AbstractController
 		model.addAttribute("buttonSubmit", "Modifier");
 		
 		GoalRepository gRepository = new GoalRepository();
-		ArrayList<Goal> listGoals = new ArrayList<Goal>(gRepository.fetchAll());
-		model.addAttribute("goals", listGoals);
+		model.addAttribute("goals", gRepository.fetchAll());
 		
 		return this.render("mission/form", model);
 	}
@@ -161,7 +158,7 @@ public class MissionController extends AbstractController
 		MissionRepository repository = new MissionRepository();
 		repository.delete(repository.fetch(id));
 		
-		this.successMessage = "Mission supprimés avec succès";
+		this.successMessage = "Mission supprimée avec succès";
 		
 		return this.redirect("/missions/");
 	}
