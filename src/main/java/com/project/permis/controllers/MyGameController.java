@@ -62,7 +62,7 @@ public class MyGameController extends AbstractController
 		Game game = gameRepository.fetch(id);
 		
 		model.addAttribute("game", game);
-		model.addAttribute("page", "Épreuve");
+		model.addAttribute("page", game.getName()); // @todo Escape HTML
 		
 		return this.render("mygame/view", model);
 	}
