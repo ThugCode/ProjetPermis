@@ -37,8 +37,7 @@ public class MyGameController extends AbstractController
 		ModelMap model = new ModelMap();
 		model.addAttribute("page", "Mes formations");
 		
-		GameRepository repository = new GameRepository();
-		model.addAttribute("games", repository.fetchAll());
+		model.addAttribute("games", this.getUser().getGames());
 		
 		return this.render("mygame/list", model);
 	}
