@@ -16,6 +16,7 @@ import com.project.permis.entities.LogLogins;
 import com.project.permis.entities.Student;
 import com.project.permis.repositories.LogLoginsRepository;
 import com.project.permis.repositories.StudentRepository;
+import com.project.permis.utils.EmailUtil;
 import com.project.permis.utils.HashUtil;
 
 /**
@@ -65,10 +66,6 @@ public class SecurityController extends AbstractController
 		// Initialize vars
 		ModelMap model = new ModelMap();
 		boolean errorHappened = false;
-		Pattern emailPattern = Pattern.compile(
-	        "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])",
-	        Pattern.CASE_INSENSITIVE
-	    );
 		
 		// Check email address
 		if(null == email || email.isEmpty())
@@ -78,7 +75,7 @@ public class SecurityController extends AbstractController
 		}
 		else
 		{
-			Matcher emailMatcher = emailPattern.matcher(email);
+			Matcher emailMatcher = EmailUtil.PATTERN.matcher(email);
 			
 			if(!emailMatcher.matches())
 			{

@@ -93,14 +93,14 @@ public abstract class AbstractController
     @ExceptionHandler(AbstractException.class)
     public ModelAndView exceptionHandler(AbstractException ex)
     {
-        ModelAndView modelAndView = new ModelAndView("static/error");
+    	ModelMap model = new ModelMap();
         
-        modelAndView.addObject("customTitle", ex.getTitle());
-        modelAndView.addObject("customMessage", ex.getMessage());
-        modelAndView.addObject("errorMessage", ex.getCause().getMessage());
-        modelAndView.addObject("stackTrace", ex.getCause().getStackTrace());
+    	model.addAttribute("customTitle", ex.getTitle());
+        model.addAttribute("customMessage", ex.getMessage());
+        model.addAttribute("errorMessage", ex.getCause().getMessage());
+        model.addAttribute("stackTrace", ex.getCause().getStackTrace());
         
-        return modelAndView;
+        return this.render("static/error", model);
     }
     
     /**

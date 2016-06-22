@@ -1,10 +1,13 @@
 package com.project.permis.validators;
 
+import java.util.regex.Matcher;
+
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.project.permis.entities.Student;
+import com.project.permis.utils.EmailUtil;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -44,7 +47,21 @@ public class StudentValidator implements Validator
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", null, "Vous devez renseigner le prénom.");
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", null, "Vous devez renseigner le nom.");
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mail", null, "Vous devez renseigner l'adresse email.");
-            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", null, "Vous devez renseigner l'adresse email.");
+            
+            // Specific checks
+            Student student = (Student) target;
+            
+            if(null == student.getId())
+            {
+            	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", null, "Vous devez renseigner le mot de passe.");            	
+            }
+            
+            Matcher matcher = EmailUtil.PATTERN.matcher(student.getMail());
+            
+            if(!matcher.matches())
+            {
+            	errors.rejectValue("mail", null, "Le format de votre adresse email est invalide.");
+            }
         }
     }
 }

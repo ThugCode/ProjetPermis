@@ -63,14 +63,17 @@
                     </td>
                     <td class="actionCol">
 	                    <c:if test="${!item.isEnabled}">
-	                        <a type="button" class="btn self-border" title="Valider">
+	                        <c:url value="/users/enable/${item.id}" var="_url" />
+	                        <a href="${fn:escapeXml(_url)}" type="button" class="btn self-border" title="Valider">
 	                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 	                        </a>
 	                    </c:if>
-                        <a type="button" class="btn self-border" title="Modifier">
+	                    <c:url value="/users/modify/${item.id}" var="_url" />
+                        <a href="${fn:escapeXml(_url)}" type="button" class="btn self-border" title="Modifier">
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                         </a>
-                        <a type="button" class="btn btndel self-border" title="Supprimer">
+                        <c:url value="/users/delete/${item.id}" var="_url" />
+                        <a href="${fn:escapeXml(_url)}" type="button" class="btn btndel self-border" title="Supprimer">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                         </a>
                     </td>

@@ -41,7 +41,7 @@ public class StudentRepository
 			
 			return (Student) query.uniqueResult();
 		}
-		catch(HibernateException ex)
+		catch(Exception ex)
 		{
 			throw new RepositoryException(
 				ex,
@@ -73,7 +73,7 @@ public class StudentRepository
 			
 			return (List<Student>) query.list();
 		}
-		catch(HibernateException ex)
+		catch(Exception ex)
 		{
 			throw new RepositoryException(
 				ex,
@@ -102,7 +102,7 @@ public class StudentRepository
 			
 			return (Student) query.uniqueResult();
 		}
-		catch(HibernateException ex)
+		catch(Exception ex)
 		{
 			throw new RepositoryException(
 				ex,
@@ -135,8 +135,10 @@ public class StudentRepository
 			session.saveOrUpdate(student);
 			transaction.commit();
 		}
-		catch(HibernateException ex)
+		catch(Exception ex)
 		{
+			transaction.rollback();
+			
 			throw new RepositoryException(
 				ex,
 				"Impossible de sauvegarder un étudiant."
@@ -165,8 +167,10 @@ public class StudentRepository
 			session.delete(student);
 			transaction.commit();
 		}
-		catch(HibernateException ex)
+		catch(Exception ex)
 		{
+			transaction.rollback();
+			
 			throw new RepositoryException(
 				ex,
 				"Impossible de supprimer un étudiant."

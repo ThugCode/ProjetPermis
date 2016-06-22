@@ -1,7 +1,9 @@
-<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib tagdir="/WEB-INF/tags" prefix="t"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib tagdir="/WEB-INF/tags" prefix="t" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <t:layout>
     <jsp:attribute name="_page_title">
@@ -11,58 +13,109 @@
         <div class="row">
             <div class="col-md-12 col-lg-8 col-lg-offset-2">
                 <div class="box box-primary">
-                    <form class="form-horizontal" id="form" method="post" action="#">
+                    <c:url value="/users/submit" var="_url" />
+                    <form:form cssClass="form-horizontal" id="form" method="post" action="${fn:escapeXml(_url)}" modelAttribute="_form">
                         <div class="box-body">
+	                        <form:input
+                                type="hidden"
+                                path="id"
+                            />
+                            <form:input
+                                type="hidden"
+                                path="isEnabled"
+                            />
+                            <form:input
+                                type="hidden"
+                                path="isAdmin"
+                            />
+                            <spring:bind path="lastname">
+	                            <div class="form-group ${status.error ? 'has-error' : ''}">
+	                                <form:label path="lastname" cssClass="control-label col-sm-2" for="inputLastName">
+	                                    Nom
+	                                </form:label>
+	                                <div class="col-sm-10">
+	                                    <form:input
+	                                        type="text"
+	                                        path="lastname"
+	                                        cssClass="form-control"
+	                                        id="inputLastName"
+	                                    />
+	                                    <form:errors cssClass="help-block" path="lastname" />
+	                                </div>
+	                            </div>
+                            </spring:bind>
+                            <spring:bind path="firstname">
+	                            <div class="form-group ${status.error ? 'has-error' : ''}">
+	                                <form:label path="firstname" cssClass="control-label col-sm-2" for="inputFirstName">
+	                                    Prénom
+	                                </form:label>
+	                                <div class="col-sm-10">
+	                                    <form:input
+	                                        type="text"
+	                                        path="firstname"
+	                                        class="form-control"
+	                                        id="inputFirstName"
+	                                    />
+	                                    <form:errors cssClass="help-block" path="firstname" />
+	                                </div>
+	                            </div>
+                            </spring:bind>
+                            <spring:bind path="password">
+                                <div class="form-group ${status.error ? 'has-error' : ''}">
+                                    <form:label path="password" cssClass="control-label col-sm-2" for="inputPassword">
+                                        Mot de passe
+                                    </form:label>
+                                    <div class="col-sm-10">
+                                        <form:input
+                                            type="password"
+                                            path="password"
+                                            class="form-control"
+                                            id="inputPassword"
+                                        />
+                                        <form:errors cssClass="help-block" path="password" />
+                                    </div>
+                                </div>
+                            </spring:bind>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="inputName">
-                                    Nom
+                                <label class="control-label col-sm-2" for="inputPasswordConfirmation">
+                                    Confirmation du mot de passe
                                 </label>
                                 <div class="col-sm-10">
                                     <input
-                                        type="text"
+                                        type="password"
+                                        name="passwordConfirmation"
                                         class="form-control"
-                                        id="inputName"
-                                        placeholder="Nom"
+                                        id="inputPasswordConfirmation"
                                     />
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="inputSurname">
-                                    Prénom
-                                </label>
-                                <div class="col-sm-10">
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="inputSurname"
-                                        placeholder="Prénom"
-                                    />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="inputEmail">
-                                    Adresse email
-                                </label>
-                                <div class="col-sm-10">
-                                    <input
-                                        type="email"
-                                        class="form-control"
-                                        id="inputEmail"
-                                        placeholder="Adresse email"
-                                    />
-                                </div>
-                            </div>
+                            <spring:bind path="mail">
+                                <div class="form-group ${status.error ? 'has-error' : ''}">
+	                                <form:label path="mail" cssClass="control-label col-sm-2" for="inputEmail">
+	                                    Adresse email
+	                                </form:label>
+	                                <div class="col-sm-10">
+	                                    <form:input
+	                                        type="email"
+	                                        path="mail"
+	                                        class="form-control"
+	                                        id="inputEmail"
+	                                    />
+	                                    <form:errors cssClass="help-block" path="mail" />
+	                                </div>
+	                            </div>
+                            </spring:bind>
                             <%-- @todo Hide if current user isn't an administrator --%>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <div class="checkbox">
-                                        <label>
-                                            <input
-                                            type="checkbox"
-                                            id="cbAdmin"
+                                        <form:label path="isAdmin" for="inputIsAdmin">
+                                            <form:checkbox
+	                                            path="isAdmin"
+	                                            id="inputIsAdmin"
                                             />
                                             Est administrateur ?
-                                        </label>
+                                        </form:label>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +129,7 @@
                                 Créer
                             </button>
                         </div>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>
