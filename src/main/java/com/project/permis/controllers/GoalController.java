@@ -1,11 +1,10 @@
 package com.project.permis.controllers;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +15,6 @@ import com.project.permis.entities.Action;
 import com.project.permis.entities.Goal;
 import com.project.permis.repositories.ActionRepository;
 import com.project.permis.repositories.GoalRepository;
-import com.project.permis.validators.GoalValidator;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -29,18 +27,6 @@ import com.project.permis.validators.GoalValidator;
 @Controller
 public class GoalController extends AbstractController
 {
-	/**
-     * Initializes a binder with validators and editors to work
-     * with goals.
-     *
-     * @param binder The binder to initialize.
-     */
-    @InitBinder
-    protected void initBinder(WebDataBinder binder)
-    {
-        // binder.setValidator(new GoalValidator());
-    }
-    
 	/**
 	 * 
 	 * @return
@@ -55,14 +41,12 @@ public class GoalController extends AbstractController
     	}
     	
     	// Build model
+    	GoalRepository repository = new GoalRepository();
 		ModelMap model = new ModelMap();
+		
 		model.addAttribute("page", "Liste des objectifs");
-		
-		GoalRepository repository = new GoalRepository();
 		model.addAttribute("goals", repository.fetchAll());
-		
-		model.addAttribute("successMessage", this.successMessage);
-		this.successMessage = null;
+		model.addAttribute("_flashes", this.getAndClearFlashList());
 		
 		return this.render("goal/list", model);
 	}
@@ -81,16 +65,22 @@ public class GoalController extends AbstractController
     	}
     	
     	// Build model
+    	ActionRepository aRepository = new ActionRepository();
 		ModelMap model = new ModelMap();
-		model.addAttribute("page", "Ajouter un objectif");
-		model.addAttribute("buttonSubmit", "Créer");
 		
-		ActionRepository aRepository = new ActionRepository();
-		model.addAttribute("actions", aRepository.fetchAll());
+		model.addAttribute("page", "Ajouter un objectif");
+		model.addAttribute("buttonSubmit", "Créer");model.addAttribute("actions", aRepository.fetchAll());
 		
 		return this.render("goal/form", model);
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @param name
+	 * @param actions
+	 * @return
+	 */
 	@RequestMapping(value = "/goals/add", method = RequestMethod.POST)
 	public ModelAndView validateGoal(
 		@RequestParam(value="inputId", required=false) String id,
@@ -98,37 +88,48 @@ public class GoalController extends AbstractController
 		@RequestParam(value="inputActions", required=true) String actions
 	)
 	{
+		// Check if the user is logged in
 		if(!this.isLoggedIn())
 		{
 			return this.redirect("/login");
 		}
 		
+		// Build goal
 		Goal goal = new Goal();
 		String fact = "ajouté";
-		if(id != null && id != "") {
+		
+		if(null != id && !id.isEmpty())
+		{
 			goal.setId(Integer.parseInt(id));
 			fact = "modifié";
 		}
+		
 		goal.setName(name);
 		
-		//Set new list of actions
-		HashSet<Action> setActions = new HashSet<Action>();
-		if(actions != null && actions !="") {
+		// Set new list of actions
+		Set<Action> setActions = new HashSet<Action>();
+		
+		if(actions != null && actions !="")
+		{
 			ActionRepository aRepository = new ActionRepository();
 			String[] ids = actions.split("x");
 			Action addedAction = null;
-			for (int i = 0; i < ids.length; i++) {
+			
+			for(int i = 0; i < ids.length; i++)
+			{
 				addedAction = aRepository.fetch(Integer.parseInt(ids[i]));
 				setActions.add(addedAction);
 			}
 		}
+		
 		goal.setActions(setActions);
 		
-		//Save new goal
+		// Then, save it
 		GoalRepository repository = new GoalRepository();
 		repository.save(goal);
 
-		this.successMessage = "Objectif "+fact+" avec succès";
+		// And inform the user
+		this.addFlash("success", "Objectif " + fact + " avec succès");
 		
 		return this.redirect("/goals/");
 	}
@@ -147,13 +148,12 @@ public class GoalController extends AbstractController
     	}
     	
     	// Build model
+    	GoalRepository gRepository = new GoalRepository();
+    	ActionRepository aRepository = new ActionRepository();
 		ModelMap model = new ModelMap();
 		
-		GoalRepository repository = new GoalRepository();
-		model.addAttribute("goal", repository.fetch(id));
+		model.addAttribute("goal", gRepository.fetch(id));
 		model.addAttribute("buttonSubmit", "Modifier");
-		
-		ActionRepository aRepository = new ActionRepository();
 		model.addAttribute("actions", aRepository.fetchAll());
 		
 		return this.render("goal/form", model);
@@ -172,10 +172,12 @@ public class GoalController extends AbstractController
     		return this.redirect("/login");
     	}
 		
+    	// Delete the goal
 		GoalRepository repository = new GoalRepository();
 		repository.delete(repository.fetch(id));
 		
-		this.successMessage = "Objectif supprimé avec succès";
+		// Then, inform the user
+		this.addFlash("success", "Objectif supprimé avec succès");
 		
 		return this.redirect("/goals/");
 	}

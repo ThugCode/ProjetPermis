@@ -27,8 +27,6 @@ import com.project.permis.session.Flash;
  */
 public abstract class AbstractController
 {
-	protected String successMessage;
-	
     /**
      * The request sent to the server.
      */

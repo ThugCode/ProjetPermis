@@ -1,6 +1,7 @@
 package com.project.permis.controllers;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -41,13 +42,11 @@ public class MissionController extends AbstractController
     	
     	// Build model
 		ModelMap model = new ModelMap();
-		model.addAttribute("page", "Liste des missions");
-		
 		MissionRepository repository = new MissionRepository();
-		model.addAttribute("missions", repository.fetchAll());
 		
-		model.addAttribute("successMessage", this.successMessage);
-		this.successMessage = null;
+		model.addAttribute("page", "Liste des missions");
+		model.addAttribute("missions", repository.fetchAll());
+		model.addAttribute("_flashes", this.getAndClearFlashList());
 		
 		return this.render("mission/list", model);
 	}
@@ -67,15 +66,22 @@ public class MissionController extends AbstractController
     	
     	// Build model
 		ModelMap model = new ModelMap();
+		GoalRepository gRepository = new GoalRepository();
+		
 		model.addAttribute("page", "Ajouter une mission");
 		model.addAttribute("buttonSubmit", "Créer");
-		
-		GoalRepository gRepository = new GoalRepository();
 		model.addAttribute("goals", gRepository.fetchAll());
 		
 		return this.render("mission/form", model);
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @param title
+	 * @param goals
+	 * @return
+	 */
 	@RequestMapping(value = "/missions/add", method = RequestMethod.POST)
 	public ModelAndView validateMission(
 		@RequestParam(value="inputId", required=false) String id,
@@ -83,35 +89,46 @@ public class MissionController extends AbstractController
 		@RequestParam(value="inputGoals", required=false) String goals
 	)
 	{
+		// Check if the user is logged in
 		if(!this.isLoggedIn())
 		{
 			return this.redirect("/login");
 		}
 		
+		// Build mission
 		Mission mission = new Mission();
 		String fact = "ajoutée";
-		if(id != null && id != "") {
+		
+		if(null != id && !id.isEmpty())
+		{
 			mission.setId(Integer.parseInt(id));
 			fact = "modifiée";
 		}
+		
 		mission.setTitle(title);
 		
-		//Set new list of goals
-		HashSet<Goal> setGoals = new HashSet<Goal>();
-		if(goals != null && goals !="") {
+		// Set new list of goals
+		Set<Goal> setGoals = new HashSet<Goal>();
+		
+		if(goals != null && goals !="")
+		{
 			GoalRepository gRepository = new GoalRepository();
 			String[] ids = goals.split("x");
-			for (int i = 0; i < ids.length; i++) {
+			
+			for(int i = 0; i < ids.length; i++)
+			{
 				setGoals.add(gRepository.fetch(Integer.parseInt(ids[i])));
 			}
 		}
+		
 		mission.setGoals(setGoals);
 		
-		//Save new mission
+		// Then, save it
 		MissionRepository repository = new MissionRepository();
 		repository.save(mission);
 
-		this.successMessage = "Mission "+fact+" avec succès";
+		// And inform the user
+		this.addFlash("success", "Mission " + fact + " avec succès");
 		
 		return this.redirect("/missions/");
 	}
@@ -131,12 +148,11 @@ public class MissionController extends AbstractController
     	
     	// Build model
 		ModelMap model = new ModelMap();
-		
-		MissionRepository repository = new MissionRepository();
-		model.addAttribute("mission", repository.fetch(id));
-		model.addAttribute("buttonSubmit", "Modifier");
-		
+		MissionRepository mRepository = new MissionRepository();
 		GoalRepository gRepository = new GoalRepository();
+		
+		model.addAttribute("mission", mRepository.fetch(id));
+		model.addAttribute("buttonSubmit", "Modifier");
 		model.addAttribute("goals", gRepository.fetchAll());
 		
 		return this.render("mission/form", model);
@@ -155,10 +171,12 @@ public class MissionController extends AbstractController
     		return this.redirect("/login");
     	}
 		
+    	// Delete the mission
 		MissionRepository repository = new MissionRepository();
 		repository.delete(repository.fetch(id));
 		
-		this.successMessage = "Mission supprimée avec succès";
+		// Then, inform the user
+		this.addFlash("success", "Mission supprimée avec succès");
 		
 		return this.redirect("/missions/");
 	}
