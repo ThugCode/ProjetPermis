@@ -79,7 +79,8 @@
                             <ul class="menu">
                                 <c:forEach items="${user.games}" var="item">
                                     <li>
-                                        <a href="#">
+                                        <c:url value="/mygames/${item.id}" var="_url" />
+                                        <a href="${fn:escapeXml(_url)}">
                                             <h3>
                                                 ${item.name}
                                                 <small class="pull-right">20%</small>
