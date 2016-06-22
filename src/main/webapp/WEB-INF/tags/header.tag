@@ -64,10 +64,10 @@
                     <ul class="dropdown-menu">
                         <li class="header">
                             <c:choose>
-                                <c:when test="${fn:length(user.messages) gt 1}">
+                                <c:when test="${fn:length(user.games) gt 1}">
                                     Vous avez ${fn:length(user.games)} formations.
                                 </c:when>
-                                <c:when test="${fn:length(user.messages) eq 1 }">
+                                <c:when test="${fn:length(user.games) eq 1 }">
                                     Vous avez 1 formation.
                                 </c:when>
                                 <c:otherwise>
