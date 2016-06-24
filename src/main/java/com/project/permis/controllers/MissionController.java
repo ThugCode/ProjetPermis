@@ -3,6 +3,7 @@ package com.project.permis.controllers;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.permis.entities.Goal;
 import com.project.permis.entities.Mission;
+import com.project.permis.entities.Student;
 import com.project.permis.repositories.GoalRepository;
 import com.project.permis.repositories.MissionRepository;
+import com.project.permis.repositories.StudentRepository;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -56,7 +59,7 @@ public class MissionController extends AbstractController
 	 * @return
 	 */
 	@RequestMapping(value = "/missions/add", method = RequestMethod.GET)
-	public ModelAndView addMission()
+	public ModelAndView add()
 	{
 		// Check if the user is logged in
     	if(!this.isLoggedIn())
@@ -77,13 +80,60 @@ public class MissionController extends AbstractController
 	
 	/**
 	 * 
+	 * @return 
+	 */
+	@RequestMapping(value = "/missions/modify/{id}", method = RequestMethod.GET)
+	public ModelAndView modify(@PathVariable("id") int id)
+	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Initialize vars
+    	MissionRepository mRepository = new MissionRepository();
+        Mission mission = mRepository.fetch(id);
+
+        if(mission != null)
+        {
+        	// Initialize additional vars
+        	GoalRepository gRepository = new GoalRepository();
+        	
+            // Build model
+            ModelMap model = new ModelMap();
+            model.addAttribute("page", "Éditer une mission");
+            model.addAttribute("buttonSubmit", "Modifier");
+            // model.addAttribute("_form", mission);
+            model.addAttribute("mission", mission);
+            model.addAttribute("goals", gRepository.fetchAll());
+
+            return this.render("mission/form", model);
+        }
+        else
+        {
+            // Register a flash message
+            this.addFlash(
+                "danger",
+                String.format(
+                    "Il n'existe aucune mission ayant pour identifiant <strong>%d</strong>.",
+                    id
+                )
+            );
+
+            return this.redirect("/missions");
+        }
+	}
+	
+	/**
+	 * 
 	 * @param id
 	 * @param title
 	 * @param goals
 	 * @return
 	 */
-	@RequestMapping(value = "/missions/add", method = RequestMethod.POST)
-	public ModelAndView validateMission(
+	@RequestMapping(value = "/missions/submit", method = RequestMethod.POST)
+	public ModelAndView validate(
 		@RequestParam(value="inputId", required=false) String id,
 		@RequestParam(value="inputTitle", required=true) String title,
 		@RequestParam(value="inputGoals", required=false) String goals
@@ -137,33 +187,8 @@ public class MissionController extends AbstractController
 	 * 
 	 * @return 
 	 */
-	@RequestMapping(value = "/missions/modify/{id}", method = RequestMethod.GET)
-	public ModelAndView modifyMission(@PathVariable("id")int id)
-	{
-		// Check if the user is logged in
-    	if(!this.isLoggedIn())
-    	{
-    		return this.redirect("/login");
-    	}
-    	
-    	// Build model
-		ModelMap model = new ModelMap();
-		MissionRepository mRepository = new MissionRepository();
-		GoalRepository gRepository = new GoalRepository();
-		
-		model.addAttribute("mission", mRepository.fetch(id));
-		model.addAttribute("buttonSubmit", "Modifier");
-		model.addAttribute("goals", gRepository.fetchAll());
-		
-		return this.render("mission/form", model);
-	}
-	
-	/**
-	 * 
-	 * @return 
-	 */
 	@RequestMapping(value = "/missions/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView deleteMission(@PathVariable("id")int id)
+	public ModelAndView delete(@PathVariable("id") int id)
 	{
 		// Check if the user is logged in
     	if(!this.isLoggedIn())
@@ -171,13 +196,38 @@ public class MissionController extends AbstractController
     		return this.redirect("/login");
     	}
 		
-    	// Delete the mission
-		MissionRepository repository = new MissionRepository();
-		repository.delete(repository.fetch(id));
-		
-		// Then, inform the user
-		this.addFlash("success", "Mission supprimée avec succès");
-		
-		return this.redirect("/missions/");
+    	// Initialize vars
+        MissionRepository repository = new MissionRepository();
+        Mission mission = repository.fetch(id);
+
+        if(mission != null)
+        {
+            // Delete the mission
+            repository.delete(mission);
+
+            // Then, register a flash message
+            this.addFlash(
+                "success",
+                String.format(
+                    "La mission <strong>%s</strong> a été supprimée.",
+                    StringEscapeUtils.escapeHtml(mission.getTitle())
+                )
+            );
+
+        }
+        else
+        {
+            // Register a flash message
+            this.addFlash(
+                "danger",
+                String.format(
+                    "Il n'existe aucune mission ayant pour identifiant <strong>%d</strong>.",
+                    id
+                )
+            );
+        }
+
+        // Finally, redirect user
+        return this.redirect("/missions");
 	}
 }

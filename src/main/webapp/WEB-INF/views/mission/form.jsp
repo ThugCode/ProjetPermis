@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-8 col-lg-offset-2">
                 <div class="box box-primary">
-                    <c:url value="/missions/add" var="_url" />
+                    <c:url value="/missions/submit" var="_url" />
                     <form class="form-horizontal" id="form" method="post" action="${fn:escapeXml(_url)}">
                         <div class="box-body">
                             <input
