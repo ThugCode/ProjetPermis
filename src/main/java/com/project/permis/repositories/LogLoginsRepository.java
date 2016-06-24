@@ -98,7 +98,7 @@ public class LogLoginsRepository
 		try
 		{
 			Query query = HibernateUtil.getSession().createQuery(
-				"SELECT l FROM LogLogins AS l, Student s WHERE s.id = l.student.id"
+				"SELECT l FROM LogLogins AS l, Student s WHERE s.id = l.student.id ORDER BY l.id desc"
 			);
 			query.setMaxResults(maxResults);
 			

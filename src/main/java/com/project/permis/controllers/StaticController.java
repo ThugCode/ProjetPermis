@@ -1,6 +1,5 @@
 package com.project.permis.controllers;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -41,8 +40,6 @@ public class StaticController extends AbstractController
     	LogLoginsRepository lRepository = new LogLoginsRepository();
     	List<LogLogins> loginData = lRepository.fetchLast(10);
         ModelMap model = new ModelMap();
-        
-        Collections.reverse(loginData);
         
         model.addAttribute("page", "Statistiques");
         model.addAttribute("studentsPerGameData", sRepository.studentsPerGame());
