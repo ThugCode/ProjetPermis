@@ -38,6 +38,7 @@ public class GoalRepository
 				"FROM Goal AS g WHERE g.id = :id"
 			);
 			query.setInteger("id", id);
+			query.setMaxResults(1);
 			
 			return (Goal) query.uniqueResult();
 		}

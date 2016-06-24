@@ -38,6 +38,7 @@ public class LogLoginsRepository
 				"FROM LogLogins AS l WHERE l.id = :id"
 			);
 			query.setInteger("id", id);
+			query.setMaxResults(1);
 			
 			return (LogLogins) query.uniqueResult();
 		}
@@ -70,6 +71,36 @@ public class LogLoginsRepository
 			Query query = HibernateUtil.getSession().createQuery(
 				"FROM LogLogins AS l"
 			);
+			
+			return (List<LogLogins>) query.list();
+		}
+		catch(HibernateException ex)
+		{
+			throw new RepositoryException(
+				ex,
+				"Impossible de récupérer l'historique de connexion."
+			);
+		}
+	}
+	
+	/**
+	 * Fetches the last {@code maxResults} existing login log from the database.
+	 * 
+	 * @return The list of login logs.
+	 * @throws com.project.permis.repositories.RepositoryException If the login logs can't
+	 * be properly fetched.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<LogLogins> fetchLast(int maxResults)
+	throws RepositoryException
+	{
+		// Fetch the login logs
+		try
+		{
+			Query query = HibernateUtil.getSession().createQuery(
+				"SELECT l FROM LogLogins AS l, Student s WHERE s.id = l.student.id"
+			);
+			query.setMaxResults(maxResults);
 			
 			return (List<LogLogins>) query.list();
 		}

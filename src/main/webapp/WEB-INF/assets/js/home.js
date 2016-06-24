@@ -159,9 +159,11 @@ $(function () {
     //-------------
     //- BAR CHARTS -
     //-------------
+    /*
     var barChartCanvas = $("#repartitionChart").get(0).getContext("2d");
     var barChart = new Chart(barChartCanvas);
     barChart.Bar(learnersRepartitionData, barChartOptions);
+    */
     
     var barChartCanvas = $("#meanTimeChart").get(0).getContext("2d");
     var barChart = new Chart(barChartCanvas);

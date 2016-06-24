@@ -38,6 +38,7 @@ public class MissionRepository
 				"FROM Mission AS m WHERE m.id = :id"
 			);
 			query.setInteger("id", id);
+			query.setMaxResults(1);
 			
 			return (Mission) query.uniqueResult();
 		}

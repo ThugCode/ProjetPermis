@@ -40,6 +40,7 @@ public class StudentActionRepository
 			);
 			query.setInteger("student_id", id.getIdStudent());
 			query.setInteger("action_id", id.getIdAction());
+			query.setMaxResults(1);
 			
 			return (StudentAction) query.uniqueResult();
 		}

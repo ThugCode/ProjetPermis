@@ -38,6 +38,7 @@ public class ActionRepository
 				"FROM Action AS a WHERE a.id = :id"
 			);
 			query.setInteger("id", id);
+			query.setMaxResults(1);
 			
 			return (Action) query.uniqueResult();
 		}

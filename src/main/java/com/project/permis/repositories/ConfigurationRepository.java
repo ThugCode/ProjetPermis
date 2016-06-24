@@ -38,6 +38,7 @@ public class ConfigurationRepository
 				"FROM Configuration AS c WHERE c.id = :id"
 			);
 			query.setInteger("id", id);
+			query.setMaxResults(1);
 			
 			return (Configuration) query.uniqueResult();
 		}

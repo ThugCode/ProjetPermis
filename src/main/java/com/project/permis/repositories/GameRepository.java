@@ -38,6 +38,7 @@ public class GameRepository
 				"FROM Game AS g WHERE g.id = :id"
 			);
 			query.setInteger("id", id);
+			query.setMaxResults(1);
 			
 			return (Game) query.uniqueResult();
 		}

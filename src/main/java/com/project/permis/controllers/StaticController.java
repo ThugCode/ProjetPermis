@@ -1,10 +1,17 @@
 package com.project.permis.controllers;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.project.permis.entities.LogLogins;
+import com.project.permis.repositories.LogLoginsRepository;
+import com.project.permis.repositories.StatisticsRepository;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -30,8 +37,16 @@ public class StaticController extends AbstractController
     	}
     	
         // Build model
+    	StatisticsRepository sRepository = new StatisticsRepository();
+    	LogLoginsRepository lRepository = new LogLoginsRepository();
+    	List<LogLogins> loginData = lRepository.fetchLast(10);
         ModelMap model = new ModelMap();
+        
+        Collections.reverse(loginData);
+        
         model.addAttribute("page", "Statistiques");
+        model.addAttribute("studentsPerGameData", sRepository.studentsPerGame());
+        model.addAttribute("loginData", loginData);
         
         return this.render("static/home", model);
     }

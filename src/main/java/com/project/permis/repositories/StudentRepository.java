@@ -38,6 +38,7 @@ public class StudentRepository
 				"FROM Student AS s WHERE s.id = :id"
 			);
 			query.setInteger("id", id);
+			query.setMaxResults(1);
 			
 			return (Student) query.uniqueResult();
 		}

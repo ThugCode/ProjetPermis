@@ -38,6 +38,7 @@ public class FlagRepository
 				"FROM Flag AS f WHERE f.id = :id"
 			);
 			query.setInteger("id", id);
+			query.setMaxResults(1);
 			
 			return (Flag) query.uniqueResult();
 		}

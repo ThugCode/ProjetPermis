@@ -38,6 +38,7 @@ public class RuleRepository
 				"FROM Rule AS r WHERE r.id = :id"
 			);
 			query.setInteger("id", id);
+			query.setMaxResults(1);
 			
 			return (Rule) query.uniqueResult();
 		}
