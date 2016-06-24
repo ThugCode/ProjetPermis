@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
 @Controller
-public class HomeController extends AbstractController
+public class StaticController extends AbstractController
 {
     /**
      * Displays the home page with statistics.

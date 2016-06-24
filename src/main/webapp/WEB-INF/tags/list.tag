@@ -21,14 +21,13 @@
         <jsp:invoke fragment="_list_stylesheets"/>
     </jsp:attribute>
     <jsp:attribute name="_page_scripts">
+        <jsp:invoke fragment="_list_scripts"/>
         <c:url value="/assets/js/layout/list.js" var="_url" />
         <script type="text/javascript" src="${fn:escapeXml(_url)}"></script>
         <c:url value="/assets/js/datatables/jquery.dataTables.min.js" var="_url" />
         <script type="text/javascript" src="${fn:escapeXml(_url)}"></script>
         <c:url value="/assets/js/datatables/dataTables.bootstrap.min.js" var="_url" />
         <script type="text/javascript" src="${fn:escapeXml(_url)}"></script>
-        <%-- Specific scripts --%>
-        <jsp:invoke fragment="_list_scripts"/>
     </jsp:attribute>
     <jsp:body>
         <a id="btn-add" href="<jsp:invoke fragment="_url_add" />" class="btn btn-block btn-social btn-bitbucket">

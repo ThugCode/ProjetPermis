@@ -56,7 +56,7 @@ public class GoalController extends AbstractController
 	 * @return
 	 */
 	@RequestMapping(value = "/goals/add", method = RequestMethod.GET)
-	public ModelAndView addGoal()
+	public ModelAndView add()
 	{
 		// Check if the user is logged in
     	if(!this.isLoggedIn())
@@ -82,7 +82,7 @@ public class GoalController extends AbstractController
 	 * @return
 	 */
 	@RequestMapping(value = "/goals/add", method = RequestMethod.POST)
-	public ModelAndView validateGoal(
+	public ModelAndView submit(
 		@RequestParam(value="inputId", required=false) String id,
 		@RequestParam(value="inputName", required=true) String name,
 		@RequestParam(value="inputActions", required=true) String actions
@@ -139,7 +139,7 @@ public class GoalController extends AbstractController
 	 * @return 
 	 */
 	@RequestMapping(value = "/goals/modify/{id}", method = RequestMethod.GET)
-	public ModelAndView modifyGoal(@PathVariable("id")int id)
+	public ModelAndView modify(@PathVariable("id")int id)
 	{
 		// Check if the user is logged in
     	if(!this.isLoggedIn())
@@ -164,7 +164,7 @@ public class GoalController extends AbstractController
 	 * @return 
 	 */
 	@RequestMapping(value = "/goals/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView deleteGoal(@PathVariable("id")int id)
+	public ModelAndView delete(@PathVariable("id")int id)
 	{
 		// Check if the user is logged in
     	if(!this.isLoggedIn())

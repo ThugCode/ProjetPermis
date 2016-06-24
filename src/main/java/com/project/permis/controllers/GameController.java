@@ -58,7 +58,7 @@ public class GameController extends AbstractController
 	 * @return
 	 */
 	@RequestMapping(value = "/games/add", method = RequestMethod.GET)
-	public ModelAndView addMission()
+	public ModelAndView add()
 	{
 		// Check if the user is logged in
     	if(!this.isLoggedIn())
@@ -89,7 +89,7 @@ public class GameController extends AbstractController
 	 * @return
 	 */
 	@RequestMapping(value = "/games/add", method = RequestMethod.POST)
-	public ModelAndView validateGame(
+	public ModelAndView submit(
 		@RequestParam(value="inputId", required=false) String id,
 		@RequestParam(value="inputName", required=true) String name,
 		@RequestParam(value="inputFile", required=true) String image,
@@ -167,7 +167,7 @@ public class GameController extends AbstractController
 	 * @return 
 	 */
 	@RequestMapping(value = "/games/modify/{id}", method = RequestMethod.GET)
-	public ModelAndView modifyGame(@PathVariable("id")int id)
+	public ModelAndView modify(@PathVariable("id")int id)
 	{
 		// Check if the user is logged in
     	if(!this.isLoggedIn())
@@ -194,7 +194,7 @@ public class GameController extends AbstractController
 	 * @return 
 	 */
 	@RequestMapping(value = "/games/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView deleteMission(@PathVariable("id")int id)
+	public ModelAndView delete(@PathVariable("id")int id)
 	{
 		// Check if the user is logged in
     	if(!this.isLoggedIn())

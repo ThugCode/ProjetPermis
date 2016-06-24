@@ -51,7 +51,7 @@ public class ActionController extends AbstractController
      * @return
      */
     @RequestMapping(value = "/actions/add", method = RequestMethod.GET)
-    public ModelAndView addGoal()
+    public ModelAndView add()
     {
         // Check if the user is logged in
         if(!this.isLoggedIn())
@@ -75,7 +75,7 @@ public class ActionController extends AbstractController
      * @return
      */
     @RequestMapping(value = "/actions/add", method = RequestMethod.POST)
-    public ModelAndView validateAction(
+    public ModelAndView submit(
         @RequestParam(value="inputId", required=false) String id,
         @RequestParam(value="inputName", required=true) String name
     )
@@ -113,7 +113,7 @@ public class ActionController extends AbstractController
      * @return 
      */
     @RequestMapping(value = "/actions/modify/{id}", method = RequestMethod.GET)
-    public ModelAndView modifyAction(@PathVariable("id")int id)
+    public ModelAndView modify(@PathVariable("id")int id)
     {
         // Check if the user is logged in
         if(!this.isLoggedIn())
@@ -136,7 +136,7 @@ public class ActionController extends AbstractController
      * @return 
      */
     @RequestMapping(value = "/actions/delete/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteAction(@PathVariable("id") int id)
+    public ModelAndView delete(@PathVariable("id") int id)
     {
         // Check if the user is logged in
         if(!this.isLoggedIn())

@@ -1,5 +1,6 @@
 package com.project.permis.controllers;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,7 +63,7 @@ public class MyGameController extends AbstractController
 		Game game = gameRepository.fetch(id);
 		
 		model.addAttribute("game", game);
-		model.addAttribute("page", game.getName()); // @todo Escape HTML
+		model.addAttribute("page", StringEscapeUtils.escapeHtml(game.getName()));
 		
 		return this.render("mygame/view", model);
 	}
