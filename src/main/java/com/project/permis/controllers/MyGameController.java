@@ -1,5 +1,7 @@
 package com.project.permis.controllers;
 
+import java.util.ArrayList;
+
 import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -8,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.project.permis.entities.Game;
+import com.project.permis.entities.Mission;
 import com.project.permis.repositories.GameRepository;
+import com.project.permis.statistics.StatisticsManager;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -36,8 +40,8 @@ public class MyGameController extends AbstractController
     	
     	// Build model
 		ModelMap model = new ModelMap();
-		model.addAttribute("page", "Mes formations");
 		
+		model.addAttribute("page", "Mes formations");
 		model.addAttribute("games", this.getUser().getGames());
 		
 		return this.render("mygame/list", model);
@@ -57,13 +61,14 @@ public class MyGameController extends AbstractController
     	}
     	
     	// Build model
+    	GameRepository gameRepository = new GameRepository();
+    	Game game = gameRepository.fetch(id);
+    	StatisticsManager statisticsManager = new StatisticsManager();
 		ModelMap model = new ModelMap();
-		GameRepository gameRepository = new GameRepository();
-		
-		Game game = gameRepository.fetch(id);
 		
 		model.addAttribute("game", game);
 		model.addAttribute("page", StringEscapeUtils.escapeHtml(game.getName()));
+		model.addAttribute("progress", statisticsManager.progressPerMission(this.getUser(), game.getMissions()));
 		
 		return this.render("mygame/view", model);
 	}
