@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.permis.entities.LogLogins;
 import com.project.permis.repositories.LogLoginsRepository;
-import com.project.permis.repositories.StatisticsRepository;
+import com.project.permis.statistics.StatisticsManager;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -36,7 +36,7 @@ public class StaticController extends AbstractController
     	}
     	
         // Build model
-    	StatisticsRepository sRepository = new StatisticsRepository();
+    	StatisticsManager sRepository = new StatisticsManager();
     	LogLoginsRepository lRepository = new LogLoginsRepository();
     	
     	List<LogLogins> loginData;
