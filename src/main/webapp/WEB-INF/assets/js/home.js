@@ -75,22 +75,6 @@ $(function () {
       ]
     };
     
-    var meanTimeData = {
-      labels: ["Formation 1", "Formation 2", "Formation 3"],
-      datasets: [
-        {
-          label: "Temps moyen",
-          fillColor: "#4E638B",
-          strokeColor: "#4E638B",
-          pointColor: "#4E638B",
-          pointStrokeColor: "#4E638B",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(60,141,188,1)",
-          data: [3600, 3118, 4598]
-        }
-      ]
-    };
-    
     var completionData = {
       labels: ["Formation 1", "Formation 2", "Formation 3"],
       datasets: [
@@ -159,15 +143,6 @@ $(function () {
     //-------------
     //- BAR CHARTS -
     //-------------
-    /*
-    var barChartCanvas = $("#repartitionChart").get(0).getContext("2d");
-    var barChart = new Chart(barChartCanvas);
-    barChart.Bar(learnersRepartitionData, barChartOptions);
-    */
-    
-    var barChartCanvas = $("#meanTimeChart").get(0).getContext("2d");
-    var barChart = new Chart(barChartCanvas);
-    barChart.Bar(meanTimeData, barChartOptions);
     
     var barChartCanvas = $("#completionChart").get(0).getContext("2d");
     var barChart = new Chart(barChartCanvas);

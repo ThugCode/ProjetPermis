@@ -240,4 +240,24 @@ public abstract class AbstractController
     	
         return false;
     }
+    
+    /**
+     * Tests if the user is an admin
+     * 
+     * @return {@code true} if the user is an admin, {@code false} otherwise.
+     */
+    protected boolean isAdmin() 
+    {
+    	Student user = this.getUser();
+    	
+    	if(null != user)
+    	{
+    		if(user.isIsAdmin())
+    		{
+    			return true;
+    		}
+    	}
+    	
+        return false;
+    }
 }

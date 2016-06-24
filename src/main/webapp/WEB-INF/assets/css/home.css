@@ -16,3 +16,7 @@
 	text-align				: center;
 	z-index					: 999999999999999
 }
+
+.sectionChart {
+	height : 340px;
+}

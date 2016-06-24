@@ -91,15 +91,17 @@ public class LogLoginsRepository
 	 * be properly fetched.
 	 */
 	@SuppressWarnings("unchecked")
-	public List<LogLogins> fetchLast(int maxResults)
+	public List<LogLogins> fetchLast(int maxResults, int idUser)
 	throws RepositoryException
 	{
 		// Fetch the login logs
 		try
 		{
-			Query query = HibernateUtil.getSession().createQuery(
-				"SELECT l FROM LogLogins AS l, Student s WHERE s.id = l.student.id ORDER BY l.id desc"
-			);
+			String query_s = "SELECT l FROM LogLogins AS l, Student s WHERE s.id = l.student.id ";
+			if(idUser > 0) query_s +=" AND s.id = "+idUser;
+			query_s +=" ORDER BY l.id desc";
+			
+			Query query = HibernateUtil.getSession().createQuery( query_s );
 			query.setMaxResults(maxResults);
 			
 			return (List<LogLogins>) query.list();

@@ -44,10 +44,6 @@
 			      barValueSpacing: 5,
 			      //Number - Spacing between data sets within X values
 			      barDatasetSpacing: 1,
-			      <%--
-			      //String - A legend template
-			      legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
-			      --%>
 			      //Boolean - whether to make the chart responsive
 			      responsive: true,
 			      maintainAspectRatio: true,
@@ -70,7 +66,7 @@
 	        	
 	        	<c:forEach items="${studentsPerGameData}" var="row">
 	        	    studentsPerGameData.labels.push("${row[0]}");
-	        	    studentsPerGameData.datasets[0].data.push(${row[1]});
+	        	    studentsPerGameData.datasets[0].data.push("${row[1]}");
 	        	</c:forEach>
 	        	
 	        	// Then, draw graphics
@@ -82,9 +78,10 @@
     </jsp:attribute>
     <jsp:body>
         <div class="row">
-            <!-- LEFT COLUMN -->
-            <div class="col-md-6">
-                <!-- COMPLETION TOTAL CHART -->
+            
+            <c:if test="${!_user.isAdmin}">
+            <!-- COMPLETION TOTAL CHART -->
+            <div class="col-md-6 sectionChart">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Completion total des formations (AP)</h3>
@@ -100,11 +97,15 @@
                     <div class="box-body">
 	                    <div class="chart">
 	                        <div id="totalPourcentage">60%</div>
-	                        <canvas id="completionTotalChart" style="height: 250px"></canvas>
+	                        <canvas id="completionTotalChart"></canvas>
 	                    </div>
                     </div>
                 </div>
-                <!-- DERNIERES CONNEXIONS -->
+            </div>
+           </c:if>
+           
+            <!-- DERNIERES CONNEXIONS -->
+            <div class="col-md-6 sectionChart">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Dernières connexions (AD et AP)</h3>
@@ -127,16 +128,14 @@
                                                 <c:when test="${_user.isAdmin}">
                                                     <c:url value="/users/modify/${row.student.id}" var="_url" />
                                                     <a href="${_url}">
-                                                        ${fn:escapeXml(row.student.firstname)}
-                                                        ${fn:escapeXml(row.student.lastname)}
+                                                        ${fn:escapeXml(row.student.firstname)} 
+                                                        ${fn:escapeXml(row.student.lastname)} s'est connecté(e) à
                                                     </a>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    ${fn:escapeXml(row.student.firstname)}
-                                                    ${fn:escapeXml(row.student.lastname)}
+                                                    Vous vous êtes connecté(e) à 
                                                 </c:otherwise>
                                             </c:choose>
-                                            s'est connecté(e) à
                                             <fmt:formatDate type="time" value="${row.dateLogin}" />
                                             le
                                             <fmt:formatDate type="date" value="${row.dateLogin}" />
@@ -144,11 +143,14 @@
                                     </c:forEach>
                                 </ul>
                             </c:if>
-                            <%-- <canvas id="connectionChart" style="height: 250px"></canvas> --%>
                         </div>
                     </div>
                 </div>
-                <!-- REPARTITION APPRENANT -->
+            </div>
+            
+            <!-- REPARTITION APPRENANT -->
+            <c:if test="${_user.isAdmin}">
+            <div class="col-md-6 sectionChart">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Répartition des apprenants par formation (AD)</h3>
@@ -162,33 +164,14 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <canvas id="repartitionChart" style="height: 250px"></canvas>
+                        <canvas id="repartitionChart"></canvas>
                     </div>
                 </div>
             </div>
-            <!-- /LEFT COLUMN -->
-            <!-- RIGHT COLUMN -->
-            <div class="col-md-6">
-                <!-- TEMPS MOYEN -->
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Temps moyen par formation (AD et AP)</h3>
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        <div class="chart">
-                            <canvas id="meanTimeChart" style="height: 250px"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <!-- COMPLETION CHART -->
+            </c:if>
+            
+            <!-- COMPLETION CHART -->
+            <div class="col-md-6 sectionChart">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Completion moyenne (AD et AP)</h3>
@@ -203,12 +186,12 @@
                     </div>
                     <div class="box-body">
                         <div class="chart">
-                            <canvas id="completionChart" style="height: 230px"></canvas>
+                            <canvas id="completionChart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- /RIGHT COLUMN -->
-        </div>
+
+		</div>
     </jsp:body>
 </t:layout>

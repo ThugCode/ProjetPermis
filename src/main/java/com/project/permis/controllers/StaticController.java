@@ -38,12 +38,34 @@ public class StaticController extends AbstractController
         // Build model
     	StatisticsRepository sRepository = new StatisticsRepository();
     	LogLoginsRepository lRepository = new LogLoginsRepository();
-    	List<LogLogins> loginData = lRepository.fetchLast(10);
+    	
+    	List<LogLogins> loginData;
+    	List<Object[]> studentPerGame;
+    	List<Object[]> meanCompletion;
+    	int totalCompletion;
+    	
+    	if(this.isAdmin()) {
+    		loginData = lRepository.fetchLast(10, -1);
+    		studentPerGame = sRepository.studentsPerGame();
+    		meanCompletion = null;
+    		totalCompletion = -1;
+    	} else {
+    		loginData = lRepository.fetchLast(10, this.getUser().getId());
+    		studentPerGame = null;
+    		meanCompletion = null;
+    		totalCompletion = 10;
+    	}
+    	
+    	sRepository.meanCompletion();
+    	
+    	
         ModelMap model = new ModelMap();
         
         model.addAttribute("page", "Statistiques");
-        model.addAttribute("studentsPerGameData", sRepository.studentsPerGame());
+        model.addAttribute("studentsPerGameData", studentPerGame);
         model.addAttribute("loginData", loginData);
+        model.addAttribute("meanCompletion", meanCompletion);
+        model.addAttribute("totalCompletion", totalCompletion);
         
         return this.render("static/home", model);
     }
