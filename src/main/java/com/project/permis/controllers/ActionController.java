@@ -1,15 +1,21 @@
 package com.project.permis.controllers;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.permis.entities.Action;
 import com.project.permis.repositories.ActionRepository;
+import com.project.permis.validators.ActionValidator;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -22,6 +28,17 @@ import com.project.permis.repositories.ActionRepository;
 @Controller
 public class ActionController extends AbstractController
 {
+	/**
+     * Initializes a binder with validators and editors.
+     *
+     * @param binder The binder to initialize.
+     */
+    @InitBinder("_form")
+    protected void initBinder(WebDataBinder binder)
+    {
+        binder.setValidator(new ActionValidator());
+    }
+    
     /**
      * 
      * @return
@@ -64,8 +81,51 @@ public class ActionController extends AbstractController
         
         model.addAttribute("page", "Ajouter une action");
         model.addAttribute("buttonSubmit", "Créer");
+        model.addAttribute("_form", new Action());
         
         return this.render("action/form", model);
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    @RequestMapping(value = "/actions/modify/{id}", method = RequestMethod.GET)
+    public ModelAndView modify(@PathVariable("id") int id)
+    {
+        // Check if the user is logged in
+        if(!this.isLoggedIn())
+        {
+            return this.redirect("/login");
+        }
+        
+        // Initialize vars	
+        ActionRepository repository = new ActionRepository();
+        Action action = repository.fetch(id);
+
+        if(action != null)
+        {
+            // Build model
+            ModelMap model = new ModelMap();
+            model.addAttribute("page", "Éditer une action");
+            model.addAttribute("buttonSubmit", "Modifier");
+            model.addAttribute("_form", action);
+
+            return this.render("action/form", model);
+        }
+        else
+        {
+            // Register a flash message
+            this.addFlash(
+                "danger",
+                String.format(
+                    "Il n'existe aucune action ayant pour identifiant <strong>%d</strong>.",
+                    id
+                )
+            );
+
+            return this.redirect("/actions");
+        }
     }
     
     /**
@@ -74,10 +134,10 @@ public class ActionController extends AbstractController
      * @param name
      * @return
      */
-    @RequestMapping(value = "/actions/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/actions/submit", method = RequestMethod.POST)
     public ModelAndView submit(
-        @RequestParam(value="inputId", required=false) String id,
-        @RequestParam(value="inputName", required=true) String name
+		@ModelAttribute("_form") @Validated Action action,
+        BindingResult result
     )
     {
     	// Check if the user is logged in
@@ -86,49 +146,43 @@ public class ActionController extends AbstractController
             return this.redirect("/login");
         }
         
-        // Build action
-        Action action = new Action();
-        String fact = "ajoutée";
-        
-        if(null != id && !id.isEmpty())
+        if(!result.hasErrors())
         {
-            action.setId(Integer.parseInt(id));
-            fact = "modifiée";
+            // Save the action
+            ActionRepository repository = new ActionRepository();
+            repository.save(action);
+
+            // Then, register a flash message
+            this.addFlash(
+                "success",
+                String.format(
+                    "L'action <strong>%s</strong> a été sauvegardée.",
+                    StringEscapeUtils.escapeHtml(action.getName())
+                )
+            );
+
+            // Finally, redirect user
+            return this.redirect("/actions");
         }
-        
-        action.setName(name);
-        
-        // Then, save it
-        ActionRepository repository = new ActionRepository();
-        repository.save(action);
-        
-        // And inform the user
-        this.addFlash("success", "Action " + fact + " avec succès");
-        
-        return this.redirect("/actions/");
-    }
-    
-    /**
-     * 
-     * @return 
-     */
-    @RequestMapping(value = "/actions/modify/{id}", method = RequestMethod.GET)
-    public ModelAndView modify(@PathVariable("id")int id)
-    {
-        // Check if the user is logged in
-        if(!this.isLoggedIn())
+        else
         {
-            return this.redirect("/login");
+            // Populate model
+            ModelMap model = new ModelMap();
+            model.addAttribute("_form", action);
+
+            if(null == action.getId())
+            {
+            	model.addAttribute("page", "Ajouter une action");
+                model.addAttribute("buttonSubmit", "Créer");
+            }
+            else
+            {
+                model.addAttribute("page", "Éditer une action");
+                model.addAttribute("buttonSubmit", "Modifier");
+            }
+
+            return this.render("adherents/form", model);
         }
-        
-        // Build model
-        ActionRepository repository = new ActionRepository();
-        ModelMap model = new ModelMap();
-        
-        model.addAttribute("action", repository.fetch(id));
-        model.addAttribute("buttonSubmit", "Modifier");
-        
-        return this.render("action/form", model);
     }
     
     /**
@@ -144,13 +198,38 @@ public class ActionController extends AbstractController
             return this.redirect("/login");
         }
         
-        // Delete the action
+        // Initialize vars
         ActionRepository repository = new ActionRepository();
-        repository.delete(repository.fetch(id));
-        
-        // Then, inform the user
-        this.addFlash("success", "Action supprimée avec succès");
-        
-        return this.redirect("/actions/");
+        Action action = repository.fetch(id);
+
+        if(action != null)
+        {
+            // Delete the action
+            repository.delete(action);
+
+            // Then, register a flash message
+            this.addFlash(
+                "success",
+                String.format(
+                    "L'action <strong>%s</strong> a été supprimée.",
+                    StringEscapeUtils.escapeHtml(action.getName())
+                )
+            );
+
+        }
+        else
+        {
+            // Register a flash message
+            this.addFlash(
+                "danger",
+                String.format(
+                    "Il n'existe aucune action ayant pour identifiant <strong>%d</strong>.",
+                    id
+                )
+            );
+        }
+
+        // Finally, redirect user
+        return this.redirect("/actions");
     }
 }
