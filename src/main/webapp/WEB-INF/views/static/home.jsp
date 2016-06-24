@@ -18,7 +18,6 @@
     <jsp:attribute name="_page_scripts">
         <c:url value="/assets/js/Chart.min.js" var="_url" />
         <script type="text/javascript" src="${fn:escapeXml(_url)}"></script>
-        
         <script type="text/javascript">
 	        $(function() {
 	        	// Options
@@ -65,114 +64,113 @@
 	        	};
 
 	        	<c:if test="${_user.isAdmin}">
-	        	<c:forEach items="${studentsPerGameData}" var="row">
-	        	    studentsPerGameData.labels.push("${row[0]}");
-	        	    studentsPerGameData.datasets[0].data.push("${row[1]}");
-	        	</c:forEach>
-	        	
-	        	// Then, draw graphics
-	        	var barChartCanvas = $("#repartitionChart").get(0).getContext("2d");
-	            var barChart = new Chart(barChartCanvas);
-	            barChart.Bar(studentsPerGameData, barChartOptions);
+    	        	<c:forEach items="${studentsPerGameData}" var="row">
+    	        	    studentsPerGameData.labels.push("${row[0]}");
+    	        	    studentsPerGameData.datasets[0].data.push(${row[1]});
+    	        	</c:forEach>
+    	        	
+    	        	// Then, draw graphics
+    	        	var barChartCanvas = $("#repartitionChart").get(0).getContext("2d");
+    	            var barChart = new Chart(barChartCanvas);
+    	            barChart.Bar(studentsPerGameData, barChartOptions);
 	            </c:if>
 	            
 	            var completionData = {
-	            	      labels: [],
-	            	      datasets: [
-	            	        {
-	            	          label: "Non commencé",
-	            	          fillColor: "#4E638B",
-	            	          strokeColor: "#4E638B",
-	            	          pointColor: "#4E638B",
-	            	          pointStrokeColor: "#4E638B",
-	            	          pointHighlightFill: "#fff",
-	            	          pointHighlightStroke: "rgba(60,141,188,1)",
-	            	          data: []
-	            	        },
-	            	        {
-	            	          label: "Commencé",
-	            	          fillColor: "#D2AC91",
-	            	          strokeColor: "#D2AC91",
-	            	          pointColor: "#D2AC91",
-	            	          pointStrokeColor: "#D2AC91",
-	            	          pointHighlightFill: "#fff",
-	            	          pointHighlightStroke: "rgba(60,141,188,1)",
-	            	          data: []
-	            	        },
-	            	        {
-	            	            label: "Terminé",
-	            	            fillColor: "#181C20",
-	            	            strokeColor: "#181C20",
-	            	            pointColor: "#181C20",
-	            	            pointStrokeColor: "#181C20",
-	            	            pointHighlightFill: "#fff",
-	            	            pointHighlightStroke: "rgba(60,141,188,1)",
-	            	            data: []
-	            	        }
-           	      	]
+        	        labels: [],
+        	        datasets: [
+            	        {
+            	          label: "Non commencé",
+            	          fillColor: "#4E638B",
+            	          strokeColor: "#4E638B",
+            	          pointColor: "#4E638B",
+            	          pointStrokeColor: "#4E638B",
+            	          pointHighlightFill: "#fff",
+            	          pointHighlightStroke: "rgba(60,141,188,1)",
+            	          data: []
+            	        },
+            	        {
+            	          label: "Commencé",
+            	          fillColor: "#D2AC91",
+            	          strokeColor: "#D2AC91",
+            	          pointColor: "#D2AC91",
+            	          pointStrokeColor: "#D2AC91",
+            	          pointHighlightFill: "#fff",
+            	          pointHighlightStroke: "rgba(60,141,188,1)",
+            	          data: []
+            	        },
+            	        {
+            	            label: "Terminé",
+            	            fillColor: "#181C20",
+            	            strokeColor: "#181C20",
+            	            pointColor: "#181C20",
+            	            pointStrokeColor: "#181C20",
+            	            pointHighlightFill: "#fff",
+            	            pointHighlightStroke: "rgba(60,141,188,1)",
+            	            data: []
+            	        }
+        	        ]
            	    };
 
 	            <c:forEach items="${meanCompletion}" var="row">
 	            	completionData.labels.push("${row[0]}");
-	            	completionData.datasets[0].data.push(parseInt("${row[1]}"));
-	            	completionData.datasets[1].data.push(parseInt("${row[2]}"));
-	            	completionData.datasets[2].data.push(100-parseInt("${row[1]}")+parseInt("${row[2]}"));
+	            	completionData.datasets[0].data.push(${row[1]});
+	            	completionData.datasets[1].data.push(${row[2]});
+	            	completionData.datasets[2].data.push(100 - ${row[1]} + ${row[2]});
         		</c:forEach>
         	    
 	            var barChartCanvas = $("#completionChart").get(0).getContext("2d");
 	            var barChart = new Chart(barChartCanvas);
 	            barChart.Bar(completionData, barChartOptions);
 
-			<c:if test="${!_user.isAdmin}">
-	            var pourcentage = ${totalCompletion};
-	            
-	            $("#totalPourcentage").text(pourcentage+"%");
-	            
-	            var PieData = [
-	              {
-	                value: pourcentage,
-	                color: "#4E638B",
-	                label: "Complétion"
-	              },
-	              {
-	                value: 100-pourcentage,
-	                color: "#D2AC91",
-	                label: ""
-	              }
-	            ];
-	            
-	            var pieOptions = {
-	              //Boolean - Whether we should show a stroke on each segment
-	              segmentShowStroke: false,
-	              //Number - The percentage of the chart that we cut out of the middle
-	              percentageInnerCutout: 60,
-	              //Number - Amount of animation steps
-	              animationSteps: 100,
-	              //String - Animation easing effect
-	              animationEasing: "easeOutBounce",
-	              //Boolean - Whether we animate the rotation of the Doughnut
-	              animateRotate: true,
-	              //Boolean - Whether we animate scaling the Doughnut from the centre
-	              animateScale: false,
-	              //Boolean - whether to make the chart responsive to window resizing
-	              responsive: true,
-	              // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-	              maintainAspectRatio: true,
-	              //String - A legend template
-	              legendTemplate: "60",
-	              inGraphDataShow: true,
-	              inGraphDataRadiusPosition: 2,
-	              inGraphDataFontColor: 'white'
-	            };
-	            
-	            //Create pie or douhnut chart
-	            // You can switch between pie and douhnut using the method below.
-	            
-	            var pieChartCanvas = $("#completionTotalChart").get(0).getContext("2d");
-	            var pieChart = new Chart(pieChartCanvas);
-	            pieChart.Doughnut(PieData, pieOptions);
-            </c:if>
-
+    			<c:if test="${!_user.isAdmin}">
+    	            var pourcentage = ${totalCompletion};
+    	            
+    	            $("#totalPourcentage").text(pourcentage+"%");
+    	            
+    	            var PieData = [
+    	              {
+    	                value: pourcentage,
+    	                color: "#4E638B",
+    	                label: "Complétion"
+    	              },
+    	              {
+    	                value: 100 - pourcentage,
+    	                color: "#D2AC91",
+    	                label: ""
+    	              }
+    	            ];
+    	            
+    	            var pieOptions = {
+    	              //Boolean - Whether we should show a stroke on each segment
+    	              segmentShowStroke: false,
+    	              //Number - The percentage of the chart that we cut out of the middle
+    	              percentageInnerCutout: 60,
+    	              //Number - Amount of animation steps
+    	              animationSteps: 100,
+    	              //String - Animation easing effect
+    	              animationEasing: "easeOutBounce",
+    	              //Boolean - Whether we animate the rotation of the Doughnut
+    	              animateRotate: true,
+    	              //Boolean - Whether we animate scaling the Doughnut from the centre
+    	              animateScale: false,
+    	              //Boolean - whether to make the chart responsive to window resizing
+    	              responsive: true,
+    	              // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+    	              maintainAspectRatio: true,
+    	              //String - A legend template
+    	              legendTemplate: "60",
+    	              inGraphDataShow: true,
+    	              inGraphDataRadiusPosition: 2,
+    	              inGraphDataFontColor: 'white'
+    	            };
+    	            
+    	            //Create pie or douhnut chart
+    	            // You can switch between pie and douhnut using the method below.
+    	            
+    	            var pieChartCanvas = $("#completionTotalChart").get(0).getContext("2d");
+    	            var pieChart = new Chart(pieChartCanvas);
+    	            pieChart.Doughnut(PieData, pieOptions);
+                </c:if>
 	        });
         </script>
     </jsp:attribute>
