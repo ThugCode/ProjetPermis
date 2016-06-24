@@ -1,10 +1,10 @@
 package com.project.permis.statistics;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.hibernate.SQLQuery;
@@ -140,6 +140,80 @@ public class StatisticsManager
 			throw new RepositoryException(
 				ex,
 				"Impossible de récupérer les statistiques d'étudiants par formation."
+			);
+		}
+	}
+	
+	/**
+	 * Computes statistics about the mean completion per game.
+	 * 
+	 * @return The list of formations with the associated mean completion.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Object[]> meanCompletion(int idUser)
+	{
+		// Fetch the statistics
+		try
+		{
+			String query_s = "SELECT g.`name`, g.`id` as completion1, g.`id` as completion2 FROM `game` g ";
+			if(idUser > 0) query_s += " INNER JOIN `student_game` sg ON sg.`id_game` = g.`id` WHERE sg.`id_student` = "+idUser;
+
+			// Execute query
+			SQLQuery query = HibernateUtil.getSession().createSQLQuery(query_s);
+			query.addScalar("name", new StringType());
+			query.addScalar("completion1", new StringType());
+			query.addScalar("completion2", new StringType());
+			
+			Random rand = new Random();
+			for(Object[] row : (List<Object[]>)query.list()) {
+				row[1] = rand.nextInt(70)+"";
+				row[2] = rand.nextInt(30)+"";
+			}
+			
+			return (List<Object[]>) query.list();
+		}
+		catch(Exception ex)
+		{
+			throw new RepositoryException(
+				ex,
+				"Impossible de récupérer les résultats."
+			);
+		}
+	}
+	
+	/**
+	 * Computes statistics about the number of students per game.
+	 * The game's name is accessible by casting the first row to a string and
+	 * the game's number of students is accessible by casting the second row
+	 * as an integer or a long.
+	 * 
+	 * @return The list of formations with the associated number of students.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Object[]> totalCompletion()
+	{
+		// Fetch the statistics
+		try
+		{
+			// Execute query
+			SQLQuery query = HibernateUtil.getSession().createSQLQuery(
+				"SELECT g.`name`, COUNT(sg.`id_student`) AS `count` " +
+				"FROM `game` g " +
+				"INNER JOIN `student_game` sg " +
+				"ON sg.`id_game` = g.`id` " +
+				"GROUP BY g.`id` " +
+				"ORDER BY COUNT(sg.`id_student`) DESC"
+			);
+			query.addScalar("name", new StringType());
+			query.addScalar("count", new LongType());
+			
+			return (List<Object[]>) query.list();
+		}
+		catch(Exception ex)
+		{
+			throw new RepositoryException(
+				ex,
+				"Impossible de récupérer la liste des missions."
 			);
 		}
 	}

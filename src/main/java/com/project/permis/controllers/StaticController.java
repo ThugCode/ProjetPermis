@@ -47,16 +47,14 @@ public class StaticController extends AbstractController
     	if(this.isAdmin()) {
     		loginData = lRepository.fetchLast(10, -1);
     		studentPerGame = sRepository.studentsPerGame();
-    		meanCompletion = null;
+    		meanCompletion = sRepository.meanCompletion(-1);
     		totalCompletion = -1;
     	} else {
     		loginData = lRepository.fetchLast(10, this.getUser().getId());
     		studentPerGame = null;
-    		meanCompletion = null;
+    		meanCompletion = sRepository.meanCompletion(this.getUser().getId());
     		totalCompletion = 10;
     	}
-    	
-    	sRepository.meanCompletion();
     	
     	
         ModelMap model = new ModelMap();
