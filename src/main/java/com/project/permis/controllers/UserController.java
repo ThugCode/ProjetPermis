@@ -38,7 +38,7 @@ public class UserController extends AbstractController
      *
      * @param binder The binder to initialize.
      */
-    @InitBinder
+    @InitBinder("_form")
     protected void initBinder(WebDataBinder binder)
     {
         binder.setValidator(new StudentValidator());

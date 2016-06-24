@@ -2,8 +2,6 @@ package com.project.permis.controllers;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -73,15 +71,10 @@ public class SecurityController extends AbstractController
 			errorHappened = true;
 			model.addAttribute("_error_email", "Vous devez renseigner votre adresse email.");
 		}
-		else
+		else if(!EmailUtil.isEmail(email))
 		{
-			Matcher emailMatcher = EmailUtil.PATTERN.matcher(email);
-			
-			if(!emailMatcher.matches())
-			{
-				errorHappened = true;
-				model.addAttribute("_error_email", "Le format de votre adresse email est invalide.");
-			}
+			errorHappened = true;
+			model.addAttribute("_error_email", "Le format de votre adresse email est invalide.");
 		}
 		
 		// Check password
