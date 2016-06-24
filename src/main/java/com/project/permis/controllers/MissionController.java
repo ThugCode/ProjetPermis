@@ -14,10 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.permis.entities.Goal;
 import com.project.permis.entities.Mission;
-import com.project.permis.entities.Student;
 import com.project.permis.repositories.GoalRepository;
 import com.project.permis.repositories.MissionRepository;
-import com.project.permis.repositories.StudentRepository;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
