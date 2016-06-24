@@ -155,22 +155,28 @@ public class StatisticsManager
 		// Fetch the statistics
 		try
 		{
-			String query_s = "SELECT g.`name`, g.`id` as completion1, g.`id` as completion2 FROM `game` g ";
-			if(idUser > 0) query_s += " INNER JOIN `student_game` sg ON sg.`id_game` = g.`id` WHERE sg.`id_student` = "+idUser;
+			String queryString = "SELECT g.`name`, g.`id` as completion1, g.`id` as completion2 FROM `game` g ";
+			
+			if(idUser > 0)
+			{
+				queryString += "INNER JOIN `student_game` sg ON sg.`id_game` = g.`id` WHERE sg.`id_student` = " + idUser;
+			}
 
 			// Execute query
-			SQLQuery query = HibernateUtil.getSession().createSQLQuery(query_s);
+			SQLQuery query = HibernateUtil.getSession().createSQLQuery(queryString);
 			query.addScalar("name", new StringType());
 			query.addScalar("completion1", new StringType());
 			query.addScalar("completion2", new StringType());
-			
+			List<Object[]> resultSet = (List<Object[]>) query.list();
 			Random rand = new Random();
-			for(Object[] row : (List<Object[]>)query.list()) {
-				row[1] = rand.nextInt(70)+"";
-				row[2] = rand.nextInt(30)+"";
+			
+			for(Object[] row : resultSet)
+			{
+				row[1] = rand.nextInt(70) + "";
+				row[2] = rand.nextInt(30) + "";
 			}
 			
-			return (List<Object[]>) query.list();
+			return resultSet;
 		}
 		catch(Exception ex)
 		{
