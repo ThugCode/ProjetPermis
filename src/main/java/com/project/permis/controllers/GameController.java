@@ -3,6 +3,7 @@ package com.project.permis.controllers;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -77,6 +78,54 @@ public class GameController extends AbstractController
 		model.addAttribute("users", sRepository.fetchAll());
 		
 		return this.render("game/form", model);
+	}
+	
+	/**
+	 * 
+	 * @return 
+	 */
+	@RequestMapping(value = "/games/modify/{id}", method = RequestMethod.GET)
+	public ModelAndView modify(@PathVariable("id")int id)
+	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Initialize vars
+    	GameRepository gRepository = new GameRepository();
+        Game game = gRepository.fetch(id);
+
+        if(game != null)
+        {
+            // Build model
+        	MissionRepository mRepository = new MissionRepository();
+        	StudentRepository sRepository = new StudentRepository();
+            ModelMap model = new ModelMap();
+            
+            model.addAttribute("page", "Éditer une épreuve");
+            model.addAttribute("buttonSubmit", "Modifier");
+            // model.addAttribute("_form", game);
+            model.addAttribute("game", game);
+    		model.addAttribute("missions", mRepository.fetchAll());
+    		model.addAttribute("users", sRepository.fetchAll());
+
+            return this.render("game/form", model);
+        }
+        else
+        {
+            // Register a flash message
+            this.addFlash(
+                "danger",
+                String.format(
+                    "Il n'existe aucune épreuve ayant pour identifiant <strong>%d</strong>.",
+                    id
+                )
+            );
+
+            return this.redirect("/games");
+        }
 	}
 	
 	/**
@@ -159,34 +208,7 @@ public class GameController extends AbstractController
 		// And inform the user$
 		this.addFlash("success", "Épreuve " + fact + " avec succès");
 		
-		return this.redirect("/games/");
-	}
-	
-	/**
-	 * 
-	 * @return 
-	 */
-	@RequestMapping(value = "/games/modify/{id}", method = RequestMethod.GET)
-	public ModelAndView modify(@PathVariable("id")int id)
-	{
-		// Check if the user is logged in
-    	if(!this.isLoggedIn())
-    	{
-    		return this.redirect("/login");
-    	}
-    	
-    	// Build model
-    	GameRepository gRepository = new GameRepository();
-    	MissionRepository mRepository = new MissionRepository();
-    	StudentRepository sRepository = new StudentRepository();
-		ModelMap model = new ModelMap();
-		
-		model.addAttribute("game", gRepository.fetch(id));
-		model.addAttribute("buttonSubmit", "Modifier");
-		model.addAttribute("missions", mRepository.fetchAll());
-		model.addAttribute("users", sRepository.fetchAll());
-		
-		return this.render("game/form", model);
+		return this.redirect("/games");
 	}
 	
 	/**
@@ -201,14 +223,39 @@ public class GameController extends AbstractController
     	{
     		return this.redirect("/login");
     	}
-		
-    	// Delete the game
-		GameRepository repository = new GameRepository();
-		repository.delete(repository.fetch(id));
-		
-		// Then, inform the user
-		this.addFlash("success", "Épreuve supprimée avec succès");
-		
-		return this.redirect("/games/");
+    	
+    	// Initialize vars
+    	GameRepository repository = new GameRepository();
+        Game game = repository.fetch(id);
+
+        if(game != null)
+        {
+            // Delete the game
+            repository.delete(game);
+
+            // Then, register a flash message
+            this.addFlash(
+                "success",
+                String.format(
+                    "L'épreuve <strong>%s</strong> a été supprimée.",
+                    StringEscapeUtils.escapeHtml(game.getName())
+                )
+            );
+
+        }
+        else
+        {
+            // Register a flash message
+            this.addFlash(
+                "danger",
+                String.format(
+                    "Il n'existe aucune épreuve ayant pour identifiant <strong>%d</strong>.",
+                    id
+                )
+            );
+        }
+
+        // Finally, redirect user
+        return this.redirect("/games");
 	}
 }
