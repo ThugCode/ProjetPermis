@@ -20,14 +20,6 @@
                                 type="hidden"
                                 path="id"
                             />
-                            <form:input
-                                type="hidden"
-                                path="isEnabled"
-                            />
-                            <form:input
-                                type="hidden"
-                                path="isAdmin"
-                            />
                             <spring:bind path="lastname">
 	                            <div class="form-group ${status.error ? 'has-error' : ''}">
 	                                <form:label path="lastname" cssClass="control-label col-sm-2" for="inputLastName">
@@ -105,7 +97,6 @@
 	                                </div>
 	                            </div>
                             </spring:bind>
-                            <%-- @todo Hide if current user isn't an administrator --%>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <div class="checkbox">
@@ -115,6 +106,19 @@
 	                                            id="inputIsAdmin"
                                             />
                                             Est administrateur ?
+                                        </form:label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="checkbox">
+                                        <form:label path="isEnabled" for="inputIsEnabled">
+                                            <form:checkbox
+	                                            path="isEnabled"
+	                                            id="inputIsEnabled"
+                                            />
+                                            Compte activé ?
                                         </form:label>
                                     </div>
                                 </div>
