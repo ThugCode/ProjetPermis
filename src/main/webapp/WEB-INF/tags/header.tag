@@ -116,17 +116,17 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <c:url value="/assets/img/bigUser.png" var="_url" />
-                            <img src="${fn:escapeXml(_url)}" class="img-circle" alt="User Image" />
                             <p>
                                 ${_user.firstname} ${_user.lastname}
                                 <small>${_user.mail}</small>
                             </p>
                         </li>
                         <li class="user-footer">
+                            <%--
                             <div class="pull-left">
                                 <a href="#" class="btn btn-default btn-flat">Profil</a>
                             </div>
+                            --%>
                             <div class="pull-right">
                                 <c:url value="/logout" var="_url" />
                                 <a href="${fn:escapeXml(_url)}" class="btn btn-default btn-flat">Déconnexion</a>

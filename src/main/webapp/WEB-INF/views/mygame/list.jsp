@@ -18,8 +18,20 @@
                                 <i class="fa fa-graduation-cap"></i>
                             </span>
                             <div class="info-box-content">
-                                  <span class="info-box-text">${item.name}</span>
-                                  <span class="info-box-number">${fn:length(item.missions)} missions</span>
+                                  <span class="info-box-text">
+                                    ${fn:escapeXml(item.name)}
+                                  </span>
+                                  <span class="info-box-number">
+                                    ${fn:length(item.missions)}
+                                    <c:choose>
+                                        <c:when test="${fn:length(item.missions) gt 1}">
+                                            missions
+                                        </c:when>
+                                        <c:otherwise>
+                                            mission
+                                        </c:otherwise>
+                                    </c:choose>
+                                  </span>
                             </div>
                           </div>
                     </div>
