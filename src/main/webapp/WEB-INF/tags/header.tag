@@ -17,15 +17,15 @@
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope"></i>
-                        <span class="label label-success">${fn:length(user.messages)}</span>
+                        <span class="label label-success">${fn:length(_user.messages)}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">
                             <c:choose>
-                                <c:when test="${fn:length(user.messages) gt 1}">
-                                    Vous avez ${fn:length(user.messages)} messages.
+                                <c:when test="${fn:length(_user.messages) gt 1}">
+                                    Vous avez ${fn:length(_user.messages)} messages.
                                 </c:when>
-                                <c:when test="${fn:length(user.messages) eq 1 }">
+                                <c:when test="${fn:length(_user.messages) eq 1 }">
                                     Vous avez 1 message.
                                 </c:when>
                                 <c:otherwise>
@@ -35,7 +35,7 @@
                         </li>
                         <li>
                             <ul class="menu">
-                                <c:forEach items="${user.messages}" var="item">
+                                <c:forEach items="${_user.messages}" var="item">
                                     <li>
                                         <a href="#">
                                            <div class="pull-left">
@@ -59,15 +59,15 @@
                 <li class="dropdown tasks-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-graduation-cap"></i>
-                        <span class="label label-danger">${fn:length(user.games)}</span>
+                        <span class="label label-danger">${fn:length(_user.games)}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">
                             <c:choose>
-                                <c:when test="${fn:length(user.games) gt 1}">
-                                    Vous avez ${fn:length(user.games)} formations.
+                                <c:when test="${fn:length(_user.games) gt 1}">
+                                    Vous avez ${fn:length(_user.games)} formations.
                                 </c:when>
-                                <c:when test="${fn:length(user.games) eq 1 }">
+                                <c:when test="${fn:length(_user.games) eq 1 }">
                                     Vous avez 1 formation.
                                 </c:when>
                                 <c:otherwise>
@@ -77,7 +77,7 @@
                         </li>
                         <li>
                             <ul class="menu">
-                                <c:forEach items="${user.games}" var="item">
+                                <c:forEach items="${_user.games}" var="item">
                                     <li>
                                         <c:url value="/mygames/${item.id}" var="_url" />
                                         <a href="${fn:escapeXml(_url)}">
@@ -112,15 +112,15 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-user fa-lg"></i>
-                        <span class="hidden-xs">${user.firstname} ${user.lastname}</span>
+                        <span class="hidden-xs">${_user.firstname} ${_user.lastname}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
                             <c:url value="/assets/img/bigUser.png" var="_url" />
                             <img src="${fn:escapeXml(_url)}" class="img-circle" alt="User Image" />
                             <p>
-                                ${user.firstname} ${user.lastname}
-                                <small>${user.mail}</small>
+                                ${_user.firstname} ${_user.lastname}
+                                <small>${_user.mail}</small>
                             </p>
                         </li>
                         <li class="user-footer">

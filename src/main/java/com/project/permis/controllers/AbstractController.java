@@ -68,7 +68,7 @@ public abstract class AbstractController
         }
         */
         
-        model.addAttribute("user", this.getUser());
+        model.addAttribute("_user", this.getUser());
         
         return new ModelAndView(viewName, model);
     }

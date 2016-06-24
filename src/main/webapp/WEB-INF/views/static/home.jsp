@@ -123,8 +123,19 @@
                                 <ul>
                                     <c:forEach items="${loginData}" var="row">
                                         <li>
-                                            ${fn:escapeXml(row.student.firstname)}
-                                            ${fn:escapeXml(row.student.lastname)}
+                                            <c:choose>
+                                                <c:when test="${_user.isAdmin}">
+                                                    <c:url value="/users/modify/${row.student.id}" var="_url" />
+                                                    <a href="${_url}">
+                                                        ${fn:escapeXml(row.student.firstname)}
+                                                        ${fn:escapeXml(row.student.lastname)}
+                                                    </a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${fn:escapeXml(row.student.firstname)}
+                                                    ${fn:escapeXml(row.student.lastname)}
+                                                </c:otherwise>
+                                            </c:choose>
                                             s'est connecté(e) à
                                             <fmt:formatDate type="time" value="${row.dateLogin}" />
                                             le

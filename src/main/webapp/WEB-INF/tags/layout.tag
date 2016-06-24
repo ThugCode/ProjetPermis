@@ -60,7 +60,7 @@
                                 <span>Mes formations</span>
                             </a>
                         </li>
-                        <c:if test="${user.isAdmin}">
+                        <c:if test="${_user.isAdmin}">
                             <li>
                                 <c:url value="/users/" var="_url"/>
                                 <a href="${fn:escapeXml(_url)}">
