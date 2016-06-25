@@ -155,7 +155,7 @@ public class StatisticsManager
 		// Fetch the statistics
 		try
 		{
-			String queryString = "SELECT g.`name`, g.`id` as completion1, g.`id` as completion2 FROM `game` g ";
+			String queryString = "SELECT g.`name`, g.`id` as completion1 FROM `game` g ";
 			
 			if(idUser > 0)
 			{
@@ -166,14 +166,12 @@ public class StatisticsManager
 			SQLQuery query = HibernateUtil.getSession().createSQLQuery(queryString);
 			query.addScalar("name", new StringType());
 			query.addScalar("completion1", new StringType());
-			query.addScalar("completion2", new StringType());
 			List<Object[]> resultSet = (List<Object[]>) query.list();
 			Random rand = new Random();
 			
 			for(Object[] row : resultSet)
 			{
 				row[1] = rand.nextInt(70) + "";
-				row[2] = rand.nextInt(30) + "";
 			}
 			
 			return resultSet;

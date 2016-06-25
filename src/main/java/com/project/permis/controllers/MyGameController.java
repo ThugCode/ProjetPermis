@@ -1,6 +1,6 @@
 package com.project.permis.controllers;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.stereotype.Controller;
@@ -9,9 +9,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.project.permis.entities.Action;
+import com.project.permis.entities.Calendar;
 import com.project.permis.entities.Game;
+import com.project.permis.entities.Goal;
 import com.project.permis.entities.Mission;
+import com.project.permis.entities.StudentAction;
+import com.project.permis.entities.StudentActionId;
 import com.project.permis.repositories.GameRepository;
+import com.project.permis.repositories.MissionRepository;
+import com.project.permis.repositories.StudentActionRepository;
 import com.project.permis.statistics.StatisticsManager;
 
 /**
@@ -25,6 +33,8 @@ import com.project.permis.statistics.StatisticsManager;
 @Controller
 public class MyGameController extends AbstractController
 {
+	private int currentGameId;
+	
 	/**
 	 * 
 	 * @return
@@ -60,6 +70,8 @@ public class MyGameController extends AbstractController
     		return this.redirect("/login");
     	}
     	
+    	currentGameId = id;
+    	
     	// Build model
     	GameRepository gameRepository = new GameRepository();
     	Game game = gameRepository.fetch(id);
@@ -71,5 +83,39 @@ public class MyGameController extends AbstractController
 		model.addAttribute("progress", statisticsManager.progressPerMission(this.getUser(), game.getMissions()));
 		
 		return this.render("mygame/view", model);
+	}
+	
+	/**
+	 * 
+	 * @return 
+	 */
+	@RequestMapping(value = "/mygames/mission/{id}", method = RequestMethod.GET)
+	public ModelAndView mission(@PathVariable("id")int id)
+	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
+    	MissionRepository missionRepository = new MissionRepository();
+    	Mission mission = missionRepository.fetch(id);
+    	
+    	StudentActionRepository asRepository = new StudentActionRepository();
+    	for(Goal goal : (Set<Goal>)mission.getGoals()) {
+    		for(Action action : (Set<Action>)goal.getActions()) {
+    			StudentActionId key = new StudentActionId();
+    			StudentAction studentAction = new StudentAction();
+    			studentAction.setId(key);
+    			studentAction.setStudent(this.getUser());
+    			studentAction.setAction(action);
+    			studentAction.setCalendar(new Calendar());
+    			studentAction.setValue(100);
+    			asRepository.save(studentAction);
+        	}
+    	}
+		
+		return this.redirect("/mygames/"+currentGameId);
 	}
 }

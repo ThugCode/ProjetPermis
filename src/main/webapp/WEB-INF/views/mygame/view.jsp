@@ -26,7 +26,8 @@
                         </div>
                         <%-- @todo Add a message when there are no missions --%>
                         <c:forEach items="${game.missions}" var="item">
-                            <a class="missionLine" href="#" >
+                        	<c:url value="/mygames/mission/${item.id}" var="_url" />
+                            <a class="missionLine" href="${fn:escapeXml(_url)}" >
 	                            <div class="panel panel-default">
 	                                <div class="panel-heading">
 	                                    <h3 class="panel-title">${item.title}</h3>

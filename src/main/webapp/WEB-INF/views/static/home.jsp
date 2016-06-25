@@ -45,7 +45,11 @@
 			      //Boolean - whether to make the chart responsive
 			      responsive: true,
 			      maintainAspectRatio: true,
-			      datasetFill: false
+			      datasetFill: false,
+			      scaleOverride : true,
+			      scaleSteps : 10,
+			      scaleStepWidth : 10,
+			      scaleStartValue : 0 
 			    };
 			    
 	        	// Build datasets
@@ -79,27 +83,7 @@
         	        labels: [],
         	        datasets: [
             	        {
-            	          label: "Non commencé",
-            	          fillColor: "#4E638B",
-            	          strokeColor: "#4E638B",
-            	          pointColor: "#4E638B",
-            	          pointStrokeColor: "#4E638B",
-            	          pointHighlightFill: "#fff",
-            	          pointHighlightStroke: "rgba(60,141,188,1)",
-            	          data: []
-            	        },
-            	        {
-            	          label: "Commencé",
-            	          fillColor: "#D2AC91",
-            	          strokeColor: "#D2AC91",
-            	          pointColor: "#D2AC91",
-            	          pointStrokeColor: "#D2AC91",
-            	          pointHighlightFill: "#fff",
-            	          pointHighlightStroke: "rgba(60,141,188,1)",
-            	          data: []
-            	        },
-            	        {
-            	            label: "Terminé",
+            	            label: "Terminé à",
             	            fillColor: "#181C20",
             	            strokeColor: "#181C20",
             	            pointColor: "#181C20",
@@ -114,8 +98,6 @@
 	            <c:forEach items="${meanCompletion}" var="row">
 	            	completionData.labels.push("${row[0]}");
 	            	completionData.datasets[0].data.push(${row[1]});
-	            	completionData.datasets[1].data.push(${row[2]});
-	            	completionData.datasets[2].data.push(100 - ${row[1]} + ${row[2]});
         		</c:forEach>
         	    
 	            var barChartCanvas = $("#completionChart").get(0).getContext("2d");
