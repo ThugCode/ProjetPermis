@@ -1,5 +1,6 @@
 package com.project.permis.controllers;
 
+import java.util.Date;
 import java.util.Set;
 
 import org.apache.commons.lang.StringEscapeUtils;
@@ -20,6 +21,7 @@ import com.project.permis.entities.StudentActionId;
 import com.project.permis.repositories.GameRepository;
 import com.project.permis.repositories.MissionRepository;
 import com.project.permis.repositories.StudentActionRepository;
+import com.project.permis.repositories.StudentRepository;
 import com.project.permis.statistics.StatisticsManager;
 
 /**
@@ -102,19 +104,27 @@ public class MyGameController extends AbstractController
     	MissionRepository missionRepository = new MissionRepository();
     	Mission mission = missionRepository.fetch(id);
     	
-    	StudentActionRepository asRepository = new StudentActionRepository();
+    	//StudentActionRepository asRepository = new StudentActionRepository();
+    	StudentRepository sRepository = new StudentRepository();
     	for(Goal goal : (Set<Goal>)mission.getGoals()) {
     		for(Action action : (Set<Action>)goal.getActions()) {
-    			StudentActionId key = new StudentActionId();
+    			/*StudentActionId key = new StudentActionId();
+    			key.setDate(new Date());
+    			key.setIdAction(action.getId());
+    			key.setIdStudent(this.getUser().getId());
     			StudentAction studentAction = new StudentAction();
     			studentAction.setId(key);
     			studentAction.setStudent(this.getUser());
     			studentAction.setAction(action);
-    			studentAction.setCalendar(new Calendar());
+    			studentAction.setCalendar(new Calendar(new Date()));
     			studentAction.setValue(100);
-    			asRepository.save(studentAction);
+    			asRepository.save(studentAction);*/
+    			
+    			this.getUser().getStudentActions().add(action);
         	}
     	}
+    	
+    	sRepository.save(this.getUser());
 		
 		return this.redirect("/mygames/"+currentGameId);
 	}
