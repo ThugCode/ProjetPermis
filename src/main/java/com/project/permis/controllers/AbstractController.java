@@ -55,19 +55,7 @@ public abstract class AbstractController
      */
     protected ModelAndView render(String viewName, ModelMap model)
     {
-        // Initialize vars
-        /*
-        Student user = this.getUser();
-        
-        // Append common data to model
-        if(null != user)
-        {
-            model.addAttribute("_user_first_name", user.getFirstname());
-            model.addAttribute("_user_last_name", user.getLastname());
-            model.addAttribute("_user_email", user.getMail());
-        }
-        */
-        
+        // Add vars needed by the layout
         model.addAttribute("_user", this.getUser());
         
         return new ModelAndView(viewName, model);
