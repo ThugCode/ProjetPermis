@@ -31,8 +31,9 @@ import com.project.permis.repositories.StudentRepository;
 public class GameController extends AbstractController
 {
 	/**
+	 * Displays a list of games.
 	 * 
-	 * @return
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/games", method = RequestMethod.GET)
 	public ModelAndView list()
@@ -55,8 +56,9 @@ public class GameController extends AbstractController
 	}
 	
 	/**
+	 * Displays a form add a game.
 	 * 
-	 * @return
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/games/add", method = RequestMethod.GET)
 	public ModelAndView add()
@@ -81,8 +83,10 @@ public class GameController extends AbstractController
 	}
 	
 	/**
+	 * Displays a form to modify a game.
 	 * 
-	 * @return 
+	 * @param id The game's id.
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/games/modify/{id}", method = RequestMethod.GET)
 	public ModelAndView modify(@PathVariable("id")int id)
@@ -129,13 +133,14 @@ public class GameController extends AbstractController
 	}
 	
 	/**
+	 * Handles the submission of a form to add or modify a game.
 	 * 
-	 * @param id
-	 * @param name
-	 * @param image
-	 * @param missions
-	 * @param users
-	 * @return
+	 * @param id The game's id.
+	 * @param name The game's name.
+	 * @param image The game's associated image.
+	 * @param missions The game's associated missions.
+	 * @param users The game's associated users.
+	 * @return The view to display or to use to redirect.
 	 */
 	@RequestMapping(value = "/games/add", method = RequestMethod.POST)
 	public ModelAndView submit(
@@ -205,15 +210,16 @@ public class GameController extends AbstractController
 		// Then, save it
 		repository.save(game);
 
-		// And inform the user$
+		// And inform the user
 		this.addFlash("success", "Épreuve " + fact + " avec succès");
 		
 		return this.redirect("/games");
 	}
 	
 	/**
+	 * Handles the deletion of a game.
 	 * 
-	 * @return 
+	 * @return The view to use to redirect. 
 	 */
 	@RequestMapping(value = "/games/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable("id")int id)
