@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.permis.entities.Action;
-import com.project.permis.entities.Calendar;
 import com.project.permis.entities.Game;
 import com.project.permis.entities.Goal;
 import com.project.permis.entities.Mission;

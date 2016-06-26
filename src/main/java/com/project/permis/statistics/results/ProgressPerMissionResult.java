@@ -11,19 +11,20 @@ package com.project.permis.statistics.results;
 public class ProgressPerMissionResult
 {
 	/**
-	 * 
+	 * The total number of actions for a mission.
 	 */
 	protected int actionsNumber;
 	
 	/**
-	 * 
+	 * The number of actions a user has carried out for a mission.
 	 */
 	protected int carriedOutActionsNumber;
 	
 	/**
+	 * Creates a new result for a mission's progress.
 	 * 
-	 * @param actionsNumber
-	 * @param carriedOutActionsNumber
+	 * @param actionsNumber The total number of actions for a mission.
+	 * @param carriedOutActionsNumber The number of actions a user has carried out for a mission.
 	 */
 	public ProgressPerMissionResult(int actionsNumber, int carriedOutActionsNumber)
 	{
@@ -33,8 +34,9 @@ public class ProgressPerMissionResult
 	}
 	
 	/**
+	 * Gets the total number of actions for a mission.
 	 * 
-	 * @return
+	 * @return The total number of actions for a mission.
 	 */
 	public int getActionsNumber()
 	{
@@ -42,8 +44,9 @@ public class ProgressPerMissionResult
 	}
 	
 	/**
+	 * Gets the number of actions a user has carried out for a mission.
 	 * 
-	 * @return
+	 * @return The number of actions a user has carried out for a mission.
 	 */
 	public int getCarriedOutActionsNumber()
 	{
@@ -51,8 +54,9 @@ public class ProgressPerMissionResult
 	}
 	
 	/**
+	 * Computes the percentage of progress for a mission.
 	 * 
-	 * @return
+	 * @return The progress, in percentage, for a mission.
 	 */
 	public int getPercentage()
 	{

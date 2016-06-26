@@ -1,6 +1,5 @@
 package com.project.permis.utils;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -31,8 +30,6 @@ public abstract class EmailUtil
 	 */
 	public static boolean isEmail(String input)
 	{
-		Matcher m = EmailUtil.PATTERN.matcher(input);
-		
-		return m.matches();
+		return EmailUtil.PATTERN.matcher(input).matches();
 	}
 }

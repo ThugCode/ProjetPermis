@@ -2,10 +2,10 @@ package com.project.permis.session;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
- * @author Léo Letourneur (leo.letourneur@etu.univ-lyon1.fr)
+ * @author LÃ©o Letourneur (leo.letourneur@etu.univ-lyon1.fr)
  * @author Thomas Arnaud (thomas.arnaud@etu.univ-lyon1.fr)
  * @author Karl Gorgoglione (karl.gorgoglione@etu.univ-lyon1.fr)
- * @author Loïc Gerland (loic.gerland@etu.univ-lyon1.fr)
+ * @author LoÃ¯c Gerland (loic.gerland@etu.univ-lyon1.fr)
  * @author Guillaume Ogier (guillaume.ogier@etu.univ-lyon1.fr)
  */
 public class Flash
