@@ -105,6 +105,8 @@ INSERT INTO `game_mission` (`id_game`, `id_mission`) VALUES
 (1, 7),
 (2, 13);
 
+INSERT INTO `student`( `lastname`, `firstname`, `mail`, `password`, `is_enabled`, `is_admin`) VALUES ("User", "Lyon 1", "user@univ-lyon1.fr", "5a9c360cdcc94f1a643eeb6ef93fdbe576001ff669deec44c8d994fa18f3c298", 1, 0);
+INSERT INTO `student`( `lastname`, `firstname`, `mail`, `password`, `is_enabled`, `is_admin`) VALUES ("Admin", "Lyon 1", "admin@univ-lyon1.fr", "32723980f9ce8f9bc0c8b6a052326eac96211f133ab2214efb1be11a7f321c8b", 1, 1);
 INSERT INTO `student`( `lastname`, `firstname`, `mail`, `password`, `is_enabled`, `is_admin`) VALUES ("Léo", "Letourneur", "letourneur.leo@gmail.com", "50f216a0d4b0df52d4b7dbb9a6b17ed15d2e91d8061972559520395eb37b8d0c", 1, 1);
 INSERT INTO `student`( `lastname`, `firstname`, `mail`, `password`, `is_enabled`, `is_admin`) VALUES ("Perry","Reed","turpis.nec.mauris@adipiscing.org","",1,0);
 INSERT INTO `student`( `lastname`, `firstname`, `mail`, `password`, `is_enabled`, `is_admin`) VALUES ("Steel","Shepard","ante.Maecenas.mi@eu.com","",1,0);
