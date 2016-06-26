@@ -5,6 +5,7 @@
 <hibernate-configuration>
     <session-factory name="SessionFactory">
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.characterEncoding">utf8</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">epul</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/runwaylicence</property>
@@ -12,7 +13,6 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
-        <property name="hibernate.connection.characterEncoding">utf8</property>
         <mapping resource="com/project/permis/entities/Rule.hbm.xml" />
         <mapping resource="com/project/permis/entities/Configuration.hbm.xml" />
         <mapping resource="com/project/permis/entities/Action.hbm.xml" />
@@ -23,7 +23,6 @@
         <mapping resource="com/project/permis/entities/Message.hbm.xml" />
         <mapping resource="com/project/permis/entities/Student.hbm.xml" />
         <mapping resource="com/project/permis/entities/Game.hbm.xml" />
-        <mapping resource="com/project/permis/entities/Calendar.hbm.xml" />
         <mapping resource="com/project/permis/entities/Goal.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

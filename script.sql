@@ -86,16 +86,6 @@ CREATE TABLE IF NOT EXISTS `mission` (
 );
 
 /*==============================================================*/
-/* Table : calendar                                             */
-/*==============================================================*/
-
-DROP TABLE IF EXISTS `calendar`;
-CREATE TABLE IF NOT EXISTS `calendar` (
-   `date` date NOT NULL,
-   PRIMARY KEY (`date`)
-);
-
-/*==============================================================*/
 /* Table : goal                                                 */
 /*==============================================================*/
 
@@ -232,8 +222,7 @@ CREATE TABLE IF NOT EXISTS `student_action` (
   `value` INT(11) DEFAULT NULL,
   PRIMARY KEY (`id_student`, `id_action`, `date`),
   FOREIGN KEY (`id_student`) REFERENCES student(id),
-  FOREIGN KEY (`id_action`) REFERENCES action(id),
-  FOREIGN KEY (`date`) REFERENCES calendar(date)
+  FOREIGN KEY (`id_action`) REFERENCES action(id)
 );
 
 /*==============================================================*/

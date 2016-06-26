@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 19 juin 2016 22:00:38 by Hibernate Tools 4.0.0.Final -->
+<!-- Generated 26 juin 2016 14:31:09 by Hibernate Tools 4.0.0.Final -->
 <hibernate-mapping>
     <class name="com.project.permis.entities.StudentAction" table="student_action" catalog="runwaylicence">
         <composite-id name="id" class="com.project.permis.entities.StudentActionId">
@@ -17,9 +17,6 @@
         </composite-id>
         <many-to-one name="action" class="com.project.permis.entities.Action" update="false" insert="false" fetch="select">
             <column name="id_action" not-null="true" />
-        </many-to-one>
-        <many-to-one name="calendar" class="com.project.permis.entities.Calendar" update="false" insert="false" fetch="select">
-            <column name="date" length="10" not-null="true" />
         </many-to-one>
         <many-to-one name="student" class="com.project.permis.entities.Student" update="false" insert="false" fetch="select">
             <column name="id_student" not-null="true" />

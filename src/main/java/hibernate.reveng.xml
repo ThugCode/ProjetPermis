@@ -9,7 +9,6 @@
 		match-name="action_goal" />
 	<table-filter match-catalog="runwaylicence"
 		match-name="action_rule" />
-	<table-filter match-catalog="runwaylicence" match-name="calendar" />
 	<table-filter match-catalog="runwaylicence"
 		match-name="configuration" />
 	<table-filter match-catalog="runwaylicence" match-name="flag" />
