@@ -61,29 +61,11 @@ public class MyGameController extends AbstractController
     	
     	// Build model
 		ModelMap model = new ModelMap();
+		StatisticsManager sManager = new StatisticsManager();
 		
 		model.addAttribute("page", "Mes formations");
 		model.addAttribute("games", this.getUser().getGames());
-		
-		StatisticsManager sManager = new StatisticsManager();
-		HashMap<Integer, Integer> progress = new HashMap<Integer, Integer>();
-		
-		for(Game game : ((Set<Game>)this.getUser().getGames()))
-		{
-			Map<Integer, ProgressPerMissionResult> map = sManager.progressPerMission(this.getUser(), game.getMissions());
-			
-			int percentage = 0;
-			for(Entry<Integer, ProgressPerMissionResult> entry : map.entrySet()) {
-			    ProgressPerMissionResult value = entry.getValue();
-			    percentage += value.getPercentage();
-			}
-			if(percentage > 0)
-				percentage /= map.entrySet().size();
-			
-			progress.put(game.getId(), percentage);
-		}
-		
-		model.addAttribute("progress", progress);
+		model.addAttribute("progress", sManager.progressPerGame(this.getUser()));
 		
 		return this.render("mygame/list", model);
 	}

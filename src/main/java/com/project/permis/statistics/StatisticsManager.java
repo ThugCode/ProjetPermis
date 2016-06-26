@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.type.IntegerType;
 import org.hibernate.type.LongType;
 import org.hibernate.type.StringType;
 
+import com.project.permis.entities.Game;
 import com.project.permis.entities.Mission;
 import com.project.permis.entities.Student;
 import com.project.permis.repositories.RepositoryException;
@@ -64,6 +66,35 @@ public class StatisticsManager
 			);
 		}
 	}
+	
+	/**
+	 * 
+	 * @param student
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Map<Integer, Integer> progressPerGame(Student student)
+	{
+		HashMap<Integer, Integer> progress = new HashMap<Integer, Integer>();
+		
+		for(Game game : ((Set<Game>)student.getGames()))
+		{
+			Map<Integer, ProgressPerMissionResult> map = this.progressPerMission(student, game.getMissions());
+			
+			int percentage = 0;
+			for(Entry<Integer, ProgressPerMissionResult> entry : map.entrySet()) {
+			    ProgressPerMissionResult value = entry.getValue();
+			    percentage += value.getPercentage();
+			}
+			if(percentage > 0)
+				percentage /= map.entrySet().size();
+			
+			progress.put(game.getId(), percentage);
+		}
+		
+		return progress;
+	}
+	
 	
 	/**
 	 * 
