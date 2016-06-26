@@ -56,7 +56,7 @@ public class StaticController extends AbstractController
     		loginData = lRepository.fetchLast(10, this.getUser().getId());
     		studentPerGame = null;
     		meanCompletion = sRepository.meanCompletion(this.getUser().getId());
-    		totalCompletion = 10;
+    		totalCompletion = sRepository.totalCompletion(this.getUser());
     	}
     	
     	

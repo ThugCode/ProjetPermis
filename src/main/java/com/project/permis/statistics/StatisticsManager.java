@@ -95,6 +95,24 @@ public class StatisticsManager
 		return progress;
 	}
 	
+	/**
+	 * 
+	 * @param student
+	 * @return
+	 */
+	public int totalCompletion(Student student)
+	{
+		HashMap<Integer, Integer> progress = (HashMap<Integer, Integer>) this.progressPerGame(student);
+		
+		int percentage = 0;
+		for(Entry<Integer, Integer> entry : progress.entrySet()) {
+		    percentage += entry.getValue();
+		}
+		if(percentage > 0)
+			percentage /= progress.entrySet().size();
+		
+		return percentage;
+	}
 	
 	/**
 	 * 

@@ -1,11 +1,6 @@
 package com.project.permis.controllers;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang.StringEscapeUtils;
@@ -26,7 +21,6 @@ import com.project.permis.repositories.GameRepository;
 import com.project.permis.repositories.MissionRepository;
 import com.project.permis.repositories.StudentActionRepository;
 import com.project.permis.statistics.StatisticsManager;
-import com.project.permis.statistics.results.ProgressPerMissionResult;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -49,7 +43,6 @@ public class MyGameController extends AbstractController
 	 * 
 	 * @return The view to display.
 	 */
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/mygames", method = RequestMethod.GET)
 	public ModelAndView list()
 	{
