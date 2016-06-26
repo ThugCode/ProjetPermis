@@ -28,8 +28,9 @@ import com.project.permis.repositories.GoalRepository;
 public class GoalController extends AbstractController
 {
 	/**
+	 * Displays a list of goals.
 	 * 
-	 * @return
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/goals", method = RequestMethod.GET)
 	public ModelAndView list()
@@ -52,8 +53,9 @@ public class GoalController extends AbstractController
 	}
 	
 	/**
+	 * Displays a form to add a goal.
 	 * 
-	 * @return
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/goals/add", method = RequestMethod.GET)
 	public ModelAndView add()
@@ -75,13 +77,41 @@ public class GoalController extends AbstractController
 	}
 	
 	/**
+	 * Displays a form to modify a goal.
 	 * 
-	 * @param id
-	 * @param name
-	 * @param actions
-	 * @return
+	 * @param id The goal's id.
+	 * @return The view to display.
 	 */
-	@RequestMapping(value = "/goals/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/goals/modify/{id}", method = RequestMethod.GET)
+	public ModelAndView modify(@PathVariable("id") int id)
+	{
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+    	
+    	// Build model
+    	GoalRepository gRepository = new GoalRepository();
+    	ActionRepository aRepository = new ActionRepository();
+		ModelMap model = new ModelMap();
+		
+		model.addAttribute("goal", gRepository.fetch(id));
+		model.addAttribute("buttonSubmit", "Modifier");
+		model.addAttribute("actions", aRepository.fetchAll());
+		
+		return this.render("goal/form", model);
+	}
+	
+	/**
+	 * Handles the submission of a form to add or modify a goal.
+	 * 
+	 * @param id The goal's id.
+	 * @param name The goal's name.
+	 * @param actions The goal's associated actions.
+	 * @return The view to display or to use to redirect.
+	 */
+	@RequestMapping(value = "/goals/submit", method = RequestMethod.POST)
 	public ModelAndView submit(
 		@RequestParam(value="inputId", required=false) String id,
 		@RequestParam(value="inputName", required=true) String name,
@@ -131,40 +161,17 @@ public class GoalController extends AbstractController
 		// And inform the user
 		this.addFlash("success", "Objectif " + fact + " avec succès");
 		
-		return this.redirect("/goals/");
+		return this.redirect("/goals");
 	}
 	
 	/**
+	 * Handles the deletion of a goal.
 	 * 
-	 * @return 
-	 */
-	@RequestMapping(value = "/goals/modify/{id}", method = RequestMethod.GET)
-	public ModelAndView modify(@PathVariable("id")int id)
-	{
-		// Check if the user is logged in
-    	if(!this.isLoggedIn())
-    	{
-    		return this.redirect("/login");
-    	}
-    	
-    	// Build model
-    	GoalRepository gRepository = new GoalRepository();
-    	ActionRepository aRepository = new ActionRepository();
-		ModelMap model = new ModelMap();
-		
-		model.addAttribute("goal", gRepository.fetch(id));
-		model.addAttribute("buttonSubmit", "Modifier");
-		model.addAttribute("actions", aRepository.fetchAll());
-		
-		return this.render("goal/form", model);
-	}
-	
-	/**
-	 * 
-	 * @return 
+	 * @param id The goal's id.
+	 * @return The view to use to redirect.
 	 */
 	@RequestMapping(value = "/goals/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView delete(@PathVariable("id")int id)
+	public ModelAndView delete(@PathVariable("id") int id)
 	{
 		// Check if the user is logged in
     	if(!this.isLoggedIn())
@@ -179,6 +186,6 @@ public class GoalController extends AbstractController
 		// Then, inform the user
 		this.addFlash("success", "Objectif supprimé avec succès");
 		
-		return this.redirect("/goals/");
+		return this.redirect("/goals");
 	}
 }
