@@ -1,6 +1,11 @@
 package com.project.permis.controllers;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang.StringEscapeUtils;
@@ -20,8 +25,8 @@ import com.project.permis.entities.StudentActionId;
 import com.project.permis.repositories.GameRepository;
 import com.project.permis.repositories.MissionRepository;
 import com.project.permis.repositories.StudentActionRepository;
-import com.project.permis.repositories.StudentRepository;
 import com.project.permis.statistics.StatisticsManager;
+import com.project.permis.statistics.results.ProgressPerMissionResult;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -44,6 +49,7 @@ public class MyGameController extends AbstractController
 	 * 
 	 * @return The view to display.
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/mygames", method = RequestMethod.GET)
 	public ModelAndView list()
 	{
@@ -58,6 +64,26 @@ public class MyGameController extends AbstractController
 		
 		model.addAttribute("page", "Mes formations");
 		model.addAttribute("games", this.getUser().getGames());
+		
+		StatisticsManager sManager = new StatisticsManager();
+		HashMap<Integer, Integer> progress = new HashMap<Integer, Integer>();
+		
+		for(Game game : ((Set<Game>)this.getUser().getGames()))
+		{
+			Map<Integer, ProgressPerMissionResult> map = sManager.progressPerMission(this.getUser(), game.getMissions());
+			
+			int percentage = 0;
+			for(Entry<Integer, ProgressPerMissionResult> entry : map.entrySet()) {
+			    ProgressPerMissionResult value = entry.getValue();
+			    percentage += value.getPercentage();
+			}
+			if(percentage > 0)
+				percentage /= map.entrySet().size();
+			
+			progress.put(game.getId(), percentage);
+		}
+		
+		model.addAttribute("progress", progress);
 		
 		return this.render("mygame/list", model);
 	}

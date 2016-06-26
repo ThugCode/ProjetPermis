@@ -32,7 +32,12 @@
                                         </c:otherwise>
                                     </c:choose>
                                   </span>
-                            </div>
+                                  
+                                  <div class="progress">
+									<div class="progress-bar" style="width: ${progress[item.id]}%; background-color: #337ab7;"></div>
+              					  </div>
+              					  <span class="progress-description"> ${progress[item.id]}% terminé </span>
+                          	  </div>
                           </div>
                     </div>
                 </a>
