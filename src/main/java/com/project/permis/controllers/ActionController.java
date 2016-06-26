@@ -40,8 +40,9 @@ public class ActionController extends AbstractController
     }
     
     /**
+     * Displays a list of actions.
      * 
-     * @return
+     * @return The view to display.
      */
     @RequestMapping(value = "/actions", method = RequestMethod.GET)
     public ModelAndView list()
@@ -64,8 +65,9 @@ public class ActionController extends AbstractController
     }
     
     /**
+     * Displays a form to add an action.
      * 
-     * @return
+     * @return The view to display.
      */
     @RequestMapping(value = "/actions/add", method = RequestMethod.GET)
     public ModelAndView add()
@@ -87,8 +89,10 @@ public class ActionController extends AbstractController
     }
     
     /**
+     * Displays a form to modify an action.
      * 
-     * @return 
+     * @param id The action's id.
+     * @return The view to display.
      */
     @RequestMapping(value = "/actions/modify/{id}", method = RequestMethod.GET)
     public ModelAndView modify(@PathVariable("id") int id)
@@ -129,10 +133,11 @@ public class ActionController extends AbstractController
     }
     
     /**
+     * Handles the submission of a form to add or modify an action.
      * 
-     * @param id
-     * @param name
-     * @return
+     * @param action The action to save.
+     * @param result The validation results.
+     * @return The view to display or to use to redirect.
      */
     @RequestMapping(value = "/actions/submit", method = RequestMethod.POST)
     public ModelAndView submit(
@@ -186,8 +191,10 @@ public class ActionController extends AbstractController
     }
     
     /**
+     * Handles the deletion of an action.
      * 
-     * @return 
+     * @param id The action's id.
+     * @return The view to use to redirect.
      */
     @RequestMapping(value = "/actions/delete/{id}", method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable("id") int id)
