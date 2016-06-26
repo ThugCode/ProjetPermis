@@ -29,8 +29,9 @@ import com.project.permis.repositories.MissionRepository;
 public class MissionController extends AbstractController
 {
 	/**
+	 * Displays a list of missions.
 	 * 
-	 * @return
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/missions", method = RequestMethod.GET)
 	public ModelAndView list()
@@ -53,8 +54,9 @@ public class MissionController extends AbstractController
 	}
 	
 	/**
+	 * Displays a form to add a mission.
 	 * 
-	 * @return
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/missions/add", method = RequestMethod.GET)
 	public ModelAndView add()
@@ -77,8 +79,10 @@ public class MissionController extends AbstractController
 	}
 	
 	/**
+	 * Displays a form to modify a mission.
 	 * 
-	 * @return 
+	 * @param id The mission's id.
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/missions/modify/{id}", method = RequestMethod.GET)
 	public ModelAndView modify(@PathVariable("id") int id)
@@ -124,11 +128,12 @@ public class MissionController extends AbstractController
 	}
 	
 	/**
+	 * Handles the submission of a form to add or modify a mission.
 	 * 
-	 * @param id
-	 * @param title
-	 * @param goals
-	 * @return
+	 * @param id The mission's id.
+	 * @param title The mission's title.
+	 * @param goals The mission's associated goals.
+	 * @return The view to display or to use to redirect.
 	 */
 	@RequestMapping(value = "/missions/submit", method = RequestMethod.POST)
 	public ModelAndView validate(
@@ -182,8 +187,10 @@ public class MissionController extends AbstractController
 	}
 	
 	/**
+	 * Handles the deletion of a mission.
 	 * 
-	 * @return 
+	 * @param id The mission's id.
+	 * @return The view to use to redirect.
 	 */
 	@RequestMapping(value = "/missions/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable("id") int id)

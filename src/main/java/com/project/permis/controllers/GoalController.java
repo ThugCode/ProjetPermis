@@ -139,7 +139,7 @@ public class GoalController extends AbstractController
 		// Set new list of actions
 		Set<Action> setActions = new HashSet<Action>();
 		
-		if(actions != null && actions !="")
+		if(actions != null && actions != "")
 		{
 			ActionRepository aRepository = new ActionRepository();
 			String[] ids = actions.split("x");
