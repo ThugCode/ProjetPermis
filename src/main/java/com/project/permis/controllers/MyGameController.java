@@ -35,11 +35,15 @@ import com.project.permis.statistics.StatisticsManager;
 @Controller
 public class MyGameController extends AbstractController
 {
-	private int currentGameId;
-	
 	/**
 	 * 
-	 * @return
+	 */
+	protected int currentGameId;
+	
+	/**
+	 * Displays a list of the user's games.
+	 * 
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/mygames", method = RequestMethod.GET)
 	public ModelAndView list()
@@ -60,11 +64,13 @@ public class MyGameController extends AbstractController
 	}
 	
 	/**
+	 * Displays a list of missions for the game the user selected.
 	 * 
-	 * @return 
+	 * @param id The game's id.
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/mygames/{id}", method = RequestMethod.GET)
-	public ModelAndView practice(@PathVariable("id")int id)
+	public ModelAndView practice(@PathVariable("id") int id)
 	{
 		// Check if the user is logged in
     	if(!this.isLoggedIn())
