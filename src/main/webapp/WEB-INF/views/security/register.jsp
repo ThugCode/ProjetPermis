@@ -38,14 +38,6 @@
                 <p class="login-box-msg">
                     <b>Demandez</b> votre compte pour parcourir la plateforme. Vous recevrez un mail de confirmation lorsqu'il sera disponible.
                 </p>
-                <c:if test="${not empty _flashes && fn:length(_flashes) gt 0}">
-                    <c:forEach items="${_flashes}" var="flash">
-                        <div class="alert alert-${flash.type} alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            ${flash.contents}
-                        </div>
-                    </c:forEach>
-                </c:if>
                 <c:url value="/register" var="_url" />
                 <form:form method="post" action="${fn:escapeXml(_url)}" modelAttribute="_form">
                     <spring:bind path="firstname">
@@ -106,6 +98,7 @@
                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                     </div>
                     <div class="row">
+                        <%--
                         <div class="col-xs-8">
                               <div class="checkbox icheck">
                                 <label>
@@ -116,7 +109,8 @@
                                 </label>
                               </div>
                         </div>
-                        <div class="col-xs-4">
+                        --%>
+                        <div class="col-xs-12">
                               <button id="register-btn" type="submit" class="btn btn-primary btn-block btn-flat">Valider</button>
                         </div>
                     </div>
@@ -128,7 +122,6 @@
                         </a>
                     </div>
                 </form:form>
-                
             </div>
         </div>
         

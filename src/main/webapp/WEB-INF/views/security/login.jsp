@@ -32,6 +32,14 @@
                 <p class="login-box-msg">
                     <b>Connectez-vous</b> pour démarrer votre session
                 </p>
+                <c:if test="${not empty _flashes && fn:length(_flashes) gt 0}">
+                    <c:forEach items="${_flashes}" var="flash">
+                        <div class="alert alert-${flash.type} alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            ${flash.contents}
+                        </div>
+                    </c:forEach>
+                </c:if>
                 <c:url value="/login" var="_url" />
                 <form method="post" action="${_url}">
                     <div class="form-group has-feedback<c:if test="${not empty _error_email}"> has-error</c:if>">
@@ -63,6 +71,7 @@
                         </c:if>
                     </div>
                     <div class="row">
+                        <%--
                         <div class="col-xs-8">
                               <div class="checkbox icheck">
                                 <label>
@@ -77,11 +86,10 @@
                                 </label>
                               </div>
                         </div>
-                        <!-- /.col -->
-                        <div class="col-xs-4">
+                        --%>
+                        <div class="col-xs-12">
                               <button type="submit" class="btn btn-primary btn-block btn-flat">Connexion</button>
                         </div>
-                        <!-- /.col -->
                     </div>
                 </form>
                 <c:url value="/register" var="_url" />

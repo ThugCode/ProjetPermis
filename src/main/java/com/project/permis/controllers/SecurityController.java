@@ -203,9 +203,9 @@ public class SecurityController extends AbstractController
     )
     {
         // Check if the user is logged in
-        if(!this.isLoggedIn())
+        if(this.isLoggedIn())
         {
-            return this.redirect("/login");
+            return this.redirect("/");
         }
         
         // Initialize vars
@@ -241,6 +241,10 @@ public class SecurityController extends AbstractController
         
         if(!result.hasErrors())
         {
+        	// Additional data
+        	student.setIsEnabled(false);
+        	student.setIsAdmin(false);
+        	
             // Save the student
             repository.save(student);
 
