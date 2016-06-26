@@ -1,6 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@taglib tagdir="/WEB-INF/tags/" prefix="t" %>
+<%@taglib tagdir="/WEB-INF/tags" prefix="t" %>
 
 <header class="main-header">
     <c:url value="/" var="_url" />

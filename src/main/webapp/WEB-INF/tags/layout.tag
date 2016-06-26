@@ -1,7 +1,7 @@
 <%@tag description="Logged-in page template" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@taglib tagdir="/WEB-INF/tags/" prefix="t" %>
+<%@taglib tagdir="/WEB-INF/tags" prefix="t" %>
 <%@attribute name="_page_title" fragment="true" required="false" %>
 <%@attribute name="_page_stylesheets" fragment="true" required="false" %>
 <%@attribute name="_page_scripts" fragment="true" required="false" %>
