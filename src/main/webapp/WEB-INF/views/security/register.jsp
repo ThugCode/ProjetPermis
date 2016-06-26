@@ -34,6 +34,14 @@
                 <p class="login-box-msg">
                     <b>Demandez</b> votre compte pour parcourir la plateforme. Vous recevrez un mail de confirmation lorsqu'il sera disponible.
                 </p>
+                <c:if test="${not empty _flashes && fn:length(_flashes) gt 0}">
+		            <c:forEach items="${_flashes}" var="flash">
+		                <div class="alert alert-${flash.type} alert-dismissible">
+		                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		                    ${flash.contents}
+		                </div>
+		            </c:forEach>
+		        </c:if>
                 <c:url value="/register" var="_url" />
                 <form method="post" action="${_url}">
                     <div class="form-group has-feedback">
@@ -114,10 +122,10 @@
         <script type="text/javascript">
             $(function() {
                 $("input").iCheck({
-                         checkboxClass: "icheckbox_square-blue",
-                         radioClass: "iradio_square-blue",
-                         increaseArea: "20%"
-                   });
+                     checkboxClass: "icheckbox_square-blue",
+                     radioClass: "iradio_square-blue",
+                     increaseArea: "20%"
+               });
             });
         </script>
     </body>

@@ -5,6 +5,11 @@ import java.util.Date;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +21,7 @@ import com.project.permis.repositories.LogLoginsRepository;
 import com.project.permis.repositories.StudentRepository;
 import com.project.permis.utils.EmailUtil;
 import com.project.permis.utils.HashUtil;
+import com.project.permis.validators.StudentValidator;
 
 /**
  * @author Bruno Buiret (bruno.buiret@etu.univ-lyon1.fr)
@@ -29,6 +35,17 @@ import com.project.permis.utils.HashUtil;
 public class SecurityController extends AbstractController
 {
 	/**
+     * Initializes a binder with validators and editors.
+     *
+     * @param binder The binder to initialize.
+     */
+    @InitBinder("_form")
+    protected void initBinder(WebDataBinder binder)
+    {
+        binder.setValidator(new StudentValidator());
+    }
+    
+	/**
 	 * Displays the login form.
 	 * 
 	 * @return The view to display.
@@ -36,7 +53,18 @@ public class SecurityController extends AbstractController
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login()
 	{
-		return this.isLoggedIn() ? this.redirect("/") : this.render("security/login");
+		if(!this.isLoggedIn())
+		{
+			// Build model
+			ModelMap model = new ModelMap();
+			model.addAttribute("_flashes", this.getAndClearFlashList());
+			
+			return this.render("security/login", model);
+		}
+		else
+		{
+			return this.redirect("/");
+		}
 	}
 	
 	/**
@@ -156,11 +184,73 @@ public class SecurityController extends AbstractController
 	 * 
 	 * @return The view to display or a redirection response.
 	 */
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView doRegister()
-	{
-		return this.redirect("register");
-	}
+	@RequestMapping(value="/register", method=RequestMethod.POST)
+    public ModelAndView doRegister(
+        @ModelAttribute("_form") @Validated Student student,
+        BindingResult result,
+        @RequestParam(value="passwordConfirmation", required=false) String passwordConfirmation
+    )
+    {
+		// Check if the user is logged in
+    	if(!this.isLoggedIn())
+    	{
+    		return this.redirect("/login");
+    	}
+		
+		// Initialize vars
+		StudentRepository repository = new StudentRepository();
+		
+		// Check the password is equal to its confirmation
+		if(null == passwordConfirmation || passwordConfirmation.isEmpty())
+		{
+			result.rejectValue("password", null, "Vous devez confirmer le mot de passe.");
+		}
+		else if(!student.getPassword().equals(passwordConfirmation))
+		{
+			result.rejectValue("password", null, "Le mot de passe et sa confirmation sont différents.");
+		}
+		
+		// Hash the password
+		try
+    	{
+			student.setPassword(HashUtil.sha256(student.getMail() + student.getPassword()));
+		}
+    	catch(NoSuchAlgorithmException e)
+    	{
+			result.rejectValue("password", null, "Impossible d'enregistrer votre mot de passe.");
+		}
+		
+		// Does the email already exists?
+		Student emailStudent = repository.findByMail(student.getMail());
+		
+		if(null != emailStudent)
+		{
+			result.rejectValue("mail", null, "Cette adresse email est déjà utilisée.");
+		}
+		
+        if(!result.hasErrors())
+        {
+            // Save the student
+            repository.save(student);
+
+            // Then, register a flash message
+            this.addFlash(
+                "success",
+                "Vous pourrez vous connecter dès qu'un administrateur aura activé votre compte."
+            );
+
+            // Finally, redirect user
+            return this.redirect("/login");
+        }
+        else
+        {
+            // Populate model
+            ModelMap model = new ModelMap();
+            model.addAttribute("_form", student);
+
+            return this.render("security/register", model);
+        }
+    }
 	
 	/**
 	 * Handles the logout process.
