@@ -96,6 +96,7 @@ public class MyGameController extends AbstractController
 	 * 
 	 * @return 
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/mygames/mission/{id}", method = RequestMethod.GET)
 	public ModelAndView mission(@PathVariable("id")int id)
 	{
@@ -109,27 +110,25 @@ public class MyGameController extends AbstractController
     	MissionRepository missionRepository = new MissionRepository();
     	Mission mission = missionRepository.fetch(id);
     	
-    	//StudentActionRepository asRepository = new StudentActionRepository();
-    	StudentRepository sRepository = new StudentRepository();
+    	StudentActionRepository asRepository = new StudentActionRepository();
     	for(Goal goal : (Set<Goal>)mission.getGoals()) {
     		for(Action action : (Set<Action>)goal.getActions()) {
-    			/*StudentActionId key = new StudentActionId();
-    			key.setDate(new Date());
+    			
+    			StudentActionId key = new StudentActionId();
     			key.setIdAction(action.getId());
     			key.setIdStudent(this.getUser().getId());
-    			StudentAction studentAction = new StudentAction();
-    			studentAction.setId(key);
-    			studentAction.setStudent(this.getUser());
-    			studentAction.setAction(action);
-    			studentAction.setCalendar(new Calendar(new Date()));
-    			studentAction.setValue(100);
-    			asRepository.save(studentAction);*/
-    			
-    			this.getUser().getStudentActions().add(action);
+    			key.setDate(new Date());
+    			StudentAction studentAction = asRepository.fetch(key);
+    			if(studentAction == null) {
+    				studentAction = new StudentAction();
+    				studentAction.setId(key);
+	    			studentAction.setStudent(this.getUser());
+	    			studentAction.setAction(action);
+	    			studentAction.setValue(100);
+	    			asRepository.save(studentAction);
+    			}
         	}
     	}
-    	
-    	sRepository.save(this.getUser());
 		
 		return this.redirect("/mygames/"+currentGameId);
 	}
