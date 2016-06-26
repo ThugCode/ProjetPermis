@@ -44,12 +44,15 @@ public class StaticController extends AbstractController
     	List<Object[]> meanCompletion;
     	int totalCompletion;
     	
-    	if(this.isAdmin()) {
+    	if(this.isAdmin())
+    	{
     		loginData = lRepository.fetchLast(10, -1);
     		studentPerGame = sRepository.studentsPerGame();
     		meanCompletion = sRepository.meanCompletion(-1);
     		totalCompletion = -1;
-    	} else {
+    	}
+    	else
+    	{
     		loginData = lRepository.fetchLast(10, this.getUser().getId());
     		studentPerGame = null;
     		meanCompletion = sRepository.meanCompletion(this.getUser().getId());

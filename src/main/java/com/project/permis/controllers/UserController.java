@@ -45,8 +45,9 @@ public class UserController extends AbstractController
     }
     
 	/**
+	 * Displays a list of users.
 	 * 
-	 * @return
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public ModelAndView list()
@@ -69,8 +70,9 @@ public class UserController extends AbstractController
 	}
 	
 	/**
+	 * Displays a form to add an user.
 	 * 
-	 * @return
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/users/add", method = RequestMethod.GET)
 	public ModelAndView add()
@@ -90,8 +92,10 @@ public class UserController extends AbstractController
 	}
 	
 	/**
+	 * Displays a form to modify a user.
 	 * 
-	 * @return
+	 * @param id The user's id.
+	 * @return The view to display.
 	 */
 	@RequestMapping(value = "/users/modify/{id}", method = RequestMethod.GET)
 	public ModelAndView modify(@PathVariable int id)
@@ -134,10 +138,12 @@ public class UserController extends AbstractController
 	}
 	
 	/**
+	 * Handles the submission of a form to add or modify an user.
 	 * 
-	 * @param student
-	 * @param result
-	 * @return
+	 * @param student The user to save.
+	 * @param result The validation results.
+	 * @param passwordConfirmation The password's confirmation.
+	 * @return The view to display or to use to redirect.
 	 */
 	@RequestMapping(value="/users/submit", method=RequestMethod.POST)
     public ModelAndView submit(
@@ -248,9 +254,10 @@ public class UserController extends AbstractController
     }
 	
 	/**
+	 * Handles the deletion of an user.
 	 * 
-	 * @param id
-	 * @return
+	 * @param id The user's id.
+	 * @return The view to use to redirect.
 	 */
 	@RequestMapping(value="/users/delete/{id}", method=RequestMethod.GET)
     public ModelAndView delete(@PathVariable int id)
@@ -292,9 +299,10 @@ public class UserController extends AbstractController
     }
 	
 	/**
+	 * Handles the process to enable a user.
 	 * 
-	 * @param id
-	 * @return
+	 * @param id The user's id.
+	 * @return The view to use to redirect.
 	 */
 	@RequestMapping(value="/users/enable/{id}", method=RequestMethod.GET)
     public ModelAndView enable(@PathVariable int id)
